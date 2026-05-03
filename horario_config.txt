@@ -1,0 +1,29 @@
+SEMANA: 04/05/2026 al 10/05/2026
+
+[LUNES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
+
+[MARTES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:30-20:30 | estudio
+
+[MIERCOLES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
+
+[JUEVES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
+
+[VIERNES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
+
+[SABADO]
+mañana: variable
+tarde: variable
+
+[DOMINGO]
+mañana: descanso
+tarde: descanso
