@@ -8,22 +8,22 @@ tarde: 16:00-20:00 | estudio
 mañana: 09:00-14:00 | estudio
 tarde: 16:30-20:30 | estudio
 
-[MIERCOLES]
+[MIÉRCOLES]
 mañana: 09:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 16:15-20:15 | estudio
 
 [JUEVES]
 mañana: 09:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 16:15-20:30 | estudio
 
 [VIERNES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
 
-[SABADO]
-mañana: variable
-tarde: variable
+[SÁBADO]
+mañana: seguramente
+tarde: tengo un cumpleaños
 
 [DOMINGO]
-mañana: descanso
-tarde: descanso
+mañana: probable un rato
+tarde: tengo otro cumpleaños
