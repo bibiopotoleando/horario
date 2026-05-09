@@ -1,12 +1,13 @@
 const CONFIG_FILE = "horario_config.txt";
 
 const dayNames = ["DOMINGO", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"];
+
 const displayNames = {
   LUNES: "Lunes", MARTES: "Martes", MIERCOLES: "Miércoles",
-  JUEVES: "Jueves", VIERNES: "Viernes", SABADO: "Sábado", DOMINGO: "Domingo"
+  JUEVES: "Jueves", VIERNES: "Viernes", SABADO: "Sábado", DOMINGO: "Domingo",
 };
 
-const icons = { estudio: "📚", descanso: "☕", variable: "✨" };
+const icons = { estudio: "📚", descanso: "☕", variable: "✨", nota: "📌" };
 
 async function loadSchedule() {
   try {
@@ -17,117 +18,137 @@ async function loadSchedule() {
 
     renderWeekInfo(parsed.week);
     renderSchedule(parsed.schedule);
-    renderGeneralNotes(parsed.generalNotes);
   } catch (error) {
+    document.getElementById("weekGrid").innerHTML = `<div class="block rest"><div class="block-title">☕ Error al cargar</div></div>`;
     console.error(error);
-    document.getElementById("weekGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>⚠️ Error de formato en horario_config.txt</p>";
   }
 }
 
 function parseConfig(text) {
   const schedule = {};
-  let generalNotes = [];
   let currentDay = null;
   let week = "";
-  let readingGeneralNotes = false;
 
   text.split(/\r?\n/).forEach((rawLine) => {
-    // Limpieza de marcas de citación accidentales
-    let line = rawLine.replace(/\/g, "").trim();
+    const line = rawLine.trim();
     if (!line || line.startsWith("#")) return;
 
-    if (line.toUpperCase().includes("[NOTAS]")) {
-      readingGeneralNotes = true;
-      return;
-    }
-    if (readingGeneralNotes) {
-      generalNotes.push(line.replace(/^- /, ""));
-      return;
-    }
-    if (line.toUpperCase().includes("SEMANA:")) {
+    if (line.toUpperCase().startsWith("SEMANA:")) {
       week = line.split(/:(.+)/)[1].trim();
       return;
     }
+
     const dayMatch = line.match(/^\[(.+?)\]$/);
     if (dayMatch) {
       currentDay = normalize(dayMatch[1]);
       schedule[currentDay] = { blocks: [], note: "" };
       return;
     }
+
     if (!currentDay || !line.includes(":")) return;
 
-    const [keyRaw, valueRaw] = line.split(/:(.+)/);
-    const key = keyRaw.trim().toLowerCase();
-    const value = valueRaw.trim();
+    const [slotRaw, restRaw] = line.split(/:(.+)/);
+    const slot = slotRaw.trim().toLowerCase();
+    const rest = restRaw.trim();
 
-    if (key === "nota") {
-      schedule[currentDay].note = value;
+    if (slot === "nota") {
+      schedule[currentDay].note = rest;
     } else {
       let time = "", type = "", label = "";
-      if (value.includes("|")) {
-        const parts = value.split("|");
+      if (rest.includes("|")) {
+        const parts = rest.split("|");
         time = parts[0].trim();
         type = normalizeType(parts[1]);
       } else {
-        type = normalizeType(value);
+        type = normalizeType(rest);
       }
-      label = type === "estudio" ? (key === "mañana" ? "Estudio de mañana" : "Estudio de tarde") : (type === "descanso" ? "Descanso" : value);
+
+      if (type === "estudio") label = slot === "mañana" ? "Estudio de mañana" : "Estudio de tarde";
+      else if (type === "descanso") label = "Descanso";
+      else { label = rest; type = "variable"; }
+
       schedule[currentDay].blocks.push({ time, type, label });
     }
   });
-  return { week, schedule, generalNotes };
+
+  return { week, schedule };
 }
 
 function renderSchedule(schedule) {
   const grid = document.getElementById("weekGrid");
   const today = dayNames[new Date().getDay()];
   const orderedDays = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
+
   grid.innerHTML = "";
 
   orderedDays.forEach((day) => {
-    const data = schedule[day] || { blocks: [], note: "" };
+    const dayData = schedule[day] || { blocks: [], note: "" };
     const card = document.createElement("article");
-    card.className = "day-card" + (day === today ? " today" : "");
-    
-    let html = `<div class="day-title">${displayNames[day] || day}</div>`;
-    if (data.blocks.length === 0) {
-      html += `<div class="block variable"><div class="block-title">✨ Libre</div></div>`;
+    card.className = "day-card";
+    if (day === today) card.classList.add("today");
+
+    const title = document.createElement("div");
+    title.className = "day-title";
+    title.textContent = displayNames[day] || day;
+    card.appendChild(title);
+
+    if (dayData.blocks.length === 0) {
+      card.appendChild(createBlock({ type: "variable", label: "Sin horario", time: "✨" }));
     } else {
-      data.blocks.forEach(b => {
-        const css = b.type === "estudio" ? "study" : (b.type === "descanso" ? "rest" : "variable");
-        html += `<div class="block ${css}"><div class="block-title">${icons[b.type] || "✨"} ${b.label}</div><div class="block-time">${b.time || "relax"}</div></div>`;
-      });
+      dayData.blocks.forEach((block) => card.appendChild(createBlock(block)));
     }
 
-    if (data.note) {
-      html += `<div class="day-note">📌 ${data.note}</div>`;
+    // AÑADIR NOTA SI EXISTE
+    if (dayData.note) {
+      const noteDiv = document.createElement("div");
+      noteDiv.className = "block nota";
+      noteDiv.innerHTML = `<div class="block-title">📌 Nota</div><div class="block-time">${dayData.note}</div>`;
+      card.appendChild(noteDiv);
     }
 
-    card.innerHTML = html;
     grid.appendChild(card);
   });
 }
 
-function renderGeneralNotes(notes) {
-  const list = document.getElementById("notesList");
-  if (list) list.innerHTML = notes.map(n => `<li>${n}</li>`).join("");
+function createBlock(block) {
+  const div = document.createElement("div");
+  div.className = `block ${cssClass(block.type)}`;
+  div.innerHTML = `<div class="block-title">${icons[block.type] || "✨"} ${block.label}</div><div class="block-time">${block.time || "relax"}</div>`;
+  return div;
 }
 
-function normalize(t) { return t.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
-function normalizeType(t) {
-  const v = t.toLowerCase();
-  return v.includes("estudio") ? "estudio" : (v.includes("descanso") ? "descanso" : "variable");
+function normalize(text) { return text.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+function normalizeType(text) {
+  const val = text.trim().toLowerCase();
+  if (val.includes("estudio")) return "estudio";
+  if (val.includes("descanso")) return "descanso";
+  return "variable";
 }
+function cssClass(type) { return type === "estudio" ? "study" : (type === "descanso" ? "rest" : "variable"); }
 
 function renderWeekInfo(week) {
   if (!week) return;
-  const match = week.match(/(\d{2})\/(\d{2})\/(\d{4})\s+al\s+(\d{2})/);
-  if (match) {
-    const months = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
-    document.getElementById("weekMonth").textContent = months[parseInt(match[2]) - 1] + " " + match[3];
-    document.getElementById("weekDays").textContent = `${match[1]} → ${match[4]}`;
-    document.getElementById("weekText").textContent = `Semana del ${week}`;
-  }
+  const weekMonth = document.getElementById("weekMonth");
+  const weekDays = document.getElementById("weekDays");
+  const weekText = document.getElementById("weekText");
+  const match = week.match(/(\d{2})\/(\d{2})\/(\d{4})\s+al\s+(\d{2})\/(\d{2})\/(\d{4})/);
+  if (!match) return;
+  const months = {"01":"ENERO","02":"FEBRERO","03":"MARZO","04":"ABRIL","05":"MAYO","06":"JUNIO","07":"JULIO","08":"AGOSTO","09":"SEPTIEMBRE","10":"OCTUBRE","11":"NOVIEMBRE","12":"DICIEMBRE"};
+  weekMonth.textContent = `${months[match[2]]} ${match[3]}`;
+  weekDays.textContent = `${Number(match[1])} → ${Number(match[4])}`;
+  weekText.textContent = `Semana del ${week}`;
 }
 
+async function loadLastUpdate() {
+  try {
+    const response = await fetch("https://api.github.com/repos/bibiopotoleando/horario/commits?path=horario_config.txt&page=1&per_page=1");
+    const data = await response.json();
+    if (data && data[0]) {
+      const date = new Date(data[0].commit.committer.date);
+      document.getElementById("lastUpdate").textContent = `🗓️ actualizado el ${date.toLocaleDateString("es-ES")}`;
+    }
+  } catch (e) { console.error(e); }
+}
+
+loadLastUpdate();
 loadSchedule();
