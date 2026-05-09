@@ -28,13 +28,12 @@ nota:
 [SÁBADO]
 mañana: 09:00-14:00 | estudio
 tarde: 15:30 - 19:30 | estudio
-nota: Cena de cumpleaños a las 21:00
+nota: tengo una cena de cumpleaños
 
 [DOMINGO]
-mañana: probable un rato
-tarde: tengo otro cumpleaños
-nota: Horario flexible por eventos familiares
+mañana: 09:00-12:00 | estudio
+tarde: descanso
+nota: variable por el cumpleaños del sábado y tengo una comida
 
 [NOTAS]
-- ¡Dale duro al estudio esta semana!
-- No olvides beber agua y descansar la vista.
+- Recuerda revisar los temas de la semana que viene.
