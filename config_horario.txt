@@ -1,4 +1,4 @@
-EMANA: 04/05/2026 al 10/05/2026
+SEMANA: 04/05/2026 al 10/05/2026
 
 [LUNES]
 mañana: 09:00-14:00 | estudio
