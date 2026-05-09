@@ -3,27 +3,27 @@ SEMANA: 04/05/2026 al 10/05/2026
 [LUNES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
-nota:
+nota: 1
 
 [MARTES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:30-20:30 | estudio
-nota:
+nota: 2
 
 [MIÉRCOLES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:15-20:15 | estudio
-nota:
+nota: 3
 
 [JUEVES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:15-20:30 | estudio
-nota:
+nota: 4
 
 [VIERNES]
 mañana: 08:45-13:15 | estudio
 tarde: 16:30-21:00 | estudio
-nota:
+nota: 5
 
 [SÁBADO]
 mañana: 09:00-14:00 | estudio
