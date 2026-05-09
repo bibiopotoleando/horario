@@ -1,43 +1,230 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Horario semanal cozy</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Horario Semanal Cozy</title>
+  
+  <!-- DISEÑO (CSS) INTEGRADO -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap");
+
+    :root {
+      --fondo: #f7efe3; --papel: #fffaf0; --papel-2: #fff3dc; --tinta: #4f4035;
+      --suave: #9d806b; --verde: #9fbd8c; --verde-oscuro: #6f8f5f; --rosa: #e7b7a8;
+      --amarillo: #f5d58b; --sombra: rgba(93, 68, 43, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+    body { 
+      margin: 0; min-height: 100vh; font-family: "Nunito", sans-serif; 
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 35%), linear-gradient(135deg, #f8ead7, #eef3df);
+      color: var(--tinta);
+    }
+    .wrapper { max-width: 1200px; margin: 0 auto; padding: 30px 15px; }
+
+    .header { text-align: center; margin-bottom: 25px; }
+    .header h1 { font-family: "Kalam", cursive; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--verde-oscuro); margin: 0; }
+    
+    .calendar-card { 
+      width: 190px; background: var(--papel); border-radius: 22px; box-shadow: 0 10px 25px var(--sombra); 
+      transform: rotate(-1.5deg); overflow: hidden; margin: 20px auto;
+    }
+    .calendar-top { background: var(--verde); color: white; text-align: center; padding: 8px; font-weight: 800; }
+    .calendar-days { font-family: "Kalam", cursive; font-size: 2rem; text-align: center; padding: 10px 5px; }
+    .calendar-text { text-align: center; padding-bottom: 10px; font-size: 0.8rem; opacity: 0.8; }
+
+    .agenda { 
+      position: relative; background: var(--papel); border-radius: 34px; padding: 30px; 
+      box-shadow: 0 20px 50px var(--sombra); border: 2px solid white; 
+    }
+    .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 15px; }
+
+    .day-card {
+      min-height: 280px; display: flex; flex-direction: column; background: var(--papel); 
+      border-radius: 20px; padding: 15px; border: 1px solid rgba(111, 143, 95, 0.15);
+      background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), repeating-linear-gradient(to bottom, transparent 0, transparent 34px, rgba(159, 189, 140, 0.1) 35px);
+    }
+    .day-card.today { outline: 3px solid var(--amarillo); transform: translateY(-4px); background: #fffef0; }
+    .day-title { font-family: "Kalam", cursive; font-size: 1.4rem; text-align: center; color: var(--verde-oscuro); margin-bottom: 10px; border-bottom: 1px dashed var(--verde); }
+
+    .block { margin: 6px 0; padding: 8px; border-radius: 12px; border-left: 4px solid var(--verde); background: white; box-shadow: 2px 2px 5px rgba(0,0,0,0.02); }
+    .block-title { font-weight: 800; font-size: 0.85rem; }
+    .block-time { font-family: "Kalam", cursive; font-size: 0.95rem; color: var(--suave); }
+    .block.study { border-left-color: var(--verde); }
+    .block.rest { border-left-color: var(--rosa); }
+    .block.note { border-left-color: var(--amarillo); background: var(--papel-2); margin-top: auto; }
+
+    .post-it-container { display: flex; justify-content: center; margin-top: 40px; }
+    .post-it {
+      background: var(--papel-2); width: 100%; max-width: 500px; padding: 25px; 
+      position: relative; transform: rotate(1deg); box-shadow: 5px 5px 15px var(--sombra);
+    }
+    .post-it .pin { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-size: 1.5rem; }
+    .post-it h3 { font-family: 'Kalam', cursive; text-align: center; margin-top: 0; }
+    .post-it ul { padding: 0; list-style: none; font-family: 'Kalam', cursive; }
+    .post-it li { padding: 5px 0; border-bottom: 1px dashed rgba(0,0,0,0.05); }
+
+    .footer { text-align: center; margin-top: 30px; }
+    .sticker { position: absolute; font-size: 2.2rem; z-index: 10; }
+    
+    @media (max-width: 1100px) { .week-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 650px) { .week-grid { grid-template-columns: 1fr; } .day-card { min-height: auto; } }
+  </style>
 </head>
 <body>
+
   <main class="wrapper">
     <header class="header">
-      <h1>📖 Horario semanal</h1>
-      <div id="weekInfo" class="week-info">
-        <div class="calendar-card">
-          <div class="calendar-top" id="weekMonth">MES</div>
-          <div class="calendar-days" id="weekDays">-- → --</div>
-          <div class="calendar-text" id="weekText">Semana actual</div>
-        </div>
+      <h1>📖 Horario Semanal</h1>
+      <p>Estudio y descansos</p>
+      
+      <div class="calendar-card">
+        <div class="calendar-top" id="weekMonth">MAYO 2026</div>
+        <div class="calendar-days" id="weekDays">-- → --</div>
+        <div class="calendar-text" id="weekText">Semana actual</div>
       </div>
     </header>
 
     <section class="agenda">
-      <div class="sticker one">🌿</div>
-      <div class="sticker two">☕</div>
+      <div class="sticker" style="top: -15px; left: 20px;">🌿</div>
+      <div class="sticker" style="top: -15px; right: 20px;">☕</div>
       
-      <!-- Aquí es donde el script dibujará los 7 días -->
-      <div id="weekGrid" class="week-grid"></div>
+      <div id="weekGrid" class="week-grid">
+        <!-- El horario se carga aquí mediante JS -->
+      </div>
 
-      <!-- Sección de notas (Post-it de abajo) -->
-      <div class="general-notes-container">
-        <div class="post-it-general">
+      <div class="post-it-container">
+        <div class="post-it">
           <span class="pin">📌</span>
           <h3>Notas de la semana</h3>
-          <ul id="notesList"></ul>
+          <ul id="generalNotes"></ul>
         </div>
       </div>
 
-      <div class="footer-note">✨ Actualizado con mucho mimo ✨</div>
+      <div class="footer">
+        <p>✨ Actualizado con mucho mimo ✨</p>
+        <small id="lastUpdate">🗓️ actualizado el 09 de mayo de 2026</small>
+      </div>
     </section>
   </main>
-  <script src="script.js"></script>
+
+  <!-- LÓGICA (JS) INTEGRADA -->
+  <script>
+    const CONFIG_FILE = "horario_config.txt";
+    const dayNames = ["DOMINGO", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"];
+    const displayNames = { LUNES: "Lunes", MARTES: "Martes", MIERCOLES: "Miércoles", JUEVES: "Jueves", VIERNES: "Viernes", SABADO: "Sábado", DOMINGO: "Domingo" };
+    const icons = { estudio: "📚", descanso: "☕", variable: "✨" };
+
+    async function loadAll() {
+      try {
+        const response = await fetch(CONFIG_FILE + "?v=" + Date.now());
+        if (!response.ok) throw new Error("No se pudo cargar el archivo");
+        const text = await response.text();
+        
+        // EXPLICACIÓN: Se corrige la expresión regular para eliminar etiquetas tipo 
+        const cleanText = text.replace(/\/gi, "");
+        const data = parseData(cleanText);
+
+        renderUI(data);
+      } catch (e) {
+        console.error(e);
+        document.getElementById("weekGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>⚠️ No se pudo leer horario_config.txt</p>";
+      }
+    }
+
+    function parseData(text) {
+      const schedule = {};
+      const generalNotes = [];
+      let currentDay = null;
+      let week = "";
+      let isNotes = false;
+
+      text.split(/\r?\n/).forEach(line => {
+        line = line.trim();
+        if (!line || line.startsWith("#")) return;
+
+        if (line.toUpperCase().includes("[NOTAS]")) { isNotes = true; return; }
+        if (isNotes) { generalNotes.push(line.replace(/^- /, "")); return; }
+
+        if (/SEMANA:/i.test(line)) {
+          week = line.split(/SEMANA:/i)[1].trim();
+          return;
+        }
+
+        const dayMatch = line.match(/\[(LUNES|MARTES|MIERCOLES|MIÉRCOLES|JUEVES|VIERNES|SABADO|SÁBADO|DOMINGO)\]/i);
+        if (dayMatch) {
+          currentDay = dayMatch[1].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          schedule[currentDay] = { blocks: [], note: "" };
+          return;
+        }
+
+        if (currentDay && line.includes(":")) {
+          const [keyPart, valPart] = line.split(/:(.+)/);
+          const key = keyPart.trim().toLowerCase();
+          const val = valPart.trim();
+
+          if (key === "nota") {
+            schedule[currentDay].note = val;
+          } else {
+            let time = val, type = "variable", label = val;
+            if (val.includes("|")) {
+              const parts = val.split("|");
+              time = parts[0].trim();
+              const typeT = parts[1].trim().toLowerCase();
+              type = typeT.includes("estudio") ? "estudio" : (typeT.includes("descanso") ? "descanso" : "variable");
+            }
+            label = type === "estudio" ? `Estudio de ${key}` : (type === "descanso" ? "Descanso" : val);
+            schedule[currentDay].blocks.push({ time, type, label });
+          }
+        }
+      });
+      return { week, schedule, generalNotes };
+    }
+
+    function renderUI(data) {
+      // 1. Cabecera (Fecha arriba)
+      const match = data.week.match(/(\d{2})\/(\d{2})/);
+      if (match) {
+        const months = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
+        document.getElementById("weekMonth").textContent = months[parseInt(match[2]) - 1] + " 2026";
+        document.getElementById("weekDays").textContent = `${match[1]} → ${parseInt(match[1]) + 6}`;
+      }
+      document.getElementById("weekText").textContent = "Semana del " + data.week;
+
+      // 2. Cuadrícula (Días)
+      const grid = document.getElementById("weekGrid");
+      const ordered = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
+      const today = new Date().toLocaleDateString('es-ES', {weekday: 'long'}).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      
+      grid.innerHTML = "";
+      ordered.forEach(d => {
+        const dayData = data.schedule[d] || { blocks: [], note: "" };
+        const card = document.createElement("article");
+        card.className = "day-card" + (d === today ? " today" : "");
+
+        let blocksHTML = dayData.blocks.map(b => `
+          <div class="block ${b.type}">
+            <div class="block-title">${icons[b.type] || "✨"} ${b.label}</div>
+            <div class="block-time">${b.time}</div>
+          </div>
+        `).join("");
+
+        if (dayData.blocks.length === 0) blocksHTML = "<p style='font-size:0.8rem; opacity:0.5; text-align:center; margin-top:20px;'>Día libre</p>";
+
+        card.innerHTML = `
+          <div class="day-title">${displayNames[d]}</div>
+          ${blocksHTML}
+          ${dayData.note ? `<div class="block note"><div class="block-title">📌 Nota</div><div class="block-time">${dayData.note}</div></div>` : ""}
+        `;
+        grid.appendChild(card);
+      });
+
+      // 3. Notas de abajo
+      document.getElementById("generalNotes").innerHTML = data.generalNotes.map(n => `<li>${n}</li>`).join("");
+    }
+
+    loadAll();
+  </script>
 </body>
 </html>
