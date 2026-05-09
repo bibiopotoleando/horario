@@ -1,88 +1,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap");
 
 :root {
-  --fondo: #f7efe3;
-  --papel: #fffaf0;
-  --papel-2: #fff3dc;
-  --tinta: #4f4035;
-  --suave: #9d806b;
-  --verde: #9fbd8c;
-  --verde-oscuro: #6f8f5f;
-  --rosa: #e7b7a8;
-  --amarillo: #f5d58b;
-  --sombra: rgba(93, 68, 43, 0.16);
+  --fondo: #f7efe3; --papel: #fffaf0; --papel-2: #fff3dc; --tinta: #4f4035;
+  --suave: #9d806b; --verde: #9fbd8c; --verde-oscuro: #6f8f5f; --rosa: #e7b7a8;
+  --amarillo: #f5d58b; --sombra: rgba(93, 68, 43, 0.16);
 }
 
 * { box-sizing: border-box; }
-
-body {
-  margin: 0; min-height: 100vh; color: var(--tinta); font-family: "Nunito", sans-serif;
-  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 35%), linear-gradient(135deg, #f8ead7, #eef3df);
-}
-
+body { margin: 0; min-height: 100vh; color: var(--tinta); font-family: "Nunito", sans-serif; background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 35%), linear-gradient(135deg, #f8ead7, #eef3df); }
 .wrapper { max-width: 1180px; margin: 0 auto; padding: 34px 18px 48px; }
 
 .header { text-align: center; margin-bottom: 28px; }
 .header h1 { margin: 0; font-family: "Kalam", cursive; font-size: clamp(2.4rem, 5vw, 4.3rem); color: var(--verde-oscuro); }
-.header p { margin: 6px 0 0; color: var(--suave); font-size: 1.05rem; }
 
-.week-info { display: flex; justify-content: center; margin-top: 18px; }
-.calendar-card { width: 190px; background: var(--papel); border-radius: 22px; box-shadow: 0 12px 28px var(--sombra); border: 2px solid rgba(111, 143, 95, 0.18); overflow: hidden; transform: rotate(-1.5deg); }
-.calendar-top { background: var(--verde); color: white; text-align: center; padding: 8px 10px; font-weight: 800; letter-spacing: 1px; }
-.calendar-days { font-family: "Kalam", cursive; font-size: 2rem; text-align: center; padding: 12px 8px 2px; color: var(--tinta); }
-.calendar-text { text-align: center; padding: 0 10px 14px; font-size: 0.9rem; color: var(--suave); }
+.calendar-card { width: 190px; background: var(--papel); border-radius: 22px; box-shadow: 0 12px 28px var(--sombra); transform: rotate(-1.5deg); overflow: hidden; margin: 0 auto; }
+.calendar-top { background: var(--verde); color: white; text-align: center; padding: 8px; font-weight: 800; }
+.calendar-days { font-family: "Kalam", cursive; font-size: 2rem; text-align: center; padding: 10px; }
 
-.agenda { position: relative; background: var(--papel); border-radius: 34px; padding: 28px; box-shadow: 0 20px 50px var(--sombra); border: 2px solid rgba(255, 255, 255, 0.75); }
+.agenda { position: relative; background: var(--papel); border-radius: 34px; padding: 28px; box-shadow: 0 20px 50px var(--sombra); border: 2px solid white; }
 .agenda::before { content: ""; position: absolute; inset: 16px; border: 2px dashed rgba(159, 189, 140, 0.45); border-radius: 26px; pointer-events: none; }
 
-.week-grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; }
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 16px; position: relative; z-index: 1; }
 
-.day-card {
-  min-height: 280px; display: flex; flex-direction: column; padding: 18px 14px; border-radius: 22px; border: 1px solid rgba(111, 143, 95, 0.18);
-  box-shadow: 0 10px 24px rgba(93, 68, 43, 0.09); transition: transform 0.2s ease;
-  background: linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)), repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(159, 189, 140, 0.2) 36px);
-}
+.day-card { min-height: 280px; display: flex; flex-direction: column; background: var(--papel); border-radius: 22px; padding: 15px; border: 1px solid rgba(111, 143, 95, 0.18); box-shadow: 0 10px 24px rgba(0,0,0,0.05); transition: transform 0.2s; }
+.day-card.today { outline: 3px solid var(--amarillo); transform: translateY(-4px); background: #fffdf5; }
+.day-title { font-family: "Kalam", cursive; font-size: 1.5rem; text-align: center; color: var(--verde-oscuro); margin-bottom: 10px; }
 
-.day-card.today {
-  outline: 3px solid rgba(245, 213, 139, 0.9); transform: translateY(-4px);
-  background: linear-gradient(rgba(255, 243, 220, 0.78), rgba(255, 243, 220, 0.78)), repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(231, 183, 168, 0.24) 36px);
-}
-
-.day-title { font-family: "Kalam", cursive; font-size: 1.55rem; font-weight: 700; color: var(--verde-oscuro); margin-bottom: 14px; text-align: center; }
-.today .day-title::after { content: " ✨"; }
-
-.block { margin: 12px 0; padding: 11px 10px; border-radius: 16px; background: rgba(255, 250, 240, 0.8); border-left: 5px solid var(--verde); }
-.block-title { font-weight: 800; font-size: 0.95rem; color: var(--tinta); }
-.block-time { margin-top: 3px; font-family: "Kalam", cursive; font-size: 1.1rem; color: var(--suave); }
+.block { margin: 8px 0; padding: 10px; border-radius: 12px; border-left: 5px solid var(--verde); background: rgba(255,255,255,0.5); }
+.block-title { font-weight: 800; font-size: 0.9rem; }
+.block-time { font-family: "Kalam", cursive; font-size: 1rem; color: var(--suave); }
 .block.study { border-left-color: var(--verde); }
-.block.rest { border-left-color: var(--rosa); opacity: 0.9; }
-.block.variable { border-left-color: var(--amarillo); }
+.block.rest { border-left-color: var(--rosa); }
 
-/* Nota individual estilo post-it pequeño */
-.day-note {
-  margin-top: auto; padding: 8px 10px; background-color: var(--papel-2); border-radius: 8px; border-left: 3px solid var(--amarillo);
-  font-family: "Kalam", cursive; font-size: 0.9rem; color: var(--tinta); box-shadow: 2px 2px 5px var(--sombra); line-height: 1.2;
-}
+.day-note { margin-top: auto; background: var(--papel-2); padding: 8px; border-radius: 8px; font-family: "Kalam", cursive; font-size: 0.9rem; border-left: 3px solid var(--amarillo); box-shadow: 2px 2px 5px var(--sombra); }
 
-/* Post-it general abajo */
 .general-notes-container { display: flex; justify-content: center; margin-top: 40px; }
-.post-it-general {
-  background: var(--papel-2); width: 100%; max-width: 500px; padding: 25px; position: relative; transform: rotate(-1deg);
-  box-shadow: 5px 5px 15px var(--sombra); border-bottom-right-radius: 40px 5px;
-}
+.post-it-general { background: var(--papel-2); width: 100%; max-width: 500px; padding: 25px; position: relative; transform: rotate(-1deg); box-shadow: 5px 5px 15px var(--sombra); border-bottom-right-radius: 40px 5px; }
 .post-it-general .pin { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 1.8rem; }
-.post-it-general h3 { font-family: 'Kalam', cursive; text-align: center; color: var(--verde-oscuro); border-bottom: 1px dashed var(--suave); padding-bottom: 5px; margin: 0 0 10px 0; }
-.post-it-general ul { list-style: none; padding: 0; font-family: 'Kalam', cursive; }
-.post-it-general li { padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
-.post-it-general li::before { content: "• "; color: var(--rosa); font-weight: bold; }
+.post-it-general h3 { font-family: 'Kalam', cursive; text-align: center; color: var(--verde-oscuro); border-bottom: 1px dashed var(--suave); margin-bottom: 10px; }
 
-.footer-note { margin-top: 22px; text-align: center; font-family: "Kalam", cursive; font-size: 1.2rem; color: var(--suave); }
-.last-update { margin-top: 10px; text-align: center; font-size: 0.9rem; color: var(--suave); font-family: "Kalam", cursive; opacity: 0.8; }
+#notesList { list-style: none; padding: 0; font-family: 'Kalam', cursive; }
+#notesList li { padding: 5px 0; font-size: 1.1rem; }
+#notesList li::before { content: "• "; color: var(--rosa); font-weight: bold; }
 
-.sticker { position: absolute; z-index: 2; font-size: 2rem; filter: drop-shadow(0 5px 8px rgba(93, 68, 43, 0.15)); }
-.sticker.one { top: -18px; left: 28px; }
-.sticker.two { right: 34px; top: -20px; }
-.sticker.three { bottom: -18px; left: 50%; transform: translateX(-50%); }
+.footer-note { margin-top: 20px; text-align: center; font-family: "Kalam", cursive; color: var(--suave); }
+.sticker { position: absolute; font-size: 2rem; }
+.sticker.one { top: -15px; left: 20px; }
+.sticker.two { top: -15px; right: 20px; }
 
-@media (max-width: 1050px) { .week-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 680px) { .agenda { padding: 20px; } .week-grid { grid-template-columns: 1fr; } .day-card { min-height: auto; } }
+@media (max-width: 1000px) { .week-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .week-grid { grid-template-columns: 1fr; } }

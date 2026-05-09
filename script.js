@@ -14,12 +14,13 @@ async function loadSchedule() {
     if (!response.ok) throw new Error("No se pudo cargar el archivo");
     const text = await response.text();
     const parsed = parseConfig(text);
+
     renderWeekInfo(parsed.week);
     renderSchedule(parsed.schedule);
     renderGeneralNotes(parsed.generalNotes);
   } catch (error) {
     console.error(error);
-    document.getElementById("weekGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>Error en el formato de horario_config.txt</p>";
+    document.getElementById("weekGrid").innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>⚠️ Error de formato en horario_config.txt</p>";
   }
 }
 
@@ -31,7 +32,8 @@ function parseConfig(text) {
   let readingGeneralNotes = false;
 
   text.split(/\r?\n/).forEach((rawLine) => {
-    let line = rawLine.trim();
+    // Limpieza de marcas de citación accidentales
+    let line = rawLine.replace(/\/g, "").trim();
     if (!line || line.startsWith("#")) return;
 
     if (line.toUpperCase().includes("[NOTAS]")) {
@@ -81,25 +83,27 @@ function renderSchedule(schedule) {
   const today = dayNames[new Date().getDay()];
   const orderedDays = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
   grid.innerHTML = "";
+
   orderedDays.forEach((day) => {
     const data = schedule[day] || { blocks: [], note: "" };
     const card = document.createElement("article");
     card.className = "day-card" + (day === today ? " today" : "");
-    const title = document.createElement("div");
-    title.className = "day-title";
-    title.textContent = displayNames[day] || day;
-    card.appendChild(title);
+    
+    let html = `<div class="day-title">${displayNames[day] || day}</div>`;
     if (data.blocks.length === 0) {
-      card.appendChild(createBlock({ type: "variable", label: "Libre", time: "✨" }));
+      html += `<div class="block variable"><div class="block-title">✨ Libre</div></div>`;
     } else {
-      data.blocks.forEach(block => card.appendChild(createBlock(block)));
+      data.blocks.forEach(b => {
+        const css = b.type === "estudio" ? "study" : (b.type === "descanso" ? "rest" : "variable");
+        html += `<div class="block ${css}"><div class="block-title">${icons[b.type] || "✨"} ${b.label}</div><div class="block-time">${b.time || "relax"}</div></div>`;
+      });
     }
+
     if (data.note) {
-      const noteDiv = document.createElement("div");
-      noteDiv.className = "day-note";
-      noteDiv.innerHTML = `📌 ${data.note}`;
-      card.appendChild(noteDiv);
+      html += `<div class="day-note">📌 ${data.note}</div>`;
     }
+
+    card.innerHTML = html;
     grid.appendChild(card);
   });
 }
@@ -109,18 +113,10 @@ function renderGeneralNotes(notes) {
   if (list) list.innerHTML = notes.map(n => `<li>${n}</li>`).join("");
 }
 
-function createBlock(block) {
-  const div = document.createElement("div");
-  const css = block.type === "estudio" ? "study" : (block.type === "descanso" ? "rest" : "variable");
-  div.className = `block ${css}`;
-  div.innerHTML = `<div class="block-title">${icons[block.type] || "✨"} ${block.label}</div><div class="block-time">${block.time || "relax"}</div>`;
-  return div;
-}
-
-function normalize(text) { return text.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
-function normalizeType(text) {
-  const val = text.trim().toLowerCase();
-  return val.includes("estudio") ? "estudio" : (val.includes("descanso") ? "descanso" : "variable");
+function normalize(t) { return t.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+function normalizeType(t) {
+  const v = t.toLowerCase();
+  return v.includes("estudio") ? "estudio" : (v.includes("descanso") ? "descanso" : "variable");
 }
 
 function renderWeekInfo(week) {
