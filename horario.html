@@ -4,22 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Horario semanal cozy</title>
-
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <main class="wrapper">
     <header class="header">
       <h1>📖 Horario semanal</h1>
       <p>Estudio y descansos</p>
-<div id="weekInfo" class="week-info">
-  <div class="calendar-card">
-    <div class="calendar-top" id="weekMonth">MES</div>
-    <div class="calendar-days" id="weekDays">-- → --</div>
-    <div class="calendar-text" id="weekText">Semana actual</div>
-  </div>
-</div>
+      <div id="weekInfo" class="week-info">
+        <div class="calendar-card">
+          <div class="calendar-top" id="weekMonth">MES</div>
+          <div class="calendar-days" id="weekDays">-- → --</div>
+          <div class="calendar-text" id="weekText">Semana actual</div>
+        </div>
+      </div>
     </header>
 
     <section class="agenda">
@@ -27,18 +25,20 @@
       <div class="sticker two">☕</div>
       <div class="sticker three">📚</div>
 
-      <div id="weekGrid" class="week-grid">
-        <!-- El horario se carga desde horario_config.txt -->
+      <div id="weekGrid" class="week-grid"></div>
+
+      <div class="general-notes-container">
+        <div class="post-it-general">
+          <span class="pin">📌</span>
+          <h3>Notas de la semana</h3>
+          <ul id="generalNotesList"></ul>
+        </div>
       </div>
 
-      <div class="footer-note">
-  ✨ Actualizado con mucho mimo ✨
-</div>
-
-<div class="last-update" id="lastUpdate"></div>
+      <div class="footer-note">✨ Actualizado con mucho mimo ✨</div>
+      <div class="last-update" id="lastUpdate"></div>
     </section>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
