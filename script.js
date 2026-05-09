@@ -18,7 +18,7 @@ async function loadSchedule() {
     renderWeekInfo(parsed.week);
     renderSchedule(parsed.schedule);
   } catch (error) {
-    document.getElementById("weekGrid").innerHTML = `<div class="block rest"><div class="block-title">☕ Error al cargar</div></div>`;
+    document.getElementById("weekGrid").innerHTML = `<div class="block rest"><div class="block-title">☕ Error de formato</div><div class="block-time">Revisa horario_config.txt</div></div>`;
     console.error(error);
   }
 }
@@ -28,9 +28,9 @@ function parseConfig(text) {
   let currentDay = null;
   let week = "";
 
-  text.split(/\r?\n/).forEach((rawLine) => {
-    const line = rawLine.trim();
-    if (!line || line.startsWith("#")) return;
+  text.split(/\r?\n/).forEach((line) => {
+    line = line.trim();
+    if (!line || line.startsWith("#") || line.startsWith("[source")) return;
 
     if (line.toUpperCase().startsWith("SEMANA:")) {
       week = line.split(/:(.+)/)[1].trim();
@@ -39,8 +39,11 @@ function parseConfig(text) {
 
     const dayMatch = line.match(/^\[(.+?)\]$/);
     if (dayMatch) {
-      currentDay = normalize(dayMatch[1]);
-      schedule[currentDay] = { blocks: [], note: "" };
+      const dayName = dayMatch[1].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      if (dayNames.includes(dayName) || dayName === "SABADO" || dayName === "MIERCOLES") {
+        currentDay = dayName;
+        schedule[currentDay] = { blocks: [], note: "" };
+      }
       return;
     }
 
@@ -57,9 +60,11 @@ function parseConfig(text) {
       if (rest.includes("|")) {
         const parts = rest.split("|");
         time = parts[0].trim();
-        type = normalizeType(parts[1]);
+        const typePart = parts[1].trim().toLowerCase();
+        type = typePart.includes("estudio") ? "estudio" : (typePart.includes("descanso") ? "descanso" : "variable");
       } else {
-        type = normalizeType(rest);
+        type = rest.toLowerCase().includes("descanso") ? "descanso" : "variable";
+        time = rest;
       }
 
       if (type === "estudio") label = slot === "mañana" ? "Estudio de mañana" : "Estudio de tarde";
@@ -83,66 +88,36 @@ function renderSchedule(schedule) {
   orderedDays.forEach((day) => {
     const dayData = schedule[day] || { blocks: [], note: "" };
     const card = document.createElement("article");
-    card.className = "day-card";
-    if (day === today) card.classList.add("today");
+    card.className = "day-card" + (day === today ? " today" : "");
 
-    const title = document.createElement("div");
-    title.className = "day-title";
-    title.textContent = displayNames[day] || day;
-    card.appendChild(title);
+    let html = `<div class="day-title">${displayNames[day] || day}</div>`;
 
     if (dayData.blocks.length === 0) {
-      card.appendChild(createBlock({ type: "variable", label: "Sin horario", time: "✨" }));
+      html += createBlockHTML({ type: "variable", label: "Sin horario", time: "✨" });
     } else {
-      dayData.blocks.forEach((block) => card.appendChild(createBlock(block)));
+      dayData.blocks.forEach((block) => html += createBlockHTML(block));
     }
 
     if (dayData.note) {
-      const noteDiv = document.createElement("div");
-      noteDiv.className = "block nota";
-      noteDiv.innerHTML = `<div class="block-title">📌 Nota</div><div class="block-time">${dayData.note}</div>`;
-      card.appendChild(noteDiv);
+      html += `<div class="block nota"><div class="block-title">📌 Nota</div><div class="block-time">${dayData.note}</div></div>`;
     }
+    card.innerHTML = html;
     grid.appendChild(card);
   });
 }
 
-function createBlock(block) {
-  const div = document.createElement("div");
-  div.className = `block ${cssClass(block.type)}`;
-  div.innerHTML = `<div class="block-title">${icons[block.type] || "✨"} ${block.label}</div><div class="block-time">${block.time || "relax"}</div>`;
-  return div;
+function createBlockHTML(block) {
+  const css = block.type === "estudio" ? "study" : (block.type === "descanso" ? "rest" : "variable");
+  return `<div class="block ${css}"><div class="block-title">${icons[block.type] || "✨"} ${block.label}</div><div class="block-time">${block.time || "relax"}</div></div>`;
 }
-
-function normalize(text) { return text.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
-function normalizeType(text) {
-  const val = text.trim().toLowerCase();
-  if (val.includes("estudio")) return "estudio";
-  if (val.includes("descanso")) return "descanso";
-  return "variable";
-}
-function cssClass(type) { return type === "estudio" ? "study" : (type === "descanso" ? "rest" : "variable"); }
 
 function renderWeekInfo(week) {
   if (!week) return;
-  const match = week.match(/(\d{2})\/(\d{2})\/(\d{4})\s+al\s+(\d{2})\/(\d{2})\/(\d{4})/);
+  const match = week.match(/(\d{2})\/(\d{2})\/(\d{4})/);
   if (!match) return;
-  const months = {"01":"ENERO","02":"FEBRERO","03":"MARZO","04":"ABRIL","05":"MAYO","06":"JUNIO","07":"JULIO","08":"AGOSTO","09":"SEPTIEMBRE","10":"OCTUBRE","11":"NOVIEMBRE","12":"DICIEMBRE"};
-  document.getElementById("weekMonth").textContent = `${months[match[2]]} ${match[3]}`;
-  document.getElementById("weekDays").textContent = `${Number(match[1])} → ${Number(match[4])}`;
+  const months = ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];
+  document.getElementById("weekMonth").textContent = `${months[parseInt(match[2])-1]} ${match[3]}`;
   document.getElementById("weekText").textContent = `Semana del ${week}`;
 }
 
-async function loadLastUpdate() {
-  try {
-    const response = await fetch("https://api.github.com/repos/bibiopotoleando/horario/commits?path=horario_config.txt&page=1&per_page=1");
-    const data = await response.json();
-    if (data && data[0]) {
-      const date = new Date(data[0].commit.committer.date);
-      document.getElementById("lastUpdate").textContent = `🗓️ actualizado el ${date.toLocaleDateString("es-ES")}`;
-    }
-  } catch (e) { console.error(e); }
-}
-
-loadLastUpdate();
 loadSchedule();
