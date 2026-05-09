@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Horario semanal cozy</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,8 +18,23 @@
         </div>
       </div>
     </header>
+
     <section class="agenda">
+      <div class="sticker one">🌿</div>
+      <div class="sticker two">☕</div>
+      
+      <!-- Aquí es donde el script dibujará los 7 días -->
       <div id="weekGrid" class="week-grid"></div>
+
+      <!-- Sección de notas (Post-it de abajo) -->
+      <div class="general-notes-container">
+        <div class="post-it-general">
+          <span class="pin">📌</span>
+          <h3>Notas de la semana</h3>
+          <ul id="notesList"></ul>
+        </div>
+      </div>
+
       <div class="footer-note">✨ Actualizado con mucho mimo ✨</div>
     </section>
   </main>
