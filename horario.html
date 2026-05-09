@@ -127,7 +127,7 @@
         const text = await response.text();
         
         // CORRECCIÓN: Expresión regular arreglada para evitar el SyntaxError
-        const cleanText = text.replace(/\/gi, "");
+        const cleanText = text.replace(/\/uFEFF/g, "");
         const data = parseData(cleanText);
 
         renderUI(data);
