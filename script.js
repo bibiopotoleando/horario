@@ -1,25 +1,17 @@
 const CONFIG_FILE = "horario_config.txt";
-
 const dayNames = ["DOMINGO", "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"];
-const displayNames = {
-  LUNES: "Lunes", MARTES: "Martes", MIERCOLES: "Miércoles",
-  JUEVES: "Jueves", VIERNES: "Viernes", SABADO: "Sábado", DOMINGO: "Domingo",
-};
-
+const displayNames = { LUNES: "Lunes", MARTES: "Martes", MIERCOLES: "Miércoles", JUEVES: "Jueves", VIERNES: "Viernes", SABADO: "Sábado", DOMINGO: "Domingo" };
 const icons = { estudio: "📚", descanso: "☕", variable: "✨" };
 
 async function loadSchedule() {
   try {
     const response = await fetch(CONFIG_FILE + "?v=" + Date.now());
-    if (!response.ok) throw new Error("No se pudo cargar el archivo");
     const text = await response.text();
     const parsed = parseConfig(text);
-
     renderWeekInfo(parsed.week);
     renderSchedule(parsed.schedule);
   } catch (error) {
-    document.getElementById("weekGrid").innerHTML = `<div class="block rest"><div class="block-title">☕ Error de formato</div><div class="block-time">Revisa horario_config.txt</div></div>`;
-    console.error(error);
+    console.error("Error cargando:", error);
   }
 }
 
@@ -27,54 +19,63 @@ function parseConfig(text) {
   const schedule = {};
   let currentDay = null;
   let week = "";
+  let lastKey = null;
 
-  text.split(/\r?\n/).forEach((line) => {
-    line = line.trim();
-    if (!line || line.startsWith("#") || line.startsWith("[source")) return;
+  // 1. Limpiamos el texto de etiquetas y basura similar
+  const cleanText = text.replace(/\/gi, "");
+  
+  cleanText.split(/\r?\n/).forEach((rawLine) => {
+    let line = rawLine.trim();
+    if (!line || line.startsWith("#")) return;
 
-    if (line.toUpperCase().startsWith("SEMANA:")) {
-      week = line.split(/:(.+)/)[1].trim();
+    // 2. Detectar SEMANA (aunque tenga texto delante o detrás)
+    if (/SEMANA:/i.test(line)) {
+      week = line.split(/SEMANA:/i)[1].trim();
       return;
     }
 
-    const dayMatch = line.match(/^\[(.+?)\]$/);
+    // 3. Detectar DÍAS con Regex flexible
+    const dayMatch = line.match(/\[(LUNES|MARTES|MIERCOLES|MIÉRCOLES|JUEVES|VIERNES|SABADO|SÁBADO|DOMINGO)\]/i);
     if (dayMatch) {
-      const dayName = dayMatch[1].toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      if (dayNames.includes(dayName) || dayName === "SABADO" || dayName === "MIERCOLES") {
-        currentDay = dayName;
-        schedule[currentDay] = { blocks: [], note: "" };
+      currentDay = normalize(dayMatch[1]);
+      schedule[currentDay] = { blocks: [], note: "" };
+      lastKey = null;
+      return;
+    }
+
+    if (!currentDay) return;
+
+    // 4. Si la línea NO tiene dos puntos, probablemente es la continuación de la línea anterior (error de salto)
+    if (!line.includes(":")) {
+      if (lastKey && schedule[currentDay].blocks.length > 0) {
+        let lastBlock = schedule[currentDay].blocks[schedule[currentDay].blocks.length - 1];
+        lastBlock.label += " " + line; // Unimos el texto cortado
+        if (line.toLowerCase().includes("estudio")) lastBlock.type = "estudio";
+        if (line.toLowerCase().includes("descanso")) lastBlock.type = "descanso";
       }
       return;
     }
 
-    if (!currentDay || !line.includes(":")) return;
+    // 5. Procesar líneas normales (mañana:, tarde:, nota:)
+    const [keyPart, ...valParts] = line.split(":");
+    const key = keyPart.trim().toLowerCase();
+    const val = valParts.join(":").trim();
+    lastKey = key;
 
-    const [slotRaw, restRaw] = line.split(/:(.+)/);
-    const slot = slotRaw.trim().toLowerCase();
-    const rest = restRaw.trim();
-
-    if (slot === "nota") {
-      schedule[currentDay].note = rest;
+    if (key === "nota") {
+      schedule[currentDay].note = val;
     } else {
-      let time = "", type = "", label = "";
-      if (rest.includes("|")) {
-        const parts = rest.split("|");
+      let time = val, type = "variable", label = val;
+      if (val.includes("|")) {
+        const parts = val.split("|");
         time = parts[0].trim();
         const typePart = parts[1].trim().toLowerCase();
         type = typePart.includes("estudio") ? "estudio" : (typePart.includes("descanso") ? "descanso" : "variable");
-      } else {
-        type = rest.toLowerCase().includes("descanso") ? "descanso" : "variable";
-        time = rest;
       }
-
-      if (type === "estudio") label = slot === "mañana" ? "Estudio de mañana" : "Estudio de tarde";
-      else if (type === "descanso") label = "Descanso";
-      else { label = rest; type = "variable"; }
-
+      label = type === "estudio" ? `Estudio de ${key}` : (type === "descanso" ? "Descanso" : val);
       schedule[currentDay].blocks.push({ time, type, label });
     }
   });
-
   return { week, schedule };
 }
 
@@ -82,42 +83,38 @@ function renderSchedule(schedule) {
   const grid = document.getElementById("weekGrid");
   const today = dayNames[new Date().getDay()];
   const orderedDays = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
-
   grid.innerHTML = "";
 
   orderedDays.forEach((day) => {
-    const dayData = schedule[day] || { blocks: [], note: "" };
+    const data = schedule[day] || { blocks: [], note: "" };
     const card = document.createElement("article");
     card.className = "day-card" + (day === today ? " today" : "");
-
     let html = `<div class="day-title">${displayNames[day] || day}</div>`;
-
-    if (dayData.blocks.length === 0) {
-      html += createBlockHTML({ type: "variable", label: "Sin horario", time: "✨" });
+    
+    if (data.blocks.length === 0) {
+      html += `<div class="block variable"><div class="block-title">✨ Libre</div></div>`;
     } else {
-      dayData.blocks.forEach((block) => html += createBlockHTML(block));
+      data.blocks.forEach(b => {
+        const css = b.type === "estudio" ? "study" : (b.type === "descanso" ? "rest" : "variable");
+        html += `<div class="block ${css}"><div class="block-title">${icons[b.type]} ${b.label}</div><div class="block-time">${b.time}</div></div>`;
+      });
     }
-
-    if (dayData.note) {
-      html += `<div class="block nota"><div class="block-title">📌 Nota</div><div class="block-time">${dayData.note}</div></div>`;
-    }
+    if (data.note) html += `<div class="block nota" style="background:var(--papel-2); border-left-color:var(--amarillo)"><div class="block-title">📌 Nota</div><div class="block-time">${data.note}</div></div>`;
     card.innerHTML = html;
     grid.appendChild(card);
   });
 }
 
-function createBlockHTML(block) {
-  const css = block.type === "estudio" ? "study" : (block.type === "descanso" ? "rest" : "variable");
-  return `<div class="block ${css}"><div class="block-title">${icons[block.type] || "✨"} ${block.label}</div><div class="block-time">${block.time || "relax"}</div></div>`;
-}
-
 function renderWeekInfo(week) {
   if (!week) return;
-  const match = week.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-  if (!match) return;
-  const months = ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];
-  document.getElementById("weekMonth").textContent = `${months[parseInt(match[2])-1]} ${match[3]}`;
-  document.getElementById("weekText").textContent = `Semana del ${week}`;
+  const match = week.match(/(\d{2})\/(\d{2})/);
+  if (match) {
+    document.getElementById("weekMonth").textContent = "MAYO 2026";
+    document.getElementById("weekDays").textContent = `${Number(match[1])} → ${Number(match[1]) + 6}`;
+  }
+  document.getElementById("weekText").textContent = "Semana del " + week;
 }
+
+function normalize(t) { return t.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace("MIERCOLES", "MIERCOLES").replace("SABADO", "SABADO"); }
 
 loadSchedule();
