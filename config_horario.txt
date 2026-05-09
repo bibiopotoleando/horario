@@ -1,0 +1,42 @@
+SEMANA: 04/05/2026 al 10/05/2026
+
+[LUNES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
+nota: Revisar temas del examen
+
+[MARTES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:30-20:30 | estudio
+nota:
+
+[MIÉRCOLES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:15-20:15 | estudio
+nota:
+
+[JUEVES]
+mañana: 09:00-14:00 | estudio
+tarde: 16:15-20:30 | estudio
+nota:
+
+[VIERNES]
+mañana: 08:45-13:15 | estudio
+tarde: 16:30-21:00 | estudio
+nota:
+
+[SÁBADO]
+mañana: 09:00-14:00 | estudio
+tarde: 15:30 - 19:30 | estudio
+nota: Cena de cumpleaños a las 21:00
+
+[DOMINGO]
+mañana: 09:00-12:00 | estudio
+tarde: descanso
+nota: Horario flexible por comida familiar
+
+[NOTAS]
+
+Recuerda que los descansos son necesarios.
+
+¡Esta semana hay directo especial el viernes!
