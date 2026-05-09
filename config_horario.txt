@@ -3,7 +3,7 @@ SEMANA: 04/05/2026 al 10/05/2026
 [LUNES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
-nota: Revisar temas del examen
+nota: 
 
 [MARTES]
 mañana: 09:00-14:00 | estudio
@@ -27,16 +27,14 @@ nota:
 
 [SÁBADO]
 mañana: 09:00-14:00 | estudio
-tarde: 15:30 - 19:30 | estudio
-nota: Cena de cumpleaños a las 21:00
+tarde: 14:30 - 17:00 | estudio
+nota: Merienda-cena de cumpleaños a las 19:00
 
 [DOMINGO]
 mañana: 09:00-12:00 | estudio
 tarde: descanso
-nota: Horario flexible por comida familiar
+nota: Horario flexible por comida cumpleañera (otro)
 
 [NOTAS]
 
 Recuerda que los descansos son necesarios.
-
-¡Esta semana hay directo especial el viernes!
