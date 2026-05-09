@@ -1,40 +1,39 @@
-SEMANA: 04/05/2026 al 10/05/2026 
+SEMANA: 04/05/2026 al 10/05/2026
 
 [LUNES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
-nota: 
+nota:
 
 [MARTES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:30-20:30 | estudio
-nota: 
+nota:
 
 [MIÉRCOLES]
-mañana: 09:00-14:00 | estudio [cite: 2]
+mañana: 09:00-14:00 | estudio
 tarde: 16:15-20:15 | estudio
-nota: 
+nota:
 
 [JUEVES]
 mañana: 09:00-14:00 | estudio
 tarde: 16:15-20:30 | estudio
-nota: 
+nota:
 
 [VIERNES]
 mañana: 08:45-13:15 | estudio
 tarde: 16:30-21:00 | estudio
-nota: 
+nota:
 
 [SÁBADO]
-mañana: 09:00-14:00 | estudio [cite: 3]
-tarde: 15:30 - 19:30 | estudio
-nota: tengo una cena de cumpleaños
+mañana: 09:00-14:00 | estudio
+tarde: 15:00 - 17:00 | estudio
+nota: Merienda-cena de cumpleaños a las 19:00
 
 [DOMINGO]
-mañana: 09:00-12:00 | estudio [cite: 4]
+mañana: 09:00-12:00 | estudio
 tarde: descanso
-nota: variable por el cumpleaños del sábado y tengo una comida
+nota: Horario flexible por comida cumpleañera.
 
 [NOTAS]
-- ¡Dale duro al estudio esta semana!
-- Recuerda hidratarte bien.
+- Recuerda que los descansos son necesarios.
