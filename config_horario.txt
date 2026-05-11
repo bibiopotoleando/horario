@@ -1,40 +1,41 @@
-SEMANA: 04/05/2026 al 10/05/2026
+SEMANA: 11/05/2026 al 17/05/2026
 
 [LUNES]
-mañana: 09:00-14:00 | estudio
+mañana: 10:00-12:15 | estudio
 tarde: 16:00-20:00 | estudio
-nota: 
+nota: tengo dentista, la tarde depende de cómo me encuentre
 
 [MARTES]
 mañana: 09:00-14:00 | estudio
-tarde: 16:30-20:30 | estudio
+tarde: 16:00-20:00 | estudio
 nota:
 
 [MIÉRCOLES]
 mañana: 09:00-14:00 | estudio
-tarde: 16:15-20:15 | estudio
+tarde: 16:00-20:00 | estudio
 nota:
 
 [JUEVES]
 mañana: 09:00-14:00 | estudio
-tarde: 16:15-20:30 | estudio
+tarde: 16:00-20:00 | estudio
 nota:
 
 [VIERNES]
-mañana: 08:45-13:15 | estudio
-tarde: 16:30-21:00 | estudio
+mañana: 09:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
 nota:
 
 [SÁBADO]
-mañana: 09:00-14:00 | estudio
-tarde: 14:30 - 17:00 | estudio
-nota: Merienda-cena de cumpleaños a las 19:00
+mañana: variable
+tarde: variable
+nota:
 
 [DOMINGO]
-mañana: 09:00-12:00 | estudio
-tarde: descanso
-nota: Horario flexible por comida cumpleañera (otro)
+mañana: variable
+tarde: variable
+nota:
 
 [NOTAS]
 
 Recuerda que los descansos son necesarios.
+El horario puede cambiar un poco con el día a día.
