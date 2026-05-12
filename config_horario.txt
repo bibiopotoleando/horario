@@ -2,26 +2,26 @@ SEMANA: 11/05/2026 al 17/05/2026
 
 [LUNES]
 mañana: 10:00-12:15 | estudio
-tarde: 16:00-20:00 | estudio
-nota: tengo dentista, la tarde depende de cómo me encuentre
+tarde: descanso
+nota: me quitan las muelas del juicio
 
 [MARTES]
-mañana: 09:00-14:00 | estudio
+mañana: 08:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
 nota:
 
 [MIÉRCOLES]
-mañana: 09:00-14:00 | estudio
+mañana: 08:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
 nota:
 
 [JUEVES]
-mañana: 09:00-14:00 | estudio
+mañana: 08:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
 nota:
 
 [VIERNES]
-mañana: 09:00-14:00 | estudio
+mañana: 08:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
 nota:
 
