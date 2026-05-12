@@ -7,7 +7,7 @@ nota: me quitan las muelas del juicio
 
 [MARTES]
 mañana: 08:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 17:00-21:00 | estudio
 nota:
 
 [MIÉRCOLES]
