@@ -11,8 +11,8 @@ tarde: 17:00-21:00 | estudio
 nota:
 
 [MIÉRCOLES]
-mañana: 08:30-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 08:30-13:30 | estudio
+tarde: 15:30-20:00 | estudio
 nota:
 
 [JUEVES]
