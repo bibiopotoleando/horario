@@ -16,9 +16,9 @@ tarde: 15:30-20:00 | estudio
 nota:
 
 [JUEVES]
-mañana: 08:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
-nota:
+mañana: 11:30-13:30 | estudio
+tarde: 14:30-21:30 | estudio
+nota: recaditos
 
 [VIERNES]
 mañana: 08:00-14:00 | estudio
