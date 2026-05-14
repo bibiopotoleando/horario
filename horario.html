@@ -149,6 +149,7 @@
     .block.study { border-left-color: var(--verde); }
     .block.rest { border-left-color: var(--rosa); }
     .block.variable { border-left-color: var(--amarillo); }
+    .block.nocturno { border-left-color: #8b7bb8; }
 
     .block.note {
       border-left-color: var(--amarillo);
@@ -281,7 +282,8 @@
     const icons = {
       estudio: "📚",
       descanso: "☕",
-      variable: "✨"
+      variable: "✨",
+      nocturno: "🌙"
     };
 
     async function loadAll() {
@@ -294,7 +296,6 @@
 
         const text = await response.text();
 
-        // Limpia caracteres invisibles raros, como BOM.
         const cleanText = text.replace(/\uFEFF/g, "");
 
         const data = parseData(cleanText);
@@ -398,6 +399,7 @@
           let time = val;
           let type = "variable";
           let label = val;
+          let period = key;
 
           if (val.includes("|")) {
             const parts = val.split("|");
@@ -415,7 +417,15 @@
             time = "Descanso";
           }
 
-          if (type === "estudio") {
+          if (key === "nocturno") {
+            if (type === "estudio") {
+              label = "Estudio nocturno";
+            } else if (type === "descanso") {
+              label = "Descanso nocturno";
+            } else {
+              label = "Nocturno";
+            }
+          } else if (type === "estudio") {
             label = `Estudio de ${key}`;
           } else if (type === "descanso") {
             label = "Descanso";
@@ -423,7 +433,7 @@
             label = key.charAt(0).toUpperCase() + key.slice(1);
           }
 
-          schedule[currentDay].blocks.push({ time, type, label });
+          schedule[currentDay].blocks.push({ time, type, label, period });
         }
       });
 
@@ -464,12 +474,16 @@
         const card = document.createElement("article");
         card.className = "day-card" + (dayKey === today ? " today" : "");
 
-        let blocksHTML = dayData.blocks.map(block => `
-          <div class="block ${block.type}">
-            <div class="block-title">${icons[block.type] || "✨"} ${block.label}</div>
-            <div class="block-time">${block.time}</div>
-          </div>
-        `).join("");
+        let blocksHTML = dayData.blocks.map(block => {
+          const icon = block.period === "nocturno" ? icons.nocturno : (icons[block.type] || "✨");
+
+          return `
+            <div class="block ${block.type} ${block.period}">
+              <div class="block-title">${icon} ${block.label}</div>
+              <div class="block-time">${block.time}</div>
+            </div>
+          `;
+        }).join("");
 
         if (dayData.blocks.length === 0) {
           blocksHTML = `

@@ -3,36 +3,43 @@ SEMANA: 11/05/2026 al 17/05/2026
 [LUNES]
 mañana: 10:00-12:15 | estudio
 tarde: descanso
+nocturno: descanso
 nota: me quitan las muelas del juicio
 
 [MARTES]
 mañana: 08:00-14:00 | estudio
 tarde: 17:00-21:00 | estudio
+nocturno: descanso
 nota:
 
 [MIÉRCOLES]
 mañana: 08:30-13:30 | estudio
 tarde: 15:30-20:00 | estudio
+nocturno: descanso
 nota:
 
 [JUEVES]
 mañana: 11:30-13:30 | estudio
-tarde: 14:30-21:30 | estudio
+tarde: 14:30-18:30 | estudio
+nocturno: 19:30/20:30-21:30
 nota: recaditos
 
 [VIERNES]
 mañana: 08:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
+nocturno: descanso
 nota:
 
 [SÁBADO]
 mañana: variable
 tarde: variable
+nocturno: variable
 nota:
 
 [DOMINGO]
 mañana: variable
 tarde: variable
+nocturno: variable
 nota:
 
 [NOTAS]
