@@ -14,8 +14,8 @@ nota: por la mañana tengo psicólogo en el medio y medio
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 15:00-20:00 | estudio
-nocturno: descanso
+tarde: 15:00-16:30 | estudio
+nocturno: 18:00-21:00 | estudio
 nota:
 
 [JUEVES]
