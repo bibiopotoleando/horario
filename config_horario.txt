@@ -19,9 +19,9 @@ nocturno: 18:00-21:00 | estudio
 nota:
 
 [JUEVES]
-mañana: 12:00-14:00 | estudio
-tarde: 15:00-18:00| estudio
-nocturno: descanso
+mañana: 10:30-13:30 | estudio
+tarde: 14:30-16:00| estudio
+nocturno: 19:30-21:00 | estudio
 nota: tengo médico por la mañana y un recado por la tarde
 
 [VIERNES]
