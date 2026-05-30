@@ -31,14 +31,14 @@ nocturno: descanso
 nota: tengo una cena 😳
 
 [SÁBADO]
-mañana: variable
-tarde: variable
+mañana: descanso
+tarde: 16:00-20:30 | estudio
 nocturno: variable
 nota: 
 
 [DOMINGO]
-mañana: variable
-tarde: variable
+mañana: 9:00-14:00 | estudio
+tarde: 16:00-10:00 | estudio
 nocturno: variable
 nota: 
 
