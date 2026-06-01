@@ -1,49 +1,48 @@
-SEMANA: 25/05/2026 al 31/05/2026
+SEMANA: 01/06/2026 al 07/06/2026
 
 [LUNES]
-mañana: 9:00-12:00 | estudio
-tarde: 15:00-20:00 | estudio
+mañana: 9:00-14:00 | estudio
+tarde: 16:00-21:00 | estudio
 nocturno: descanso
-nota: tengo dentista
+nota: 
 
 [MARTES]
-mañana: 12:00-14:00 | estudio
+mañana: 9:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
 nocturno: descanso
-nota: por la mañana tengo psicólogo en el medio y medio
+nota: 
 
 [MIÉRCOLES]
-mañana: 08:00-13:00 | estudio
-tarde: 15:00-16:30 | estudio
-nocturno: 18:00-21:00 | estudio
-nota:
+mañana: 08:00-11:30 | estudio
+tarde: 16:00-21:00 | estudio
+nocturno: descanso
+nota: dentista por la mañana
 
 [JUEVES]
-mañana: 10:30-13:30 | estudio
-tarde: 14:30-16:00| estudio
-nocturno: 19:30-21:00 | estudio
-nota: tengo médico por la mañana y un recado por la tarde
+mañana: 8:00-10:00 | estudio
+tarde: 14:00-21:00| estudio
+nocturno: tengo que preparar algo para el concierto con una amiga
+nota:
 
 [VIERNES]
 mañana: 09:00-14:00 | estudio
-tarde: 16:00-19:00 | estudio
+tarde: 15:00-18:00 | estudio
 nocturno: descanso
-nota: tengo una cena 😳
+nota: tengo una cena 
 
 [SÁBADO]
 mañana: descanso
-tarde: 16:00-20:30 | estudio
-nocturno: variable
-nota: 
+tarde: descanso
+nocturno: descanso
+nota: concierto de Conejo Malo 🔥
 
 [DOMINGO]
-mañana: 9:00-14:00 | estudio
-tarde: 16:00-10:00 | estudio
-nocturno: variable
+mañana: descanso
+tarde: 17:00-20:00 | estudio
+nocturno: descanso
 nota: 
 
 [NOTAS]
 
 Recuerda que los descansos son necesarios.
 El horario puede cambiar un poco con el día a día.
-Esta semana tengo que hacer malabares con recados y citas médicas.
