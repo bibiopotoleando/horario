@@ -1,7 +1,7 @@
-SEMANA: 01/06/2026 al 07/06/2026
+SEMANA: 08/06/2026 al 14/06/2026
 
 [LUNES]
-mañana: 9:00-14:00 | estudio
+mañana: 9:30-14:00 | estudio
 tarde: 16:00-21:00 | estudio
 nocturno: descanso
 nota: 
@@ -13,34 +13,34 @@ nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
-mañana: 08:00-11:30 | estudio
-tarde: 16:00-21:00 | estudio
+mañana: 08:00-13:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
-nota: dentista por la mañana
+nota: 
 
 [JUEVES]
-mañana: 8:00-10:00 | estudio
-tarde: 14:00-21:00| estudio
-nocturno: tengo que preparar algo para el concierto con una amiga
+mañana: 9:00-13:00 | estudio
+tarde: 16:00-20:30| estudio
+nocturno:
 nota:
 
 [VIERNES]
 mañana: 09:00-13:00 | estudio
-tarde: 15:30-18:00 | estudio
+tarde: 16:00-19:00 | estudio
 nocturno: descanso
 nota: tengo una cena 
 
 [SÁBADO]
-mañana: descanso
+mañana: 10:00-14:00 | estudio
 tarde: descanso
 nocturno: descanso
-nota: concierto de Conejo Malo 🔥
+nota: 
 
 [DOMINGO]
-mañana: descanso
-tarde: 17:00-20:00 | estudio
+mañana: 10:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
-nota: pendiente de cuándo llegue el avión etc.
+nota: 
 
 [NOTAS]
 
