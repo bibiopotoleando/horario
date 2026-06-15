@@ -1,8 +1,8 @@
-SEMANA: 08/06/2026 al 14/06/2026
+SEMANA: 15/06/2026 al 21/06/2026
 
 [LUNES]
-mañana: 9:30-14:00 | estudio
-tarde: 16:00-21:00 | estudio
+mañana: 9:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
@@ -13,26 +13,26 @@ nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
-mañana: 08:00-13:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 08:00-11:30 | estudio
+tarde: 16:00-21:00 | estudio
 nocturno: descanso
-nota: 
+nota: tengo dentista y uñas
 
 [JUEVES]
 mañana: 9:00-13:00 | estudio
-tarde: 16:00-20:30| estudio
+tarde: 16:00-20:00| estudio
 nocturno:
 nota:
 
 [VIERNES]
-mañana: 09:00-13:00 | estudio
-tarde: 16:00-19:00 | estudio
+mañana: 09:00-13:00 /14:00 | estudio
+tarde: 16:00-20:00
 nocturno: descanso
 nota: tengo una cena 
 
 [SÁBADO]
-mañana: 10:00-14:00 | estudio
-tarde: descanso
+mañana: descanso | estudio
+tarde: 16:00-20:00
 nocturno: descanso
 nota: 
 
