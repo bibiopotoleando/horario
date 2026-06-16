@@ -26,18 +26,18 @@ nota:
 
 [VIERNES]
 mañana: 09:00-13:00 /14:00 | estudio
-tarde: 16:00-20:00
+tarde: descanso
 nocturno: descanso
 nota: tengo una cena 
 
 [SÁBADO]
-mañana: descanso | estudio
+mañana: 10:00-13:00 | estudio
 tarde: 16:00-20:00
 nocturno: descanso
 nota: 
 
 [DOMINGO]
-mañana: 10:00-14:00 | estudio
+mañana: 10:00-13:00 | estudio
 tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
