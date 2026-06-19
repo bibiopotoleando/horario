@@ -28,11 +28,11 @@ nota:
 mañana: 09:00-13:00 /14:00 | estudio
 tarde: descanso
 nocturno: descanso
-nota: tengo una cena 
+nota:  
 
 [SÁBADO]
-mañana: 10:00-13:00 | estudio
-tarde: 16:00-20:00
+mañana: descanso
+tarde: 16:00-21:00
 nocturno: descanso
 nota: 
 
