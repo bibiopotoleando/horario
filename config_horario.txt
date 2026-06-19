@@ -31,10 +31,10 @@ nocturno: descanso
 nota:  
 
 [SÁBADO]
-mañana: descanso
+mañana: variable
 tarde: 16:00-21:00
 nocturno: descanso
-nota: 
+nota: tengo un recado a las 9:30
 
 [DOMINGO]
 mañana: 10:00-13:00 | estudio
