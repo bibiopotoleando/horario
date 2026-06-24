@@ -8,14 +8,14 @@ nota:
 
 [MARTES]
 mañana: 9:00-12:30 | estudio
-tarde: variable
+tarde: 15:30-17:30 | estudio
 nocturno: descanso
 nota: tengo psico y tardeo con amigxs
 
 [MIÉRCOLES]
-mañana: 08:00-13:00 | estudio
-tarde: 16:00-21:00 | estudio
-nocturno: descanso
+mañana: descanso
+tarde: descanso
+nocturno: 18:00-23:00 | estudio
 nota: 
 
 [JUEVES]
@@ -25,7 +25,7 @@ nocturno:
 nota: tengo pelu
 
 [VIERNES]
-mañana: 09:00-13:00 /14:00 | estudio
+mañana: 09:00-13:00/14:00 | estudio
 tarde: 16:00-21:00 | estudio
 nocturno: descanso
 nota:  
