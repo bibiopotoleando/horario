@@ -19,10 +19,10 @@ nocturno: 18:00-23:00 | estudio
 nota: 
 
 [JUEVES]
-mañana: variable
-tarde: 16:00-21:00 | estudio
+mañana: descanso
+tarde: 17:00-21:00 | estudio
 nocturno:
-nota: tengo pelu
+nota: tengo pelu y hubo problemas técnicos
 
 [VIERNES]
 mañana: 09:00-13:00/14:00 | estudio
@@ -31,7 +31,7 @@ nocturno: descanso
 nota:  
 
 [SÁBADO]
-mañana: 10:00-13:00 | estudio
+mañana: 10:30-13:30 | estudio
 tarde: 16:00-21:00 | estudio
 nocturno: descanso
 nota: 
