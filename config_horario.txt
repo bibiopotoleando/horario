@@ -22,22 +22,23 @@ nota:
 mañana: 11:00-14:00 | estudio
 tarde: 16:00-20:00 | estudio
 nocturno:
-nota: 
+nota: médico y voy a recoger un libro
+
 [VIERNES]
-mañana: 09:00-13:00| estudio
+mañana: 09:00-14:00| estudio
 tarde: descanso
 nocturno: descanso
 nota:  
 
 [SÁBADO]
 mañana: 10:00-13:00 | estudio
-tarde: 16:00-21:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
 [DOMINGO]
-mañana: 10:00-13:00 | estudio
-tarde: 16:00-21:00 | estudio
+mañana: 10:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
