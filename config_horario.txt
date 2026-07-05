@@ -19,10 +19,10 @@ nocturno: descanso
 nota: 
 
 [JUEVES]
-mañana: 11:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 11:00-13:00 | estudio
+tarde: 14:00-19:00 | estudio
 nocturno:
-nota: médico y voy a recoger un libro
+nota: médico y voy a recoger un libro + concierto
 
 [VIERNES]
 mañana: 09:00-14:00| estudio
@@ -37,8 +37,8 @@ nocturno: descanso
 nota: 
 
 [DOMINGO]
-mañana: 10:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 10:00-14:30 | estudio
+tarde: 16:30-20:00 | estudio
 nocturno: descanso
 nota: 
 
