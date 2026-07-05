@@ -1,4 +1,4 @@
-SEMANA: 29/06/2026 al 05/07/2026
+SEMANA: 06/07/2026 al 12/07/2026
 
 [LUNES]
 mañana: 9:00-13:30 | estudio
@@ -14,13 +14,13 @@ nota:
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 15:30-20:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
 [JUEVES]
-mañana: 11:00-13:00 | estudio
-tarde: 14:00-19:00 | estudio
+mañana: 09:00-13:00 | estudio
+tarde: 15:30-20:00 | estudio
 nocturno:
 nota: médico y voy a recoger un libro + concierto
 
@@ -37,8 +37,8 @@ nocturno: descanso
 nota: 
 
 [DOMINGO]
-mañana: 10:00-14:30 | estudio
-tarde: 16:30-20:00 | estudio
+mañana: 10:00-13:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
