@@ -20,13 +20,13 @@ nota:
 
 [JUEVES]
 mañana: 09:00-13:00 | estudio
-tarde: 15:30-20:00 | estudio
+tarde: 19:15-20:30 | estudio
 nocturno: descanso
-nota: 
+nota: problemas técnicos
 
 [VIERNES]
 mañana: 09:00-13:00| estudio
-tarde: descanso
+tarde: 15:00-18:30
 nocturno: descanso
 nota:  
 
