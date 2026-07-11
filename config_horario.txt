@@ -25,15 +25,15 @@ nocturno: descanso
 nota: problemas técnicos
 
 [VIERNES]
-mañana: 09:00-13:00 | estudio
-tarde: 16:00-18:30 | estudio
+mañana: 09:00-13:30 | estudio
+tarde: 16:30-18:30 | estudio
 nocturno: descanso
 nota:  
 
 [SÁBADO]
-mañana: 10:00-13:00 | estudio
-tarde: 16:00-20:00 | estudio
-nocturno: descanso
+mañana: descanso
+tarde: 16:30-22:00 | estudio
+nocturno: problemas técnicos por la mañana
 nota: 
 
 [DOMINGO]
