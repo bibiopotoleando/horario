@@ -1,44 +1,44 @@
-SEMANA: 06/07/2026 al 12/07/2026
+SEMANA: 13/07/2026 al 19/07/2026
 
 [LUNES]
-mañana: 9:00-13:50 | estudio
-tarde: 15:50-20:00 | estudio
+mañana: 9:00-14:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: 9:00-13:30 | estudio
-tarde: 15:30-20:00 | estudio
+mañana: 9:00-14:00 | estudio
+tarde: 15:30-19:00 | estudio
 nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
-mañana: 08:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 08:00-13:00 | estudio
+tarde: 17:00-20:30 | estudio
 nocturno: descanso
-nota: 
+nota: dentista :(
 
 [JUEVES]
-mañana: 09:00-13:00 | estudio
-tarde: 19:15-20:30 | estudio
+mañana: 09:00-13:30 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
-nota: problemas técnicos
+nota:
 
 [VIERNES]
 mañana: 09:00-13:30 | estudio
-tarde: 16:30-18:30 | estudio
+tarde: descanso
 nocturno: descanso
-nota:  
+nota: viernes tarde libre!
 
 [SÁBADO]
-mañana: descanso
-tarde: 16:30-22:00 | estudio
-nocturno: problemas técnicos por la mañana
-nota: 
+mañana: 10:00-13:00 | estudio
+tarde: 16:00-21:15 | estudio
+nocturno: descanso
+nota: variable según una comida que tengo
 
 [DOMINGO]
-mañana: 10:00-13:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 08:00-13:00 | estudio
+tarde: 15:00-18:00 | estudio
 nocturno: descanso
 nota: 
 
