@@ -1,8 +1,8 @@
 SEMANA: 20/07/2026 al 26/07/2026
 
 [LUNES]
-mañana: 9:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 9:20-13:30 | estudio
+tarde: 16:00-20:30 | estudio
 nocturno: descanso
 nota: 
 
@@ -14,7 +14,7 @@ nota:
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 15:00-19:00 | estudio
 nocturno: descanso
 nota:
 
