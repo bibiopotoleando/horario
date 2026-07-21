@@ -7,14 +7,14 @@ nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: 9:00-14:00 | estudio
-tarde: 16:00-20:00 | estudio
+mañana: 9:00-13:30 | estudio
+tarde: 15:30-19:00 | estudio
 nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 15:00-19:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota:
 
@@ -26,15 +26,15 @@ nota:
 
 [VIERNES]
 mañana: 09:00-13:30 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: descanso
 nocturno: descanso
-nota: paso la tarde libre del viernes al sábado
+nota: ¡viernes tarde libre!
 
 [SÁBADO]
-mañana: 9:00-13:00 | estudio
-tarde: 15:00-17:00 | estudio
+mañana: 10:00-13:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
-nota: tarde variable según un cumpleaños que tengo
+nota: 
 
 [DOMINGO]
 mañana: 10:00-13:00 | estudio
