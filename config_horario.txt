@@ -14,9 +14,9 @@ nota:
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 14:00-18:00 | estudio
 nocturno: descanso
-nota:
+nota: voy al cine
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
