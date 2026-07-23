@@ -16,7 +16,7 @@ nota:
 mañana: 08:00-13:00 | estudio
 tarde: 14:00-18:00 | estudio
 nocturno: descanso
-nota: voy al cine
+nota: voy al cine con amiguitos
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
@@ -25,10 +25,10 @@ nocturno: descanso
 nota:
 
 [VIERNES]
-mañana: 09:00-13:30 | estudio
+mañana: descanso
 tarde: descanso
 nocturno: descanso
-nota: ¡viernes tarde libre!
+nota: Recados por la mañana y ¡viernes tarde libre!
 
 [SÁBADO]
 mañana: 10:00-13:00 | estudio
