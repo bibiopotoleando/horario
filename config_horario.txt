@@ -1,22 +1,22 @@
-SEMANA: 20/07/2026 al 26/07/2026
+SEMANA: 27/07/2026 al 02/08/2026
 
 [LUNES]
-mañana: 9:20-13:30 | estudio
-tarde: 16:00-20:30 | estudio
+mañana: 9:00-13:30 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: 9:00-13:30 | estudio
-tarde: 15:30-19:00 | estudio
+mañana: descansa
+tarde: 14:30-21:30 | estudio
 nocturno: descanso
-nota: 
+nota: recadito por la mañana
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 14:00-18:00 | estudio
+tarde: 16:30-20:30 | estudio
 nocturno: descanso
-nota: voy al cine con amiguitos
+nota: tengo manicura a mediodía
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
@@ -25,10 +25,10 @@ nocturno: descanso
 nota:
 
 [VIERNES]
-mañana: descanso
+mañana:  09:00-13:30 | estudio
 tarde: descanso
 nocturno: descanso
-nota: Recados por la mañana y ¡viernes tarde libre!
+nota: ¡viernes tarde libre!
 
 [SÁBADO]
 mañana: 10:00-13:00 | estudio
