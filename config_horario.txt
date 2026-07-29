@@ -13,8 +13,8 @@ nocturno: descanso
 nota: recadito por la mañana
 
 [MIÉRCOLES]
-mañana: 08:00-13:30 | estudio
-tarde: 16:30-20:30 | estudio
+mañana: 08:00-14:30 | estudio
+tarde: 16:30-19:00 | estudio
 nocturno: descanso
 nota: tengo manicura a mediodía
 
