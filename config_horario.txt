@@ -20,7 +20,7 @@ nota: tengo manicura a mediodía
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 16:00-21:15 | estudio
 nocturno: descanso
 nota:
 
