@@ -14,7 +14,7 @@ nota:
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 15:00-20:00 | estudio
+tarde: descanso
 nocturno: descanso
 nota: 
 
@@ -26,7 +26,7 @@ nota:
 
 [VIERNES]
 mañana:  09:00-13:30 | estudio
-tarde: 16:00-19:00 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
@@ -37,7 +37,7 @@ nocturno: descanso
 nota: 
 
 [DOMINGO]
-mañana:  descanso
+mañana:  08:00-12:00 | estudio
 tarde: descanso
 nocturno: descanso
 nota: es mi aniversario de bodorrio ❤️
