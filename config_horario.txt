@@ -16,7 +16,7 @@ nota:
 mañana: 08:00-13:00 | estudio
 tarde: descanso
 nocturno: descanso
-nota: 
+nota: eclipse
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
@@ -26,7 +26,7 @@ nota:
 
 [VIERNES]
 mañana:  09:00-13:30 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 15:30-20:30 | estudio
 nocturno: descanso
 nota: 
 
@@ -34,7 +34,7 @@ nota:
 mañana:  09:00-13:00 | estudio
 tarde: 16:00-20:00 | estudio
 nocturno: descanso
-nota: 
+nota: simulacro por la mañana
 
 [DOMINGO]
 mañana:  08:00-12:00 | estudio
