@@ -32,15 +32,15 @@ nota:
 
 [SÁBADO]
 mañana:  09:00-13:00 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 15:30-20:30 | estudio
 nocturno: descanso
-nota: simulacro por la mañana
+nota: 
 
 [DOMINGO]
 mañana:  08:00-12:00 | estudio
 tarde: descanso
 nocturno: descanso
-nota: es mi aniversario de bodorrio ❤️
+nota: es mi aniversario de bodorrio ❤️ simulacro por la mañana
 
 [NOTAS]
 
