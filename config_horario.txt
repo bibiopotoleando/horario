@@ -14,7 +14,7 @@ nota: manicura a mediodía
 
 [MIÉRCOLES]
 mañana: 10:00-13:00 | estudio
-tarde: descanso
+tarde: 15:00-20:00 | estudio
 nocturno: descanso
 nota: analítica
 
