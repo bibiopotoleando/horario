@@ -31,13 +31,13 @@ nocturno: descanso
 nota: 
 
 [SÁBADO]
-mañana:  09:00-13:00 | estudio
+mañana:  09:30-13:30 | estudio
 tarde: 15:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
 [DOMINGO]
-mañana:  09:00-13:00 | estudio
+mañana:  09:00-13:30 | estudio
 tarde: 15:00-20:00 | estudio
 nocturno: descanso
 nota: 
