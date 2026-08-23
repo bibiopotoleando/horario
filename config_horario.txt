@@ -38,7 +38,7 @@ nota:
 
 [DOMINGO]
 mañana:  09:00-13:30 | estudio
-tarde: 15:00-20:00 | estudio
+tarde: 15:00-20:15 | estudio
 nocturno: descanso
 nota: 
 
