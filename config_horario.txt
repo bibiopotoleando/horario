@@ -1,26 +1,26 @@
-SEMANA: 17/08/2026 al 23/08/2026
+SEMANA: 24/08/2026 al 30/08/2026
 
 [LUNES]
 mañana: 09:00-13:30 | estudio
-tarde: 16:00-21:00 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
 
 [MARTES]
 mañana: 09:00-13:30 | estudio
-tarde: 16:00-20:00 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
-nota: manicura a mediodía
+nota: 
 
 [MIÉRCOLES]
-mañana: 10:00-13:00 | estudio
-tarde: 15:00-20:00 | estudio
+mañana: 08:00-13:00 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
-nota: analítica
+nota: 
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
-tarde: 15:00-20:00 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
 
@@ -28,17 +28,18 @@ nota:
 mañana:  09:00-13:30 | estudio
 tarde: descanso
 nocturno: descanso
-nota: 
+nota: ¡Viernes tarde libre! A descansar la cabecita.
 
 [SÁBADO]
-mañana:  09:30-13:30 | estudio
-tarde: 15:00-20:00 | estudio
+mañana: 09:00-13:30 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
 
+
 [DOMINGO]
-mañana:  09:00-13:30 | estudio
-tarde: 15:00-20:15 | estudio
+mañana: 09:00-13:30 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
 
