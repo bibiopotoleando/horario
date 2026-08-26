@@ -13,8 +13,8 @@ nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
-mañana: 08:00-13:00 | estudio
-tarde: 15:00-20:30 | estudio
+mañana: 08:00-13:30 | estudio
+tarde: 15:00-19:30 | estudio
 nocturno: descanso
 nota: 
 
