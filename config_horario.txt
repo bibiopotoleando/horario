@@ -26,9 +26,9 @@ nota:
 
 [VIERNES]
 mañana:  09:00-13:30 | estudio
-tarde: descanso
+tarde: 15:00-19:30 | estudio
 nocturno: descanso
-nota: ¡Viernes tarde libre! A descansar la cabecita.
+nota:
 
 [SÁBADO]
 mañana: 09:00-13:30 | estudio
