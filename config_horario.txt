@@ -26,12 +26,12 @@ nota:
 
 [VIERNES]
 mañana:  09:00-13:30 | estudio
-tarde: 15:00-19:30 | estudio
+tarde: 15:30-20:00 | estudio
 nocturno: descanso
 nota:
 
 [SÁBADO]
-mañana: 09:00-13:30 | estudio
+mañana: 10:00-13:15 | estudio
 tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
