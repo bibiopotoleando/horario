@@ -13,7 +13,7 @@ nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
-mañana: 08:00-13:30 | estudio
+mañana: 08:00-12:45 | estudio
 tarde: 16:00-20:30 | estudio
 nocturno: descanso
 nota: dentista a mediodía
