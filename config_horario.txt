@@ -1,49 +1,50 @@
-SEMANA: 07/09/2026 al 13/09/2026
+SEMANA: 14/09/2026 al 20/09/2026
 
 [LUNES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:00-13:30 | estudio
 tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: 09:00-13:30 | estudio
-tarde: 16:00-21:30 | estudio
+mañana: 08:00-13:30 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
-nota: manicura para el examen jeje
-
+nota: 
 [MIÉRCOLES]
-mañana: 08:00-12:45 | estudio
-tarde: 15:00-21:00 | estudio
+mañana: 08:00-13:30 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota:
 
 [JUEVES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:00-13:30 | estudio
 tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
 
 [VIERNES]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-20:30 | estudio
+mañana: 08:00-13:30 | estudio
+tarde: descanso
 nocturno: descanso
 nota:
 
 [SÁBADO]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-20:30 | estudio
+mañana: descanso
+tarde: descanso
 nocturno: descanso
-nota: 
+nota: EXAMEN
 
 
 [DOMINGO]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-20:30 | estudio
+mañana: descanso
+tarde: descanso
 nocturno: descanso
-nota: 
+nota: EXAMEN
+
 
 [NOTAS]
 
 Recuerda que los descansos son necesarios.
 El horario puede cambiar un poco con el día a día.
+¡¡Es mi semana de examen de la opo!!
