@@ -1,26 +1,26 @@
-SEMANA: 21/09/2026 al 27/09/2026
+SEMANA: 28/09/2026 al 04/10/2026
 
 [LUNES]
-mañana: descanso
-tarde: descanso
+mañana: 09:00-13:30 | estudio
+tarde: 16:00-20:00 | estudio
 nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: descanso
-tarde: descanso
+mañana: 09:00-13:30 | estudio
+tarde: 15:00-19:15 | estudio
 nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
 mañana: 09:00-13:30 | estudio
-tarde: 15:00-19:15 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota:
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
-tarde: 15:00-19:15 | estudio
+tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota:
 
@@ -31,17 +31,17 @@ nocturno: descanso
 nota:
 
 [SÁBADO]
-mañana: 9:00-12:00 | estudio
-tarde: descanso
+mañana: 09:00-13:30 | estudio
+tarde: 15:00-19:30 | estudio
 nocturno: descanso
 nota:
 
 
 [DOMINGO]
-mañana: descanso
-tarde: descanso
+mañana: 09:00-13:30 | estudio
+tarde: 15:00-19:30 | estudio
 nocturno: descanso
-nota: EXAMEN
+nota: 
 
 
 [NOTAS]
