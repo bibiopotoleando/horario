@@ -7,20 +7,20 @@ nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:00-13:30 | estudio
 tarde: 15:00-19:15 | estudio
 nocturno: descanso
 nota: 
 
 [MIÉRCOLES]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-20:30 | estudio
+mañana: 08:00-13:30 | estudio
+tarde: 15:00-19:15 | estudio
 nocturno: descanso
 nota:
 
 [JUEVES]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-20:30 | estudio
+mañana: 08:00-13:30 | estudio
+tarde: 15:00-19:15 | estudio
 nocturno: descanso
 nota:
 
@@ -48,4 +48,3 @@ nota:
 
 Recuerda que los descansos son necesarios.
 El horario puede cambiar un poco con el día a día.
-Primera semana para estudiar un poco, pero ver a mis amigxs y pasar tiempo con mi familia.
