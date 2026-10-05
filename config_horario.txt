@@ -1,13 +1,13 @@
 SEMANA: 05/10/2026 al 11/10/2026
 
 [LUNES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:00-13:30 | estudio
 tarde: 15:00-19:30 | estudio
 nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:00-13:30 | estudio
 tarde: 15:00-19:30 | estudio
 nocturno: descanso
 nota: 
@@ -19,13 +19,13 @@ nocturno: descanso
 nota:
 
 [JUEVES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:00-13:30 | estudio
 tarde: 15:00-19:30 | estudio
 nocturno: descanso
 nota: recados
 
 [VIERNES]
-mañana: mañana: 09:00-13:30 | estudio
+mañana: 08:00-13:30 | estudio
 tarde: descanso
 nocturno: descanso
 nota:
