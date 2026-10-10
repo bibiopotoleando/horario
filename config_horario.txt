@@ -32,7 +32,7 @@ nota:
 
 [SÁBADO]
 mañana: 09:00-13:30 | estudio
-tarde: 15:00-19:30 | estudio
+tarde: 15:00-20:45 | estudio
 nocturno: descanso
 nota:
 
