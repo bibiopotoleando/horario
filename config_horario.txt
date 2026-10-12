@@ -7,7 +7,7 @@ nocturno: descanso
 nota: festivo
 
 [MARTES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:30-13:30 | estudio
 tarde: 15:00-20:45 | estudio
 nocturno: descanso
 nota: 
@@ -19,13 +19,13 @@ nocturno: descanso
 nota: cita de tratamiento facial totalmente necesario
 
 [JUEVES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:30-13:30 | estudio
 tarde: 15:00-20:45 | estudio
 nocturno: descanso
-nota: recados
+nota: 
 
 [VIERNES]
-mañana: 09:00-13:30 | estudio
+mañana: 08:30-13:30 | estudio
 tarde: 15:00-19:30 | estudio
 nocturno: descanso
 nota: vamos viendo
