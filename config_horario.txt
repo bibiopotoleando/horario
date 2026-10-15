@@ -19,7 +19,7 @@ nocturno: descanso
 nota: cita de tratamiento facial totalmente necesario
 
 [JUEVES]
-mañana: 08:00-13:30 | estudio
+mañana: 09:00-13:30 | estudio
 tarde: 15:00-20:30 | estudio
 nocturno: descanso
 nota: 
