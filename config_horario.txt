@@ -2,7 +2,7 @@ SEMANA: 19/10/2026 al 25/10/2026
 
 [LUNES]
 mañana: 09:00-13:30 | estudio
-tarde: 16:00-19:00 | estudio
+tarde: 16:00-19:45 | estudio
 nocturno: descanso
 nota: manicura a mediodía
 
