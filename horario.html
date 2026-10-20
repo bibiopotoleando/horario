@@ -1,608 +1,1086 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Horario Semanal Cozy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horario semanal · Alba</title>
 
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap");
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-    :root {
-      --fondo: #f7efe3;
-      --papel: #fffaf0;
-      --papel-2: #fff3dc;
-      --tinta: #4f4035;
-      --suave: #9d806b;
-      --verde: #9fbd8c;
-      --verde-oscuro: #6f8f5f;
-      --rosa: #e7b7a8;
-      --amarillo: #f5d58b;
-      --sombra: rgba(93, 68, 43, 0.16);
-    }
+<!-- Si este archivo no existe, se usan los temas incluidos abajo. -->
+<script src="./paneles_estaciones_config.js"></script>
 
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Nunito", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 35%),
-        linear-gradient(135deg, #f8ead7, #eef3df);
-      color: var(--tinta);
-    }
-
-    .wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 30px 15px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .header h1 {
-      font-family: "Kalam", cursive;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      color: var(--verde-oscuro);
-      margin: 0;
-    }
-
-    .calendar-card {
-      width: 190px;
-      background: var(--papel);
-      border-radius: 22px;
-      box-shadow: 0 10px 25px var(--sombra);
-      transform: rotate(-1.5deg);
-      overflow: hidden;
-      margin: 20px auto;
-    }
-
-    .calendar-top {
-      background: var(--verde);
-      color: white;
-      text-align: center;
-      padding: 8px;
-      font-weight: 800;
-    }
-
-    .calendar-days {
-      font-family: "Kalam", cursive;
-      font-size: 2rem;
-      text-align: center;
-      padding: 10px 5px;
-    }
-
-    .calendar-text {
-      text-align: center;
-      padding: 0 10px 10px;
-      font-size: 0.8rem;
-      opacity: 0.8;
-    }
-
-    .agenda {
-      position: relative;
-      background: var(--papel);
-      border-radius: 34px;
-      padding: 30px;
-      box-shadow: 0 20px 50px var(--sombra);
-      border: 2px solid white;
-    }
-
-    .week-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 15px;
-    }
-
-    .day-card {
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      background: var(--papel);
-      border-radius: 20px;
-      padding: 15px;
-      border: 1px solid rgba(111, 143, 95, 0.15);
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-        repeating-linear-gradient(to bottom, transparent 0, transparent 34px, rgba(159, 189, 140, 0.1) 35px);
-    }
-
-    .day-card.today {
-      outline: 3px solid var(--amarillo);
-      transform: translateY(-4px);
-      background: #fffef0;
-    }
-
-    .day-title {
-      font-family: "Kalam", cursive;
-      font-size: 1.4rem;
-      text-align: center;
-      color: var(--verde-oscuro);
-      margin-bottom: 10px;
-      border-bottom: 1px dashed var(--verde);
-    }
-
-    .block {
-      margin: 6px 0;
-      padding: 8px;
-      border-radius: 12px;
-      border-left: 4px solid var(--verde);
-      background: white;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.02);
-    }
-
-    .block-title {
-      font-weight: 800;
-      font-size: 0.85rem;
-    }
-
-    .block-time {
-      font-family: "Kalam", cursive;
-      font-size: 0.95rem;
-      color: var(--suave);
-    }
-
-    .block.study { border-left-color: var(--verde); }
-    .block.rest { border-left-color: var(--rosa); }
-    .block.variable { border-left-color: var(--amarillo); }
-    .block.nocturno { border-left-color: #8b7bb8; }
-
-    .block.note {
-      border-left-color: var(--amarillo);
-      background: var(--papel-2);
-      margin-top: auto;
-    }
-
-    .post-it-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-    }
-
-    .post-it {
-      background: var(--papel-2);
-      width: 100%;
-      max-width: 500px;
-      padding: 25px;
-      position: relative;
-      transform: rotate(1deg);
-      box-shadow: 5px 5px 15px var(--sombra);
-    }
-
-    .post-it .pin {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.5rem;
-    }
-
-    .post-it h3 {
-      font-family: "Kalam", cursive;
-      text-align: center;
-      margin-top: 0;
-    }
-
-    .post-it ul {
-      padding: 0;
-      list-style: none;
-      font-family: "Kalam", cursive;
-    }
-
-    .post-it li {
-      padding: 5px 0;
-      border-bottom: 1px dashed rgba(0,0,0,0.05);
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .sticker {
-      position: absolute;
-      font-size: 2.2rem;
-      z-index: 10;
-    }
-
-    .error-box {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 20px;
-      background: #fff3dc;
-      border-radius: 18px;
-      border: 1px dashed var(--rosa);
-      font-weight: 700;
-    }
-
-    @media (max-width: 1100px) {
-      .week-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (max-width: 650px) {
-      .week-grid { grid-template-columns: 1fr; }
-      .day-card { min-height: auto; }
-    }
-  </style>
-<script id="paneles-config-source" src="paneles_estaciones_config.js"></script>
 <style>
-:root{--fondo:var(--wash);--papel:var(--paper);--papel-2:var(--wash);--tinta:var(--ink);--suave:var(--muted);--verde:var(--accent);--verde-oscuro:var(--ink)}
-body{background:linear-gradient(130deg,var(--paper,#fcf6ef),var(--wash,#f6e9da));color:var(--ink,#704b3b)}
-.header h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700}
-.agenda{border:1px solid var(--border);border-radius:18px;box-shadow:0 8px 30px #65493714;background:var(--paper)}
-.day-card,.calendar-card,.post-it{position:relative;isolation:isolate;overflow:hidden;border:1px solid var(--border);border-radius:14px;background:linear-gradient(125deg,var(--paper),var(--wash))}
-.day-card::before,.post-it::before,.calendar-card::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:var(--motif);background-size:var(--motif-size,318px 72px);opacity:calc(var(--motif-opacity,.34)*.55)}
-.day-card:nth-child(4n+2)::before{background-position:60px 35px}.day-card:nth-child(4n+3)::before{background-position:-90px 10px}.day-card:nth-child(4n)::before{background-position:30px -25px}
-.day-card.today{outline:2px solid #d8aebb;background:linear-gradient(120deg,var(--paper),#f5e7eb)}
-.calendar-top{background:var(--wash);color:var(--ink);border-bottom:1px solid var(--border)}
-.day-title{color:var(--ink);border-color:var(--border)}
-.sticker,.pin{display:none}.block{background:#ffffffdc}.block.note{background:var(--wash)}
-.post-it{overflow:visible}.post-it::before{border-radius:14px}.footer{color:var(--muted)}
-@media(max-width:650px){.agenda{padding:16px}.wrapper{padding:20px 12px}}
+:root {
+  --ink: #704b3b;
+  --muted: #896953;
+  --accent: #b18560;
+  --border: #d8bda2;
+  --paper: #fcf6ef;
+  --wash: #f6e9da;
+  --motif: none;
+  --motif-size: 440px 180px;
+  --motif-opacity: .34;
+  --pink: #d7a6b7;
+  --pink-light: #f5e4eb;
+  --sage: #a6b995;
+  --sand: #d8bd86;
+  --lavender: #b5a5ca;
+}
+
+* { box-sizing: border-box; }
+
+html { min-height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  font-family: "Nunito", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 15% 0%, #ffffffb8, transparent 55%),
+    linear-gradient(135deg, var(--paper), var(--wash));
+}
+
+/* Fondo estacional estático, visible pero suave. */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--motif);
+  background-size: var(--motif-size);
+  background-position: 12px 18px;
+  background-repeat: repeat;
+  opacity: calc(var(--motif-opacity) * .7);
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 38px 24px 45px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  padding: 0 14px;
+  font-family: "Kalam", cursive;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+  transform: rotate(-1deg);
+}
+
+.header h1::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 5%;
+  bottom: 10px;
+  height: 12px;
+  z-index: -1;
+  border-radius: 60% 35% 55% 45%;
+  background: var(--accent);
+  opacity: .23;
+  transform: rotate(-1deg);
+}
+
+.subtitle {
+  margin: 7px 0 14px;
+  font-size: 1.03rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.season-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 40px;
+  padding: 6px 20px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--paper);
+  box-shadow: 0 3px 10px #6549370c;
+  color: var(--ink);
+  font: 700 21px/1.25 "Kalam", cursive;
+}
+
+.season-icon {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  color: var(--accent);
+}
+
+.season-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.event-label {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+[hidden] { display: none !important; }
+
+/* Calendario de la semana ampliado. */
+.calendar-card {
+  width: 260px;
+  margin: 24px auto 0;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: 0 8px 22px #65493718;
+  transform: rotate(-1.5deg);
+}
+
+.calendar-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--motif);
+  background-size: 360px 145px;
+  opacity: calc(var(--motif-opacity) * .65);
+}
+
+.calendar-top {
+  padding: 12px 10px;
+  background: var(--wash);
+  border-bottom: 1px solid var(--border);
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+
+.calendar-days {
+  padding: 12px 8px 3px;
+  font: 700 2.8rem/1.25 "Kalam", cursive;
+}
+
+.calendar-text {
+  padding: 0 14px 16px;
+  color: var(--muted);
+  font-size: .88rem;
+  font-weight: 700;
+}
+
+.agenda {
+  position: relative;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--paper);
+  box-shadow: 0 12px 35px #65493716;
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 17px;
+}
+
+.day-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 310px;
+  padding: 32px 12px 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: linear-gradient(130deg, var(--paper), var(--wash));
+}
+
+.day-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--motif);
+  background-size: 380px 160px;
+  background-position: -25px 10px;
+  opacity: calc(var(--motif-opacity) * .55);
+}
+
+.day-card:nth-child(4n+2)::before {
+  background-position: 65px 45px;
+}
+
+.day-card:nth-child(4n+3)::before {
+  background-position: -110px -25px;
+}
+
+.day-card:nth-child(4n)::before {
+  background-position: 25px 85px;
+}
+
+.day-title {
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border);
+  text-align: center;
+  font: 700 1.45rem/1.25 "Kalam", cursive;
+  color: var(--ink);
+}
+
+/* Día actual: rosa empolvado y pequeña etiqueta. */
+.day-card.today {
+  outline: 3px solid var(--pink);
+  outline-offset: 3px;
+  border-color: #d8adbd;
+  background: linear-gradient(140deg, #fffafd, var(--pink-light));
+  box-shadow: 0 8px 19px #b77b9224;
+  transform: translateY(-3px);
+}
+
+.day-card.today::after {
+  content: "HOY";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #e7c1cf;
+  color: #704b5b;
+  font: 900 10px/1.25 "Nunito", sans-serif;
+  letter-spacing: 1.2px;
+}
+
+.day-card.today .day-title {
+  color: #805668;
+  border-bottom-color: #d7a6b7;
+}
+
+.block {
+  margin: 6px 0;
+  padding: 10px 9px;
+  border-radius: 10px;
+  border-left: 4px solid var(--sand);
+  background: #fffffff0;
+  box-shadow: 0 2px 5px #65493706;
+}
+
+.block-title {
+  font-weight: 900;
+  font-size: .86rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.block-time {
+  margin-top: 4px;
+  font: 400 1.02rem/1.35 "Kalam", cursive;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.block.estudio { border-left-color: var(--sage); }
+.block.descanso { border-left-color: var(--pink); }
+.block.variable { border-left-color: var(--sand); }
+.block.nocturno { border-left-color: var(--lavender); }
+
+.block.note {
+  margin-top: auto;
+  padding-top: 10px;
+  border-left-color: var(--sand);
+  background: #fffaf0e8;
+}
+
+.free-day {
+  margin: 20px 0;
+  text-align: center;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.post-it-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 38px;
+}
+
+.week-notes {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+  padding: 23px 27px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: linear-gradient(130deg, var(--paper), var(--wash));
+  box-shadow: 0 6px 18px #65493713;
+  transform: rotate(.7deg);
+}
+
+.week-notes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--motif);
+  background-size: 440px 180px;
+  background-position: right bottom;
+  opacity: calc(var(--motif-opacity) * .5);
+}
+
+.week-notes h2 {
+  margin: 0 0 12px;
+  text-align: center;
+  font: 700 1.7rem/1.3 "Kalam", cursive;
+}
+
+.week-notes ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 400 1.1rem/1.5 "Kalam", cursive;
+}
+
+.week-notes li {
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--border);
+  overflow-wrap: anywhere;
+}
+
+.week-notes li:last-child { border-bottom: 0; }
+
+.footer {
+  margin-top: 29px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.footer p {
+  margin: 0 0 7px;
+  font: 400 1.05rem "Kalam", cursive;
+}
+
+.footer small { font-size: .8rem; }
+
+.error-box {
+  grid-column: 1 / -1;
+  padding: 24px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: var(--wash);
+  text-align: center;
+  line-height: 1.6;
+}
+
+@media (max-width: 1150px) {
+  .week-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .day-card { min-height: 270px; }
+}
+
+@media (max-width: 700px) {
+  .wrapper { padding: 27px 16px 32px; }
+  .agenda { padding: 23px 17px; }
+  .week-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .header h1 { font-size: 3rem; }
+}
+
+@media (max-width: 450px) {
+  .week-grid { grid-template-columns: 1fr; gap: 19px; }
+  .day-card { min-height: auto; padding: 32px 16px 17px; }
+  .block.note { margin-top: 12px; }
+  .header h1 { font-size: 2.65rem; }
+  .calendar-card { width: 245px; }
+  .week-notes { padding: 20px; }
+}
 </style>
 </head>
 
 <body>
-  <main class="wrapper">
-    <header class="header">
-      <h1>📖 Horario Semanal</h1>
-      <p>Estudio y descansos</p>
+<main class="wrapper">
+  <header class="header">
+    <h1>Horario semanal</h1>
+    <p class="subtitle">Estudio, descansos y ratitos en compañía</p>
 
-      <div class="calendar-card">
-        <div class="calendar-top" id="weekMonth">CARGANDO...</div>
-        <div class="calendar-days" id="weekDays">-- → --</div>
-        <div class="calendar-text" id="weekText">Semana actual</div>
-      </div>
-    </header>
+    <div class="season-label">
+      <span id="seasonIcon" class="season-icon" aria-hidden="true"></span>
+      <span id="seasonName"></span>
+    </div>
+    <p id="eventName" class="event-label" hidden></p>
 
-    <section class="agenda">
-      <div class="sticker" style="top: -15px; left: 20px;">🌿</div>
-      <div class="sticker" style="top: -15px; right: 20px;">☕</div>
+    <div class="calendar-card">
+      <div id="weekMonth" class="calendar-top">ESTA SEMANA</div>
+      <div id="weekDays" class="calendar-days">—</div>
+      <div id="weekText" class="calendar-text">Cargando horario…</div>
+    </div>
+  </header>
 
-      <div id="weekGrid" class="week-grid"></div>
+  <section class="agenda" aria-label="Horario de la semana">
+    <div id="weekGrid" class="week-grid"></div>
 
-      <div class="post-it-container">
-        <div class="post-it">
-          <span class="pin">📌</span>
-          <h3>Notas de la semana</h3>
-          <ul id="generalNotes"></ul>
-        </div>
-      </div>
+    <div class="post-it-container">
+      <section class="week-notes">
+        <h2>Notas de la semana</h2>
+        <ul id="generalNotes"></ul>
+      </section>
+    </div>
 
-      <div class="footer">
-        <p>✨ Actualizado con mucho mimo ✨</p>
-        <small id="lastUpdate">🗓️ cargando fecha real...</small>
-      </div>
-    </section>
-  </main>
+    <footer class="footer">
+      <p>Hecho con mimo, para compartir el camino</p>
+      <small id="lastUpdate"></small>
+    </footer>
+  </section>
+</main>
 
-  <script>
-    const CONFIG_FILE = "./config_horario.txt";
-    const GITHUB_USER = "bibiopotoleando";
-    const GITHUB_REPO = "horario";
+<script>
+(() => {
+  "use strict";
 
-    const displayNames = {
-      LUNES: "Lunes",
-      MARTES: "Martes",
-      MIERCOLES: "Miércoles",
-      JUEVES: "Jueves",
-      VIERNES: "Viernes",
-      SABADO: "Sábado",
-      DOMINGO: "Domingo"
+  const ROOT = document.documentElement;
+  const ZONE = "Europe/Madrid";
+
+  const MOTIFS = {
+    leaf:
+      '<path d="M12 25l-1-6-7-1 4-5-4-5 7 1 2-7 3 6 6-3-1 7 6 3-7 4 1 6-6-1z" fill="currentColor"/>' +
+      '<path d="M11 30l5-17m-2 9-5-6m7 3 5-4" fill="none" stroke="#fff5e5" stroke-width=".9"/>',
+
+    spring:
+      '<path d="M14 29q-3-13 8-22M16 22Q2 22 7 12q11 0 9 10M19 15q-1-10 9-10 2 9-9 10" fill="currentColor"/>' +
+      '<circle cx="7" cy="6" r="3" fill="#d9b6c5"/>',
+
+    summer:
+      '<path d="M2 19q5-6 10 0t10 0t10 0M2 26q5-6 10 0t10 0t10 0" fill="none" stroke="currentColor" stroke-width="2"/>' +
+      '<circle cx="11" cy="7" r="5" fill="#e2c88d"/>',
+
+    winter:
+      '<path d="M16 2v28M4 9l24 14M4 23L28 9M11 5l5 5 5-5M11 27l5-5 5 5M4 14l7-2-2-7M28 18l-7 2 2 7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>',
+
+    mask:
+      '<path d="M2 10q5-7 14-1 9-6 14 1l-3 12q-6 4-11-1-5 5-11 1z" fill="currentColor"/>' +
+      '<path d="M6 13q5-3 8 2-5 3-8-2m12 2q3-5 8-2-3 5-8 2" fill="#fff9ef"/>',
+
+    book:
+      '<path d="M3 5q7-2 13 2 6-4 13-2v22q-7-2-13 2-6-4-13-2z" fill="currentColor"/>' +
+      '<path d="M16 7v22M7 10l5 1m-5 5 5 1m8-6 5-1m-5 7 5-1" fill="none" stroke="#fffaf0" stroke-width="1.2"/>',
+
+    pumpkin:
+      '<path d="M16 9q-3-6 3-7" fill="none" stroke="#839369" stroke-width="3"/>' +
+      '<ellipse cx="16" cy="20" rx="14" ry="11" fill="currentColor"/>' +
+      '<path d="M16 10q-8 10 0 20m0-20q8 10 0 20" fill="none" stroke="#fff2de" stroke-width="1"/>',
+
+    chestnut:
+      '<path d="M16 3Q-1 15 4 25q11 10 24-1Q32 13 16 3" fill="currentColor"/>' +
+      '<path d="M4 24q12-5 24 0-11 11-24 0" fill="#d8bb8a"/>',
+
+    sparkle:
+      '<path d="M16 2l3 10 10 4-10 3-3 11-4-11-10-3 10-4z" fill="currentColor"/>' +
+      '<circle cx="28" cy="4" r="2" fill="#c2b4d9"/>'
+  };
+
+  function palette(ink, muted, accent, border, paper, wash, motif) {
+    return {
+      texto: ink,
+      textoSecundario: muted,
+      acento: accent,
+      borde: border,
+      fondoClaro: paper,
+      fondoPastel: wash,
+      motivo: motif,
+      imagenFondo: "",
+      opacidadFondo: .34
     };
+  }
 
-    const icons = {
-      estudio: "📚",
-      descanso: "☕",
-      variable: "✨",
-      nocturno: "🌙"
-    };
+  const spring = palette(
+    "#506b52", "#74856e", "#91ab85", "#c0d3b8",
+    "#fcfdf6", "#edf5e7", "spring"
+  );
+  const summer = palette(
+    "#4d7078", "#6e8d91", "#91bcc3", "#c0dce0",
+    "#fbfdfa", "#edf6f6", "summer"
+  );
+  const autumn = palette(
+    "#704b3b", "#896953", "#b18560", "#d8bda2",
+    "#fcf6ef", "#f6e9da", "leaf"
+  );
+  const winter = palette(
+    "#5f667d", "#7f879d", "#a6afcc", "#d0d5e6",
+    "#fbfbff", "#eef0f8", "winter"
+  );
 
-    async function loadAll() {
-      try {
-        const response = await fetch(CONFIG_FILE + "?v=" + Date.now());
-
-        if (!response.ok) {
-          throw new Error(`No se pudo cargar ${CONFIG_FILE}: ${response.status} ${response.statusText}`);
-        }
-
-        const text = await response.text();
-
-        const cleanText = text.replace(/\uFEFF/g, "");
-
-        const data = parseData(cleanText);
-
-        renderUI(data);
-        fetchGitHubDate();
-
-      } catch (e) {
-        console.error("Error al cargar datos:", e);
-
-        document.getElementById("weekGrid").innerHTML = `
-          <div class="error-box">
-            ⚠️ Error de lectura: no se pudo cargar <strong>config_horario.txt</strong>.<br>
-            Abre esta URL para comprobarlo:<br>
-            <small>https://${GITHUB_USER}.github.io/${GITHUB_REPO}/config_horario.txt</small>
-          </div>
-        `;
+  const defaults = {
+    version: 1,
+    estaciones: [
+      { ...spring, id: "primavera", nombre: "Primavera", inicio: "03-20" },
+      { ...summer, id: "verano", nombre: "Verano", inicio: "06-21" },
+      { ...autumn, id: "otono", nombre: "Otoño", inicio: "09-23" },
+      { ...winter, id: "invierno", nombre: "Invierno", inicio: "12-21" }
+    ],
+    eventos: [
+      {
+        ...palette("#766078", "#93809a", "#bca1bd", "#dac9de",
+          "#fffbfc", "#f4eaf4", "mask"),
+        id: "entroido", nombre: "Entroido", activo: true,
+        regla: "entroido", desdeOffset: -3, hastaOffset: 0
+      },
+      {
+        ...palette("#617059", "#849079", "#a3b18b", "#d1d9bd",
+          "#fffdf4", "#f1f4e6", "book"),
+        id: "libro", nombre: "Día del Libro", activo: true,
+        regla: "fecha", desde: "04-23", hasta: "04-23"
+      },
+      {
+        ...palette("#54706a", "#7c9185", "#a1b7a3", "#cbdacd",
+          "#fffdf7", "#edf4e9", "book"),
+        id: "letras", nombre: "Letras Galegas", activo: true,
+        regla: "fecha", desde: "05-17", hasta: "05-17"
+      },
+      {
+        ...palette("#785743", "#95816f", "#c49a78", "#dac4b2",
+          "#fff8ee", "#f3e9e0", "pumpkin"),
+        id: "samain", nombre: "Samaín", activo: true,
+        regla: "fecha", desde: "10-31", hasta: "10-31"
+      },
+      {
+        ...palette("#735342", "#927863", "#b4956d", "#d6c3a6",
+          "#fff9ee", "#f3eada", "chestnut"),
+        id: "magosto", nombre: "Magosto", activo: true,
+        regla: "fecha", desde: "11-11", hasta: "11-11"
+      },
+      {
+        ...palette("#76664e", "#928575", "#bfa776", "#d9cdb5",
+          "#fffdf4", "#f5f0e3", "sparkle"),
+        id: "aninovo", nombre: "Fin de año / Aninovo", activo: true,
+        regla: "fecha", desde: "12-31", hasta: "01-01"
       }
+    ]
+  };
+
+  const external = window.PANELES_CONFIG;
+  const cfg = external &&
+    Array.isArray(external.estaciones) &&
+    external.estaciones.length &&
+    Array.isArray(external.eventos)
+      ? external
+      : defaults;
+
+  function madridParts(now = new Date()) {
+    return Object.fromEntries(
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: ZONE,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }).formatToParts(now)
+        .filter(p => p.type !== "literal")
+        .map(p => [p.type, Number(p.value)])
+    );
+  }
+
+  function monthDay(value) {
+    const match = /^(\d{2})-(\d{2})$/.exec(value || "");
+    return match ? Number(match[1]) * 100 + Number(match[2]) : 0;
+  }
+
+  function inRange(day, from, to) {
+    return from <= to
+      ? day >= from && day <= to
+      : day >= from || day <= to;
+  }
+
+  function carnival(year) {
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const month = Math.floor((h + l - 7 * m + 114) / 31);
+    const day = (h + l - 7 * m + 114) % 31 + 1;
+    return Date.UTC(year, month - 1, day) - 47 * 86400000;
+  }
+
+  function choose(now = new Date()) {
+    const p = madridParts(now);
+    const day = p.month * 100 + p.day;
+    const utc = Date.UTC(p.year, p.month - 1, p.day);
+    const tuesday = carnival(p.year);
+
+    const seasons = [...cfg.estaciones]
+      .sort((a, b) => monthDay(a.inicio) - monthDay(b.inicio));
+
+    let season = seasons[seasons.length - 1];
+
+    for (const item of seasons) {
+      if (day >= monthDay(item.inicio)) season = item;
     }
 
-    async function fetchGitHubDate() {
+    const event = cfg.eventos.find(item => {
+      if (!item.activo) return false;
+
+      if (item.regla === "entroido") {
+        return utc >= tuesday + Number(item.desdeOffset) * 86400000 &&
+               utc <= tuesday + Number(item.hastaOffset) * 86400000;
+      }
+
+      return inRange(day, monthDay(item.desde), monthDay(item.hasta));
+    });
+
+    return {
+      season: season.id,
+      event: event ? event.id : "",
+      theme: (event || season).id,
+      style: event || season,
+      seasonStyle: season
+    };
+  }
+
+  function svg(content, viewBox = "0 0 32 32") {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' +
+      viewBox + '">' + content + "</svg>";
+  }
+
+  function background(kind, color) {
+    const motif = (MOTIFS[kind] || MOTIFS.leaf)
+      .replaceAll("currentColor", color);
+
+    const positions = [
+      [15, 20, 1.2, -25],
+      [130, 98, .85, 32],
+      [260, 8, 1.1, 20],
+      [365, 110, 1.3, -30],
+      [45, 135, .65, 55],
+      [220, 140, .7, -15]
+    ];
+
+    return svg(positions.map(([x, y, scale, rotate]) =>
+      '<g transform="translate(' + x + " " + y + ") scale(" +
+      scale + ") rotate(" + rotate + ' 16 16)">' + motif + "</g>"
+    ).join(""), "0 0 440 180");
+  }
+
+  let lastTheme = "";
+
+  function apply(now = new Date()) {
+    const state = choose(now);
+    const signature = JSON.stringify([state.style, state.seasonStyle]);
+
+    if (signature === lastTheme) return state;
+    lastTheme = signature;
+
+    const t = { ...autumn, ...state.style };
+    const variables = {
+      ink: t.texto,
+      muted: t.textoSecundario,
+      accent: t.acento,
+      border: t.borde,
+      paper: t.fondoClaro,
+      wash: t.fondoPastel
+    };
+
+    for (const [name, value] of Object.entries(variables)) {
+      ROOT.style.setProperty("--" + name, value);
+    }
+
+    let image = "";
+
+    if (t.imagenFondo) {
       try {
-        const res = await fetch(
-          `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/commits?path=config_horario.txt&per_page=1`
+        const resolved = new URL(
+          t.imagenFondo,
+          window.PANELES_CONFIG_BASE || document.baseURI
         );
-
-        if (!res.ok) throw new Error("No se pudo consultar GitHub API");
-
-        const commits = await res.json();
-
-        if (commits && commits.length > 0) {
-          const date = new Date(commits[0].commit.committer.date);
-          const options = { day: "numeric", month: "long", year: "numeric" };
-
-          document.getElementById("lastUpdate").textContent =
-            `🗓️ actualizado el ${date.toLocaleDateString("es-ES", options)}`;
+        if (["http:", "https:", "file:", "data:", "blob:"]
+            .includes(resolved.protocol)) {
+          image = resolved.href;
         }
-      } catch (err) {
-        const now = new Date();
-
-        document.getElementById("lastUpdate").textContent =
-          `🗓️ actualizado el ${now.toLocaleDateString("es-ES")}`;
-      }
+      } catch (_) {}
     }
 
-    function normalizeKey(text) {
-      return text
-        .toUpperCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+    let motif = "none";
+
+    if (image) {
+      motif = "url(" + JSON.stringify(image) + ")";
+    } else if (t.motivo !== "none") {
+      const color = /^#[0-9a-f]{6}$/i.test(t.acento)
+        ? t.acento : "#b18560";
+
+      motif = 'url("data:image/svg+xml,' +
+        encodeURIComponent(background(t.motivo, color)) + '")';
     }
 
-    function parseData(text) {
-      const schedule = {};
-      const generalNotes = [];
+    const opacity = Number(t.opacidadFondo);
 
-      let currentDay = null;
-      let week = "";
-      let isNotes = false;
+    ROOT.style.setProperty("--motif", motif);
+    ROOT.style.setProperty("--motif-size", image ? "cover" : "440px 180px");
+    ROOT.style.setProperty(
+      "--motif-opacity",
+      Number.isFinite(opacity) ? Math.max(0, Math.min(1, opacity)) : .34
+    );
 
-      text.split(/\r?\n/).forEach(rawLine => {
-        let line = rawLine.trim();
+    ROOT.dataset.season = state.season;
+    ROOT.dataset.event = state.event;
 
-        if (!line || line.startsWith("#")) return;
+    document.getElementById("seasonName").textContent =
+      state.seasonStyle.nombre;
 
-        if (line.toUpperCase().includes("[NOTAS]")) {
-          isNotes = true;
-          currentDay = null;
-          return;
-        }
+    const defaultIcon = {
+      primavera: "spring",
+      verano: "summer",
+      otono: "leaf",
+      invierno: "winter"
+    };
 
-        if (isNotes) {
-          if (line.startsWith("-")) line = line.substring(1).trim();
-          if (line) generalNotes.push(line);
-          return;
-        }
+    const icon = state.seasonStyle.motivo;
+    document.getElementById("seasonIcon").innerHTML = svg(
+      MOTIFS[icon] || MOTIFS[defaultIcon[state.season]] || MOTIFS.leaf
+    );
 
-        if (/^SEMANA:/i.test(line)) {
-          week = line.split(/SEMANA:/i)[1].trim();
-          return;
-        }
+    const eventLabel = document.getElementById("eventName");
+    eventLabel.hidden = !state.event;
+    eventLabel.textContent = state.event ? state.style.nombre : "";
 
-        const dayMatch = line.match(/\[(LUNES|MARTES|MIERCOLES|MIÉRCOLES|JUEVES|VIERNES|SABADO|SÁBADO|DOMINGO)\]/i);
+    return state;
+  }
 
-        if (dayMatch) {
-          currentDay = normalizeKey(dayMatch[1]);
-          schedule[currentDay] = { blocks: [], note: "" };
-          return;
-        }
+  window.PanelCalendar = Object.freeze({ choose, apply, carnival });
+  window.HorarioMadridParts = madridParts;
 
-        if (currentDay && line.includes(":")) {
-          const partsLine = line.split(/:(.+)/);
-          const key = partsLine[0].trim().toLowerCase();
-          const val = (partsLine[1] || "").trim();
+  apply();
+  setInterval(() => apply(), 30000);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) apply();
+  });
+})();
+</script>
 
-          if (key === "nota") {
-            schedule[currentDay].note = val;
-            return;
-          }
+<script>
+(() => {
+  "use strict";
 
-          let time = val;
-          let type = "variable";
-          let label = val;
-          let period = key;
+  const CONFIG_FILE = "./config_horario.txt";
+  const GITHUB_USER = "bibiopotoleando";
+  const GITHUB_REPO = "horario";
 
-          if (val.includes("|")) {
-            const parts = val.split("|");
-            time = parts[0].trim();
+  const DAYS = [
+    ["LUNES", "Lunes"],
+    ["MARTES", "Martes"],
+    ["MIERCOLES", "Miércoles"],
+    ["JUEVES", "Jueves"],
+    ["VIERNES", "Viernes"],
+    ["SABADO", "Sábado"],
+    ["DOMINGO", "Domingo"]
+  ];
 
-            const typeText = (parts[1] || "").trim().toLowerCase();
+  const ICONS = {
+    estudio: "📚",
+    descanso: "☕",
+    variable: "✨",
+    nocturno: "🌙"
+  };
 
-            if (typeText.includes("estudio")) {
-              type = "estudio";
-            } else if (typeText.includes("descanso")) {
-              type = "descanso";
-            }
-          } else if (val.toLowerCase().includes("descanso")) {
-            type = "descanso";
-            time = "Descanso";
-          }
+  function normalizeKey(text) {
+    return text.toUpperCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
 
-          if (key === "nocturno") {
-            if (type === "estudio") {
-              label = "Estudio nocturno";
-            } else if (type === "descanso") {
-              label = "Descanso nocturno";
-            } else {
-              label = "Nocturno";
-            }
-          } else if (type === "estudio") {
-            label = `Estudio de ${key}`;
-          } else if (type === "descanso") {
-            label = "Descanso";
-          } else {
-            label = key.charAt(0).toUpperCase() + key.slice(1);
-          }
+  function parseData(text) {
+    const schedule = {};
+    const generalNotes = [];
 
-          schedule[currentDay].blocks.push({ time, type, label, period });
-        }
-      });
+    let currentDay = null;
+    let week = "";
+    let isNotes = false;
 
-      return { week, schedule, generalNotes };
-    }
+    text.replace(/\uFEFF/g, "").split(/\r?\n/).forEach(rawLine => {
+      const line = rawLine.trim();
+      if (!line || line.startsWith("#")) return;
 
-    function renderUI(data) {
-      const match = data.week.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-
-      if (match) {
-        const months = [
-          "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
-          "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"
-        ];
-
-        const startDay = parseInt(match[1], 10);
-        const monthIndex = parseInt(match[2], 10) - 1;
-        const year = match[3];
-
-        document.getElementById("weekMonth").textContent = `${months[monthIndex]} ${year}`;
-        document.getElementById("weekDays").textContent = `${String(startDay).padStart(2, "0")} → ${String(startDay + 6).padStart(2, "0")}`;
+      if (line.toUpperCase().includes("[NOTAS]")) {
+        isNotes = true;
+        currentDay = null;
+        return;
       }
 
-      document.getElementById("weekText").textContent = "Semana del " + data.week;
+      if (isNotes) {
+        const note = line.replace(/^-\s*/, "").trim();
+        if (note) generalNotes.push(note);
+        return;
+      }
 
-      const grid = document.getElementById("weekGrid");
-      const ordered = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"];
+      if (/^SEMANA:/i.test(line)) {
+        week = line.replace(/^SEMANA:/i, "").trim();
+        return;
+      }
 
-      const today = normalizeKey(
-        new Date().toLocaleDateString("es-ES", { weekday: "long" })
+      const match = line.match(
+        /\[(LUNES|MARTES|MIERCOLES|MIÉRCOLES|JUEVES|VIERNES|SABADO|SÁBADO|DOMINGO)\]/i
       );
 
-      grid.innerHTML = "";
-
-      ordered.forEach(dayKey => {
-        const dayData = data.schedule[dayKey] || { blocks: [], note: "" };
-
-        const card = document.createElement("article");
-        card.className = "day-card" + (dayKey === today ? " today" : "");
-
-        let blocksHTML = dayData.blocks.map(block => {
-          const icon = block.period === "nocturno" ? icons.nocturno : (icons[block.type] || "✨");
-
-          return `
-            <div class="block ${block.type} ${block.period}">
-              <div class="block-title">${icon} ${block.label}</div>
-              <div class="block-time">${block.time}</div>
-            </div>
-          `;
-        }).join("");
-
-        if (dayData.blocks.length === 0) {
-          blocksHTML = `
-            <p style="font-size:0.8rem; opacity:0.5; text-align:center; margin-top:20px;">
-              Día libre
-            </p>
-          `;
-        }
-
-        card.innerHTML = `
-          <div class="day-title">${displayNames[dayKey]}</div>
-          ${blocksHTML}
-          ${
-            dayData.note
-              ? `<div class="block note">
-                   <div class="block-title">📌 Nota</div>
-                   <div class="block-time">${dayData.note}</div>
-                 </div>`
-              : ""
-          }
-        `;
-
-        grid.appendChild(card);
-      });
-
-      const notes = document.getElementById("generalNotes");
-
-      if (data.generalNotes.length > 0) {
-        notes.innerHTML = data.generalNotes.map(note => `<li>${note}</li>`).join("");
-      } else {
-        notes.innerHTML = "<li>Sin notas esta semana 🌿</li>";
+      if (match) {
+        currentDay = normalizeKey(match[1]);
+        schedule[currentDay] = { blocks: [], note: "" };
+        return;
       }
+
+      if (!currentDay || !line.includes(":")) return;
+
+      const colon = line.indexOf(":");
+      const key = line.slice(0, colon).trim().toLowerCase();
+      const value = line.slice(colon + 1).trim();
+
+      if (key === "nota") {
+        schedule[currentDay].note = value;
+        return;
+      }
+
+      let time = value;
+      let type = "variable";
+
+      if (value.includes("|")) {
+        const parts = value.split("|");
+        time = parts[0].trim();
+        const typeText = (parts[1] || "").trim().toLowerCase();
+
+        if (typeText.includes("estudio")) type = "estudio";
+        else if (typeText.includes("descanso")) type = "descanso";
+      } else if (value.toLowerCase().includes("descanso")) {
+        type = "descanso";
+        time = "Descanso";
+      }
+
+      let label;
+
+      if (key === "nocturno") {
+        label = type === "estudio"
+          ? "Estudio nocturno"
+          : type === "descanso" ? "Descanso nocturno" : "Nocturno";
+      } else if (type === "estudio") {
+        label = "Estudio de " + key;
+      } else if (type === "descanso") {
+        label = "Descanso";
+      } else {
+        label = key.charAt(0).toUpperCase() + key.slice(1);
+      }
+
+      schedule[currentDay].blocks.push({
+        time, type, label, period: key
+      });
+    });
+
+    return { week, schedule, generalNotes };
+  }
+
+  function element(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function updateToday() {
+    const today = normalizeKey(
+      new Intl.DateTimeFormat("es-ES", {
+        timeZone: "Europe/Madrid",
+        weekday: "long"
+      }).format(new Date())
+    );
+
+    document.querySelectorAll(".day-card").forEach(card => {
+      const current = card.dataset.day === today;
+      card.classList.toggle("today", current);
+      if (current) card.setAttribute("aria-current", "date");
+      else card.removeAttribute("aria-current");
+    });
+  }
+
+  function renderWeekHeader(week) {
+    document.getElementById("weekText").textContent =
+      week ? "Semana del " + week : "Semana actual";
+
+    const match = week.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+    if (!match) {
+      document.getElementById("weekDays").textContent = "Lun → Dom";
+      return;
     }
 
-    loadAll();
-  </script>
-<script>
-/* Mismo calendario y paleta en los dos archivos; no necesita internet.
-   Fechas de estación de calendario: 20 marzo / 21 junio / 23 septiembre / 21 diciembre.
-   Los eventos se activan solo en sus fechas y después vuelve la estación.
-   Entroido: del sábado al martes, calculado cada año (no fecha fija).
-   No se incluyen festividades religiosas, banderas ni conmemoraciones patrióticas. */
-(function(){
- const root=document.documentElement;
- const motifs={
-  leaf:'<path d="M12 25l-1-6-7-1 4-5-4-5 7 1 2-7 3 6 6-3-1 7 6 3-7 4 1 6-6-1z" fill="currentColor"/><path d="M11 30l5-17m-2 9-5-6m7 3 5-4" fill="none" stroke="#fff5e5" stroke-width=".9"/>',
-  spring:'<path d="M14 29q-3-13 8-22M16 22Q2 22 7 12q11 0 9 10M19 15q-1-10 9-10 2 9-9 10" fill="currentColor"/><circle cx="7" cy="6" r="3" fill="#d9b6c5"/>',
-  summer:'<path d="M2 19q5-6 10 0t10 0t10 0M2 26q5-6 10 0t10 0t10 0" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="7" r="5" fill="#e2c88d"/>',
-  winter:'<path d="M16 2v28M4 9l24 14M4 23L28 9M11 5l5 5 5-5M11 27l5-5 5 5M4 14l7-2-2-7M28 18l-7 2 2 7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>',
-  mask:'<path d="M2 10q5-7 14-1 9-6 14 1l-3 12q-6 4-11-1-5 5-11 1z" fill="currentColor"/><path d="M6 13q5-3 8 2-5 3-8-2m12 2q3-5 8-2-3 5-8 2" fill="#fff9ef"/><circle cx="5" cy="3" r="1.5" fill="#ca9daf"/><path d="M24 2l3 3m-3 1 3-3" stroke="#d0ad71"/>',
-  book:'<path d="M3 5q7-2 13 2 6-4 13-2v22q-7-2-13 2-6-4-13-2z" fill="currentColor"/><path d="M16 7v22M7 10l5 1m-5 5 5 1m8-6 5-1m-5 7 5-1" fill="none" stroke="#fffaf0" stroke-width="1.2"/>',
-  pumpkin:'<path d="M16 9q-3-6 3-7" fill="none" stroke="#839369" stroke-width="3"/><ellipse cx="16" cy="20" rx="14" ry="11" fill="currentColor"/><path d="M16 10q-8 10 0 20m0-20q8 10 0 20" fill="none" stroke="#fff2de" stroke-width="1"/>',
-  chestnut:'<path d="M16 3Q-1 15 4 25q11 10 24-1Q32 13 16 3" fill="currentColor"/><path d="M4 24q12-5 24 0-11 11-24 0" fill="#d8bb8a"/><path d="M10 10q-4 4-4 9" fill="none" stroke="#fff4df" stroke-width="1.2"/>',
-  sparkle:'<path d="M16 2l3 10 10 4-10 3-3 11-4-11-10-3 10-4z" fill="currentColor"/><circle cx="28" cy="4" r="2" fill="#c2b4d9"/>'
- };
- const defaults={"version": 1, "ayuda": {"fechas": "MM-DD = mes-día. Son fechas de calendario editables, no instantes astronómicos.", "edicion": "Puedes editar este TXT, importarlo en panel_personalizar.html y guardar paneles_estaciones_config.js.", "instalacion": "Guarda el JS únicamente en OBS/paneles_estacionales y recarga las fuentes de OBS.", "fondos": "Elige un motivo o una imagen en el panel. También puedes indicar una ruta relativa, por ejemplo fondos/otono.png.", "prioridad": "Los eventos tienen prioridad sobre la estación. Si coinciden, gana el primero de la lista.", "entroido": "Se calcula cada año. Desde el sábado anterior hasta el martes de Entroido.", "imagenes": "Una imagen cargada en el panel se incorpora al JS/TXT. No tienes que copiarla por separado."}, "ancho": 318, "estaciones": [{"id": "primavera", "nombre": "Primavera", "inicio": "03-20", "texto": "#506b52", "textoSecundario": "#74856e", "acento": "#91ab85", "borde": "#c0d3b8", "fondoClaro": "#fcfdf6", "fondoPastel": "#edf5e7", "motivo": "spring", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "verano", "nombre": "Verano", "inicio": "06-21", "texto": "#4d7078", "textoSecundario": "#6e8d91", "acento": "#91bcc3", "borde": "#c0dce0", "fondoClaro": "#fbfdfa", "fondoPastel": "#edf6f6", "motivo": "summer", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "otono", "nombre": "Otoño", "inicio": "09-23", "texto": "#704b3b", "textoSecundario": "#896953", "acento": "#b18560", "borde": "#d8bda2", "fondoClaro": "#fcf6ef", "fondoPastel": "#f6e9da", "motivo": "leaf", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "invierno", "nombre": "Invierno", "inicio": "12-21", "texto": "#5f667d", "textoSecundario": "#7f879d", "acento": "#a6afcc", "borde": "#d0d5e6", "fondoClaro": "#fbfbff", "fondoPastel": "#eef0f8", "motivo": "winter", "imagenFondo": "", "opacidadFondo": 0.34}], "eventos": [{"id": "entroido", "nombre": "Entroido", "activo": true, "regla": "entroido", "desdeOffset": -3, "hastaOffset": 0, "texto": "#766078", "textoSecundario": "#93809a", "acento": "#bca1bd", "borde": "#dac9de", "fondoClaro": "#fffbfc", "fondoPastel": "#f4eaf4", "motivo": "mask", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "libro", "nombre": "Día del Libro", "activo": true, "regla": "fecha", "desde": "04-23", "hasta": "04-23", "texto": "#617059", "textoSecundario": "#849079", "acento": "#a3b18b", "borde": "#d1d9bd", "fondoClaro": "#fffdf4", "fondoPastel": "#f1f4e6", "motivo": "book", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "letras", "nombre": "Letras Galegas", "activo": true, "regla": "fecha", "desde": "05-17", "hasta": "05-17", "texto": "#54706a", "textoSecundario": "#7c9185", "acento": "#a1b7a3", "borde": "#cbdacd", "fondoClaro": "#fffdf7", "fondoPastel": "#edf4e9", "motivo": "book", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "samain", "nombre": "Samaín", "activo": true, "regla": "fecha", "desde": "10-31", "hasta": "10-31", "texto": "#785743", "textoSecundario": "#95816f", "acento": "#c49a78", "borde": "#dac4b2", "fondoClaro": "#fff8ee", "fondoPastel": "#f3e9e0", "motivo": "pumpkin", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "magosto", "nombre": "Magosto", "activo": true, "regla": "fecha", "desde": "11-11", "hasta": "11-11", "texto": "#735342", "textoSecundario": "#927863", "acento": "#b4956d", "borde": "#d6c3a6", "fondoClaro": "#fff9ee", "fondoPastel": "#f3eada", "motivo": "chestnut", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "aninovo", "nombre": "Fin de año / Aninovo", "activo": true, "regla": "fecha", "desde": "12-31", "hasta": "01-01", "texto": "#76664e", "textoSecundario": "#928575", "acento": "#bfa776", "borde": "#d9cdb5", "fondoClaro": "#fffdf4", "fondoPastel": "#f5f0e3", "motivo": "sparkle", "imagenFondo": "", "opacidadFondo": 0.34}]};
- let cfg=window.PANELES_CONFIG||defaults;
- function parts(now){const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now).filter(x=>x.type!=='literal').map(x=>[x.type,+x.value]));return p;}
- function carnival(y){ // Gregorian movable-calendar calculation; used only for the cultural carnival.
-  const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451);
-  const month=Math.floor((h+l-7*m+114)/31),day=(h+l-7*m+114)%31+1;
-  return Date.UTC(y,month-1,day)-47*86400000;
- }
+    const start = new Date(Date.UTC(
+      Number(match[3]), Number(match[2]) - 1, Number(match[1]), 12
+    ));
+    const end = new Date(start.getTime() + 6 * 86400000);
 
- function md(s){const m=/^(\d{2})-(\d{2})$/.exec(s||'');return m?+m[1]*100+(+m[2]):0;}
- function inRange(n,start,end){return start<=end?n>=start&&n<=end:n>=start||n<=end;}
- function choose(now){
-  const p=parts(now),day=p.month*100+p.day,utc=Date.UTC(p.year,p.month-1,p.day),tuesday=carnival(p.year);
-  const seasons=[...cfg.estaciones].sort((a,b)=>md(a.inicio)-md(b.inicio));
-  let season=seasons[seasons.length-1];for(const s of seasons){if(day>=md(s.inicio))season=s;}
-  const event=cfg.eventos.find(e=>e.activo&&(e.regla==='entroido'?utc>=tuesday+Number(e.desdeOffset)*86400000&&utc<=tuesday+Number(e.hastaOffset)*86400000:inRange(day,md(e.desde),md(e.hasta))));
-  return {season:season.id,event:event?event.id:'',theme:(event||season).id,style:event||season,seasonStyle:season};
- }
- function svg(content,viewBox='0 0 32 32'){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+viewBox+'">'+content+'</svg>';}
- function background(kind,color){const motif=motifs[kind].replaceAll('currentColor',color);return svg('<g>'+[[0,7,1.05,-20],[36,-10,.72,35],[278,-2,1.1,22],[299,43,.86,-35],[10,50,.70,60],[251,49,.68,-15]].map(([x,y,s,r])=>'<g transform="translate('+x+' '+y+') scale('+s+') rotate('+r+' 16 16)">'+motif+'</g>').join('')+'</g>','0 0 318 72');}
- let last='';
- function apply(now=new Date()){
-  const state=choose(now);const signature=JSON.stringify([state.style,cfg.ancho,state.season]);if(last===signature)return state;last=signature;
-  const t=state.style,{texto:ink,textoSecundario:muted,acento:accent,borde:border,fondoClaro:paper,fondoPastel:wash,motivo:kind}=t;
-  Object.entries({ink,muted,accent,border,paper,wash}).forEach(([key,value])=>root.style.setProperty('--'+key,value));
-  root.style.setProperty('--panel-width',Math.max(180,Math.min(900,Number(cfg.ancho)||318))+'px');
-  let image=t.imagenFondo||'';
-  if(image){try{image=new URL(image,window.PANELES_CONFIG_BASE||document.baseURI).href;}catch(e){image='';}}
-  const safeImage=image&&!/^(javascript|vbscript):/i.test(image);
-  const imageUrl=safeImage?'url('+JSON.stringify(image)+')':'none';
-  root.style.setProperty('--motif',image?safeImage?imageUrl:'none':kind==='none'?'none':'url("data:image/svg+xml,'+encodeURIComponent(background(motifs[kind]?kind:'leaf',accent))+'")');
-  root.style.setProperty('--motif-size',image?'cover':'318px 72px');
-  root.style.setProperty('--motif-opacity',Math.max(0,Math.min(1,Number(t.opacidadFondo)||0)));
-  root.dataset.season=state.season;root.dataset.event=state.event;
-  const detail=document.querySelector('.detalle');
-  // El reloj conserva un detalle de la estación. La música no tiene icono decorativo.
-  if(detail)detail.innerHTML=svg(motifs[state.seasonStyle.motivo]||motifs.leaf);
-  return state;
- }
- window.PanelCalendar=Object.freeze({choose,apply,carnival});
- window.addEventListener('message',ev=>{
-  if(window.parent===window||ev.source!==window.parent||ev.data?.tipo!=='paneles-preview')return;
-  const candidate=ev.data.config;
-  if(!candidate||!Array.isArray(candidate.estaciones)||!candidate.estaciones.length||!Array.isArray(candidate.eventos))return;
-  cfg=candidate;if(ev.data.baseConfiguracion)window.PANELES_CONFIG_BASE=ev.data.baseConfiguracion;last='';window.PANEL_PREVIEW_DATE=ev.data.fecha||'';apply(window.PANEL_PREVIEW_DATE?new Date(window.PANEL_PREVIEW_DATE+'T12:00:00+01:00'):new Date());if(typeof actualizarReloj==='function')actualizarReloj();
- });
- apply();setInterval(()=>apply(window.PANEL_PREVIEW_DATE?new Date(window.PANEL_PREVIEW_DATE+'T12:00:00+01:00'):new Date()),30000);
- document.addEventListener('visibilitychange',()=>{if(!document.hidden)apply(window.PANEL_PREVIEW_DATE?new Date(window.PANEL_PREVIEW_DATE+'T12:00:00+01:00'):new Date());});
+    const month = date => new Intl.DateTimeFormat("es-ES", {
+      timeZone: "UTC", month: "long"
+    }).format(date).toUpperCase();
+
+    const startMonth = month(start);
+    const endMonth = month(end);
+
+    document.getElementById("weekMonth").textContent =
+      start.getUTCFullYear() !== end.getUTCFullYear()
+        ? startMonth + " " + start.getUTCFullYear() +
+          " / " + endMonth + " " + end.getUTCFullYear()
+        : startMonth === endMonth
+          ? startMonth + " " + start.getUTCFullYear()
+          : startMonth + " / " + endMonth + " " + end.getUTCFullYear();
+
+    document.getElementById("weekDays").textContent =
+      String(start.getUTCDate()).padStart(2, "0") + " → " +
+      String(end.getUTCDate()).padStart(2, "0");
+  }
+
+  function renderUI(data) {
+    renderWeekHeader(data.week);
+
+    const grid = document.getElementById("weekGrid");
+    grid.replaceChildren();
+
+    DAYS.forEach(([key, name]) => {
+      const day = data.schedule[key] || { blocks: [], note: "" };
+      const card = element("article", "day-card");
+      card.dataset.day = key;
+      card.append(element("h2", "day-title", name));
+
+      day.blocks.forEach(block => {
+        const classes = "block " + block.type +
+          (block.period === "nocturno" ? " nocturno" : "");
+
+        const box = element("div", classes);
+        const icon = block.period === "nocturno"
+          ? ICONS.nocturno
+          : ICONS[block.type] || "✨";
+
+        box.append(
+          element("div", "block-title", icon + " " + block.label),
+          element("div", "block-time", block.time)
+        );
+
+        card.append(box);
+      });
+
+      if (!day.blocks.length) {
+        card.append(element("p", "free-day", "Día libre"));
+      }
+
+      if (day.note) {
+        const note = element("div", "block note");
+        note.append(
+          element("div", "block-title", "📌 Nota"),
+          element("div", "block-time", day.note)
+        );
+        card.append(note);
+      }
+
+      grid.append(card);
+    });
+
+    const notes = document.getElementById("generalNotes");
+    notes.replaceChildren();
+
+    const list = data.generalNotes.length
+      ? data.generalNotes
+      : ["Sin notas esta semana 🌿"];
+
+    list.forEach(text => notes.append(element("li", "", text)));
+
+    updateToday();
+  }
+
+  async function fetchGitHubDate() {
+    const target = document.getElementById("lastUpdate");
+
+    try {
+      const url = "https://api.github.com/repos/" +
+        GITHUB_USER + "/" + GITHUB_REPO +
+        "/commits?path=config_horario.txt&per_page=1";
+
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Fecha no disponible");
+
+      const commits = await response.json();
+      const value = commits[0]?.commit?.committer?.date;
+      if (!value) throw new Error("Sin fecha");
+
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) throw new Error("Fecha inválida");
+
+      target.textContent = "Actualizado el " +
+        new Intl.DateTimeFormat("es-ES", {
+          timeZone: "Europe/Madrid",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }).format(date);
+    } catch (_) {
+      target.textContent = "";
+    }
+  }
+
+  async function loadAll() {
+    try {
+      const response = await fetch(CONFIG_FILE + "?v=" + Date.now());
+      if (!response.ok) throw new Error("No se pudo leer el horario");
+
+      const data = parseData(await response.text());
+      renderUI(data);
+      fetchGitHubDate();
+    } catch (error) {
+      const grid = document.getElementById("weekGrid");
+      grid.replaceChildren();
+
+      const box = element("div", "error-box");
+      box.append(
+        element("strong", "", "No se pudo cargar el horario."),
+        element("p", "",
+          "Comprueba que config_horario.txt esté en la misma carpeta " +
+          "que este HTML y abre la página desde GitHub Pages."
+        )
+      );
+
+      grid.append(box);
+      document.getElementById("weekText").textContent =
+        "Horario pendiente de cargar";
+    }
+  }
+
+  loadAll();
+  setInterval(updateToday, 60000);
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) updateToday();
+  });
 })();
 </script>
 </body>
