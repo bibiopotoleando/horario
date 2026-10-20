@@ -60,363 +60,194 @@ body::before {
   opacity: calc(var(--motif-opacity) * .7);
 }
 
+/* CABECERA MÁS COMPACTA */
 .wrapper {
-  width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 38px 24px 45px;
+  padding-top: 22px;
 }
 
 .header {
-  text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 22px;
 }
 
 .header h1 {
-  display: inline-block;
-  position: relative;
-  isolation: isolate;
-  margin: 0;
-  padding: 0 14px;
-  font-family: "Kalam", cursive;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--ink);
-  transform: rotate(-1deg);
-}
-
-.header h1::after {
-  content: "";
-  position: absolute;
-  left: 8%;
-  right: 5%;
-  bottom: 10px;
-  height: 12px;
-  z-index: -1;
-  border-radius: 60% 35% 55% 45%;
-  background: var(--accent);
-  opacity: .23;
-  transform: rotate(-1deg);
+  font-size: clamp(2.2rem, 4vw, 3rem);
 }
 
 .subtitle {
-  margin: 7px 0 14px;
-  font-size: 1.03rem;
-  font-weight: 700;
-  color: var(--muted);
+  margin: 2px 0 8px;
+  font-size: .9rem;
 }
 
 .season-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 40px;
-  padding: 6px 20px;
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  background: var(--paper);
-  box-shadow: 0 3px 10px #6549370c;
-  color: var(--ink);
-  font: 700 21px/1.25 "Kalam", cursive;
+  min-height: 30px;
+  padding: 3px 13px;
+  font-size: 17px;
 }
 
 .season-icon {
-  display: inline-flex;
-  width: 26px;
-  height: 26px;
-  color: var(--accent);
+  width: 21px;
+  height: 21px;
 }
 
-.season-icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.event-label {
-  margin: 9px 0 0;
-  color: var(--muted);
-  font-size: .9rem;
-  font-weight: 800;
-}
-
-[hidden] { display: none !important; }
-
-/* Calendario de la semana ampliado. */
 .calendar-card {
-  width: 260px;
-  margin: 24px auto 0;
-  overflow: hidden;
-  position: relative;
-  isolation: isolate;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--paper);
-  box-shadow: 0 8px 22px #65493718;
-  transform: rotate(-1.5deg);
-}
-
-.calendar-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: var(--motif);
-  background-size: 360px 145px;
-  opacity: calc(var(--motif-opacity) * .65);
+  width: 220px;
+  margin-top: 14px;
 }
 
 .calendar-top {
-  padding: 12px 10px;
-  background: var(--wash);
-  border-bottom: 1px solid var(--border);
-  font-weight: 900;
-  font-size: 1.05rem;
-  letter-spacing: 1px;
+  padding: 7px;
+  font-size: .9rem;
 }
 
 .calendar-days {
-  padding: 12px 8px 3px;
-  font: 700 2.8rem/1.25 "Kalam", cursive;
+  padding: 7px 8px 0;
+  font-size: 2.2rem;
 }
 
 .calendar-text {
-  padding: 0 14px 16px;
-  color: var(--muted);
-  font-size: .88rem;
-  font-weight: 700;
+  padding-bottom: 9px;
+  font-size: .8rem;
 }
 
-.agenda {
-  position: relative;
-  padding: 32px;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: var(--paper);
-  box-shadow: 0 12px 35px #65493716;
-}
-
-.week-grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  align-items: stretch;
-  gap: 17px;
-}
-
-.day-card {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 310px;
-  padding: 32px 12px 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  background: linear-gradient(130deg, var(--paper), var(--wash));
+/* LA DECORACIÓN ACOMPAÑA */
+body::before {
+  opacity: calc(var(--motif-opacity) * .4);
 }
 
 .day-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: var(--motif);
-  background-size: 380px 160px;
-  background-position: -25px 10px;
-  opacity: calc(var(--motif-opacity) * .55);
+  opacity: calc(var(--motif-opacity) * .25);
 }
 
-.day-card:nth-child(4n+2)::before {
-  background-position: 65px 45px;
+/* EL HORARIO GANA ESPACIO Y CONTRASTE */
+.agenda {
+  padding: 27px;
 }
 
-.day-card:nth-child(4n+3)::before {
-  background-position: -110px -25px;
-}
-
-.day-card:nth-child(4n)::before {
-  background-position: 25px 85px;
+.day-card {
+  padding: 32px 10px 16px;
+  background: #fffdfa;
 }
 
 .day-title {
-  margin: 0 0 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed var(--border);
-  text-align: center;
-  font: 700 1.45rem/1.25 "Kalam", cursive;
-  color: var(--ink);
-}
-
-/* Día actual: rosa empolvado y pequeña etiqueta. */
-.day-card.today {
-  outline: 3px solid var(--pink);
-  outline-offset: 3px;
-  border-color: #d8adbd;
-  background: linear-gradient(140deg, #fffafd, var(--pink-light));
-  box-shadow: 0 8px 19px #b77b9224;
-  transform: translateY(-3px);
-}
-
-.day-card.today::after {
-  content: "HOY";
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  background: #e7c1cf;
-  color: #704b5b;
-  font: 900 10px/1.25 "Nunito", sans-serif;
-  letter-spacing: 1.2px;
-}
-
-.day-card.today .day-title {
-  color: #805668;
-  border-bottom-color: #d7a6b7;
+  margin-bottom: 14px;
+  font-size: 1.55rem;
 }
 
 .block {
-  margin: 6px 0;
-  padding: 10px 9px;
-  border-radius: 10px;
-  border-left: 4px solid var(--sand);
-  background: #fffffff0;
-  box-shadow: 0 2px 5px #65493706;
+  margin: 7px 0;
+  padding: 13px 10px;
+  border-left-width: 5px;
+  border-radius: 11px;
+  box-shadow: 0 2px 5px #493c3010;
 }
 
+/* ESTUDIO: VERDE SALVIA */
+.block.estudio {
+  background: #e4efdd;
+  border-left-color: #72965d;
+}
+
+.block.estudio .block-title {
+  color: #446035;
+}
+
+.block.estudio .block-time {
+  color: #2f4725;
+}
+
+/* DESCANSO: ROSA EMPOLVADO */
+.block.descanso {
+  background: #f5e1e9;
+  border-left-color: #be7f97;
+}
+
+.block.descanso .block-title {
+  color: #86516a;
+}
+
+.block.descanso .block-time {
+  color: #673b50;
+}
+
+/* OTROS BLOQUES */
+.block.variable {
+  background: #f5edda;
+  border-left-color: #bea166;
+}
+
+.block.variable .block-time {
+  color: #69542e;
+}
+
+/* LAS HORAS SON EL ELEMENTO PRINCIPAL */
 .block-title {
-  font-weight: 900;
-  font-size: .86rem;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
+  font-family: "Nunito", sans-serif;
+  font-size: .8rem;
+  font-weight: 800;
+  line-height: 1.3;
 }
 
 .block-time {
-  margin-top: 4px;
-  font: 400 1.02rem/1.35 "Kalam", cursive;
-  color: var(--muted);
-  overflow-wrap: anywhere;
+  margin-top: 7px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  color: #453c34;
 }
 
-.block.estudio { border-left-color: var(--sage); }
-.block.descanso { border-left-color: var(--pink); }
-.block.variable { border-left-color: var(--sand); }
-.block.nocturno { border-left-color: var(--lavender); }
+/* HOY SIGUE DESTACANDO */
+.day-card.today {
+  background: #fff5f8;
+  outline-color: #cf95ab;
+}
 
+/* LAS NOTAS QUEDAN EN SEGUNDO PLANO */
 .block.note {
-  margin-top: auto;
-  padding-top: 10px;
-  border-left-color: var(--sand);
-  background: #fffaf0e8;
+  background: #faf5e9;
+  border-left-color: #d7c6a3;
+  box-shadow: none;
 }
 
-.free-day {
-  margin: 20px 0;
-  text-align: center;
-  font-size: .9rem;
+.block.note .block-time {
+  font-size: .88rem;
+  font-weight: 600;
   color: var(--muted);
 }
 
 .post-it-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 38px;
+  margin-top: 25px;
 }
 
 .week-notes {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  max-width: 560px;
-  overflow: hidden;
-  padding: 23px 27px;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  background: linear-gradient(130deg, var(--paper), var(--wash));
-  box-shadow: 0 6px 18px #65493713;
-  transform: rotate(.7deg);
-}
-
-.week-notes::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: var(--motif);
-  background-size: 440px 180px;
-  background-position: right bottom;
-  opacity: calc(var(--motif-opacity) * .5);
+  max-width: 480px;
+  padding: 16px 22px;
+  box-shadow: none;
 }
 
 .week-notes h2 {
-  margin: 0 0 12px;
-  text-align: center;
-  font: 700 1.7rem/1.3 "Kalam", cursive;
+  margin-bottom: 7px;
+  font-size: 1.35rem;
 }
 
 .week-notes ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font: 400 1.1rem/1.5 "Kalam", cursive;
+  font-family: "Nunito", sans-serif;
+  font-size: .9rem;
 }
-
-.week-notes li {
-  padding: 7px 0;
-  border-bottom: 1px dashed var(--border);
-  overflow-wrap: anywhere;
-}
-
-.week-notes li:last-child { border-bottom: 0; }
 
 .footer {
-  margin-top: 29px;
-  text-align: center;
-  color: var(--muted);
+  margin-top: 18px;
 }
 
 .footer p {
-  margin: 0 0 7px;
-  font: 400 1.05rem "Kalam", cursive;
-}
-
-.footer small { font-size: .8rem; }
-
-.error-box {
-  grid-column: 1 / -1;
-  padding: 24px;
-  border: 1px dashed var(--border);
-  border-radius: 14px;
-  background: var(--wash);
-  text-align: center;
-  line-height: 1.6;
-}
-
-@media (max-width: 1150px) {
-  .week-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .day-card { min-height: 270px; }
+  font-size: .9rem;
 }
 
 @media (max-width: 700px) {
-  .wrapper { padding: 27px 16px 32px; }
-  .agenda { padding: 23px 17px; }
-  .week-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .header h1 { font-size: 3rem; }
-}
-
-@media (max-width: 450px) {
-  .week-grid { grid-template-columns: 1fr; gap: 19px; }
-  .day-card { min-height: auto; padding: 32px 16px 17px; }
-  .block.note { margin-top: 12px; }
-  .header h1 { font-size: 2.65rem; }
-  .calendar-card { width: 245px; }
-  .week-notes { padding: 20px; }
+  .agenda {
+    padding: 22px 15px;
+  }
 }
 </style>
 </head>
