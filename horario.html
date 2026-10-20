@@ -30,9 +30,13 @@
   --lavender: #b5a5ca;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { min-height: 100%; }
+html {
+  min-height: 100%;
+}
 
 body {
   margin: 0;
@@ -46,7 +50,6 @@ body {
     linear-gradient(135deg, var(--paper), var(--wash));
 }
 
-/* Fondo estacional estático, visible pero suave. */
 body::before {
   content: "";
   position: absolute;
@@ -57,91 +60,268 @@ body::before {
   background-size: var(--motif-size);
   background-position: 12px 18px;
   background-repeat: repeat;
-  opacity: calc(var(--motif-opacity) * .7);
+  opacity: calc(var(--motif-opacity) * .4);
 }
 
-/* CABECERA MÁS COMPACTA */
+[hidden] {
+  display: none !important;
+}
+
+/* CABECERA: BONITA, PERO MÁS COMPACTA */
+
 .wrapper {
-  padding-top: 22px;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 22px 24px 35px;
 }
 
 .header {
+  text-align: center;
   margin-bottom: 22px;
 }
 
 .header h1 {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  padding: 0 14px;
+  font-family: "Kalam", cursive;
   font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink);
+  transform: rotate(-1deg);
+}
+
+.header h1::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 5%;
+  bottom: 7px;
+  height: 9px;
+  z-index: -1;
+  border-radius: 60% 35% 55% 45%;
+  background: var(--accent);
+  opacity: .23;
+  transform: rotate(-1deg);
 }
 
 .subtitle {
   margin: 2px 0 8px;
   font-size: .9rem;
+  font-weight: 700;
+  color: var(--muted);
 }
 
 .season-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   min-height: 30px;
   padding: 3px 13px;
-  font-size: 17px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 700 17px/1.25 "Kalam", cursive;
 }
 
 .season-icon {
+  display: inline-flex;
   width: 21px;
   height: 21px;
+  color: var(--accent);
 }
+
+.season-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.event-label {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: .85rem;
+  font-weight: 800;
+}
+
+/* FECHAS DE LA SEMANA */
 
 .calendar-card {
   width: 220px;
-  margin-top: 14px;
+  margin: 14px auto 0;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 5px 15px #65493712;
+  transform: rotate(-1.5deg);
+}
+
+.calendar-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--motif);
+  background-size: 360px 145px;
+  opacity: calc(var(--motif-opacity) * .5);
 }
 
 .calendar-top {
   padding: 7px;
+  background: var(--wash);
+  border-bottom: 1px solid var(--border);
+  font-weight: 900;
   font-size: .9rem;
+  letter-spacing: .8px;
 }
 
 .calendar-days {
   padding: 7px 8px 0;
-  font-size: 2.2rem;
+  font: 700 2.2rem/1.25 "Kalam", cursive;
 }
 
 .calendar-text {
-  padding-bottom: 9px;
+  padding: 0 12px 9px;
+  color: var(--muted);
   font-size: .8rem;
+  font-weight: 700;
 }
 
-/* LA DECORACIÓN ACOMPAÑA */
-body::before {
-  opacity: calc(var(--motif-opacity) * .4);
-}
+/* HORARIO: ELEMENTO PRINCIPAL */
 
-.day-card::before {
-  opacity: calc(var(--motif-opacity) * .25);
-}
-
-/* EL HORARIO GANA ESPACIO Y CONTRASTE */
 .agenda {
+  position: relative;
   padding: 27px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 0 10px 30px #65493712;
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 17px;
 }
 
 .day-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 310px;
   padding: 32px 10px 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 15px;
   background: #fffdfa;
 }
 
-.day-title {
-  margin-bottom: 14px;
-  font-size: 1.55rem;
+.day-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--motif);
+  background-size: 380px 160px;
+  background-position: -25px 10px;
+  opacity: calc(var(--motif-opacity) * .25);
 }
+
+.day-card:nth-child(4n+2)::before {
+  background-position: 65px 45px;
+}
+
+.day-card:nth-child(4n+3)::before {
+  background-position: -110px -25px;
+}
+
+.day-card:nth-child(4n)::before {
+  background-position: 25px 85px;
+}
+
+.day-title {
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border);
+  text-align: center;
+  font: 700 1.55rem/1.25 "Kalam", cursive;
+  color: var(--ink);
+}
+
+/* DÍA ACTUAL */
+
+.day-card.today {
+  outline: 3px solid #cf95ab;
+  outline-offset: 3px;
+  border-color: #d8adbd;
+  background: #fff5f8;
+  box-shadow: 0 8px 19px #b77b9224;
+  transform: translateY(-3px);
+}
+
+.day-card.today::after {
+  content: "HOY";
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #e7c1cf;
+  color: #704b5b;
+  font: 900 10px/1.25 "Nunito", sans-serif;
+  letter-spacing: 1.2px;
+}
+
+.day-card.today .day-title {
+  color: #805668;
+  border-bottom-color: #d7a6b7;
+}
+
+/* BLOQUES Y HORAS */
 
 .block {
   margin: 7px 0;
   padding: 13px 10px;
-  border-left-width: 5px;
   border-radius: 11px;
+  border-left: 5px solid var(--sand);
+  background: #fff;
   box-shadow: 0 2px 5px #493c3010;
 }
 
-/* ESTUDIO: VERDE SALVIA */
+.block-title {
+  font-family: "Nunito", sans-serif;
+  font-size: .8rem;
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.block-time {
+  margin-top: 7px;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  color: #453c34;
+  overflow-wrap: anywhere;
+}
+
+/* ESTUDIO: VERDE */
+
 .block.estudio {
   background: #e4efdd;
   border-left-color: #72965d;
@@ -155,7 +335,8 @@ body::before {
   color: #2f4725;
 }
 
-/* DESCANSO: ROSA EMPOLVADO */
+/* DESCANSO: ROSA */
+
 .block.descanso {
   background: #f5e1e9;
   border-left-color: #be7f97;
@@ -169,45 +350,39 @@ body::before {
   color: #673b50;
 }
 
-/* OTROS BLOQUES */
+/* OTROS HORARIOS: ARENA */
+
 .block.variable {
   background: #f5edda;
   border-left-color: #bea166;
+}
+
+.block.variable .block-title {
+  color: #806b43;
 }
 
 .block.variable .block-time {
   color: #69542e;
 }
 
-/* LAS HORAS SON EL ELEMENTO PRINCIPAL */
-.block-title {
-  font-family: "Nunito", sans-serif;
-  font-size: .8rem;
-  font-weight: 800;
-  line-height: 1.3;
+.free-day {
+  margin: 20px 0;
+  text-align: center;
+  font-size: .9rem;
+  color: var(--muted);
 }
 
-.block-time {
-  margin-top: 7px;
-  font-family: "Nunito", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 900;
-  line-height: 1.4;
-  font-variant-numeric: tabular-nums;
-  color: #453c34;
-}
+/* NOTAS DEL DÍA */
 
-/* HOY SIGUE DESTACANDO */
-.day-card.today {
-  background: #fff5f8;
-  outline-color: #cf95ab;
-}
-
-/* LAS NOTAS QUEDAN EN SEGUNDO PLANO */
 .block.note {
+  margin-top: auto;
   background: #faf5e9;
   border-left-color: #d7c6a3;
   box-shadow: none;
+}
+
+.block.note .block-title {
+  color: var(--muted);
 }
 
 .block.note .block-time {
@@ -216,37 +391,134 @@ body::before {
   color: var(--muted);
 }
 
+/* NOTAS GENERALES */
+
 .post-it-container {
+  display: flex;
+  justify-content: center;
   margin-top: 25px;
 }
 
 .week-notes {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
   max-width: 480px;
+  overflow: hidden;
   padding: 16px 22px;
-  box-shadow: none;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: linear-gradient(130deg, var(--paper), var(--wash));
+  transform: rotate(.7deg);
+}
+
+.week-notes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--motif);
+  background-size: 440px 180px;
+  background-position: right bottom;
+  opacity: calc(var(--motif-opacity) * .35);
 }
 
 .week-notes h2 {
-  margin-bottom: 7px;
-  font-size: 1.35rem;
+  margin: 0 0 7px;
+  text-align: center;
+  font: 700 1.35rem/1.3 "Kalam", cursive;
 }
 
 .week-notes ul {
-  font-family: "Nunito", sans-serif;
-  font-size: .9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 400 .9rem/1.5 "Nunito", sans-serif;
+}
+
+.week-notes li {
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--border);
+  overflow-wrap: anywhere;
+}
+
+.week-notes li:last-child {
+  border-bottom: 0;
 }
 
 .footer {
   margin-top: 18px;
+  text-align: center;
+  color: var(--muted);
 }
 
 .footer p {
-  font-size: .9rem;
+  margin: 0 0 7px;
+  font: 400 .9rem "Kalam", cursive;
+}
+
+.footer small {
+  font-size: .8rem;
+}
+
+.error-box {
+  grid-column: 1 / -1;
+  padding: 24px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: var(--wash);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* TABLET Y MÓVIL */
+
+@media (max-width: 1150px) {
+  .week-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .day-card {
+    min-height: 270px;
+  }
 }
 
 @media (max-width: 700px) {
+  .wrapper {
+    padding: 22px 16px 30px;
+  }
+
   .agenda {
     padding: 22px 15px;
+  }
+
+  .week-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  .week-grid {
+    grid-template-columns: 1fr;
+    gap: 19px;
+  }
+
+  .day-card {
+    min-height: auto;
+    padding: 32px 16px 17px;
+  }
+
+  .block.note {
+    margin-top: 12px;
+  }
+
+  .header h1 {
+    font-size: 2.5rem;
+  }
+
+  .week-notes {
+    padding: 17px;
   }
 }
 </style>
