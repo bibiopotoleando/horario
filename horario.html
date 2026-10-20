@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- Si este archivo no existe, se usan los temas incluidos abajo. -->
+<!-- Usa tu configuración compartida si está en esta carpeta. -->
 <script src="./paneles_estaciones_config.js"></script>
 
 <style>
@@ -23,20 +23,23 @@
   --motif: none;
   --motif-size: 440px 180px;
   --motif-opacity: .34;
-  --pink: #d7a6b7;
-  --pink-light: #f5e4eb;
-  --sage: #a6b995;
-  --sand: #d8bd86;
-  --lavender: #b5a5ca;
+
+  --study-bg: #f1f5ed;
+  --study-border: #a8ba9b;
+  --study-ink: #485943;
+
+  --rest-bg: #faf0f4;
+  --rest-border: #d3b0bf;
+  --rest-ink: #745965;
+
+  --other-bg: #faf6ed;
+  --other-border: #d4c3a0;
+  --other-ink: #6d604a;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  min-height: 100%;
-}
+* { box-sizing: border-box; }
+html { min-height: 100%; }
+[hidden] { display: none !important; }
 
 body {
   margin: 0;
@@ -60,14 +63,8 @@ body::before {
   background-size: var(--motif-size);
   background-position: 12px 18px;
   background-repeat: repeat;
-  opacity: calc(var(--motif-opacity) * .4);
+  opacity: calc(var(--motif-opacity) * .45);
 }
-
-[hidden] {
-  display: none !important;
-}
-
-/* CABECERA: BONITA, PERO MÁS COMPACTA */
 
 .wrapper {
   width: 100%;
@@ -75,6 +72,8 @@ body::before {
   margin: 0 auto;
   padding: 22px 24px 35px;
 }
+
+/* CABECERA */
 
 .header {
   text-align: center;
@@ -105,14 +104,14 @@ body::before {
   z-index: -1;
   border-radius: 60% 35% 55% 45%;
   background: var(--accent);
-  opacity: .23;
+  opacity: .20;
   transform: rotate(-1deg);
 }
 
 .subtitle {
   margin: 2px 0 8px;
   font-size: .9rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--muted);
 }
 
@@ -146,7 +145,7 @@ body::before {
   margin: 7px 0 0;
   color: var(--muted);
   font-size: .85rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* FECHAS DE LA SEMANA */
@@ -160,7 +159,7 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--paper);
-  box-shadow: 0 5px 15px #65493712;
+  box-shadow: 0 5px 15px #6549370f;
   transform: rotate(-1.5deg);
 }
 
@@ -172,14 +171,14 @@ body::before {
   pointer-events: none;
   background-image: var(--motif);
   background-size: 360px 145px;
-  opacity: calc(var(--motif-opacity) * .5);
+  opacity: calc(var(--motif-opacity) * .45);
 }
 
 .calendar-top {
   padding: 7px;
   background: var(--wash);
   border-bottom: 1px solid var(--border);
-  font-weight: 900;
+  font-weight: 800;
   font-size: .9rem;
   letter-spacing: .8px;
 }
@@ -193,10 +192,10 @@ body::before {
   padding: 0 12px 9px;
   color: var(--muted);
   font-size: .8rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* HORARIO: ELEMENTO PRINCIPAL */
+/* HORARIO */
 
 .agenda {
   position: relative;
@@ -204,7 +203,7 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 22px;
   background: var(--paper);
-  box-shadow: 0 10px 30px #65493712;
+  box-shadow: 0 10px 30px #65493710;
 }
 
 .week-grid {
@@ -237,7 +236,7 @@ body::before {
   background-image: var(--motif);
   background-size: 380px 160px;
   background-position: -25px 10px;
-  opacity: calc(var(--motif-opacity) * .25);
+  opacity: calc(var(--motif-opacity) * .22);
 }
 
 .day-card:nth-child(4n+2)::before {
@@ -264,11 +263,11 @@ body::before {
 /* DÍA ACTUAL */
 
 .day-card.today {
-  outline: 3px solid #cf95ab;
+  outline: 2px solid #d8b4c3;
   outline-offset: 3px;
-  border-color: #d8adbd;
-  background: #fff5f8;
-  box-shadow: 0 8px 19px #b77b9224;
+  border-color: #e1c6d1;
+  background: #fff9fb;
+  box-shadow: 0 6px 17px #b77b9214;
   transform: translateY(-3px);
 }
 
@@ -279,32 +278,32 @@ body::before {
   right: 10px;
   padding: 3px 10px;
   border-radius: 20px;
-  background: #e7c1cf;
-  color: #704b5b;
-  font: 900 10px/1.25 "Nunito", sans-serif;
+  background: #f2e3e9;
+  color: #805c6c;
+  font: 800 10px/1.25 "Nunito", sans-serif;
   letter-spacing: 1.2px;
 }
 
 .day-card.today .day-title {
-  color: #805668;
-  border-bottom-color: #d7a6b7;
+  color: #805c6c;
+  border-bottom-color: #dfc3cf;
 }
 
-/* BLOQUES Y HORAS */
+/* BLOQUES: COLORES MUY CLAROS */
 
 .block {
   margin: 7px 0;
   padding: 13px 10px;
   border-radius: 11px;
-  border-left: 5px solid var(--sand);
+  border: 1px solid #ece7df;
+  border-left: 4px solid var(--other-border);
   background: #fff;
-  box-shadow: 0 2px 5px #493c3010;
 }
 
 .block-title {
   font-family: "Nunito", sans-serif;
   font-size: .8rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
   overflow-wrap: anywhere;
 }
@@ -312,57 +311,60 @@ body::before {
 .block-time {
   margin-top: 7px;
   font-family: "Nunito", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 900;
+  font-size: 1.17rem;
+  font-weight: 800;
   line-height: 1.4;
   font-variant-numeric: tabular-nums;
-  color: #453c34;
+  color: #4e453d;
   overflow-wrap: anywhere;
 }
 
-/* ESTUDIO: VERDE */
+/* ESTUDIO: VERDE SALVIA CLARO */
 
 .block.estudio {
-  background: #e4efdd;
-  border-left-color: #72965d;
+  background: var(--study-bg);
+  border-color: #e2e9dc;
+  border-left-color: var(--study-border);
 }
 
 .block.estudio .block-title {
-  color: #446035;
+  color: #65745e;
 }
 
 .block.estudio .block-time {
-  color: #2f4725;
+  color: var(--study-ink);
 }
 
-/* DESCANSO: ROSA */
+/* DESCANSO: ROSA EMPOLVADO CLARO */
 
 .block.descanso {
-  background: #f5e1e9;
-  border-left-color: #be7f97;
+  background: var(--rest-bg);
+  border-color: #eee1e7;
+  border-left-color: var(--rest-border);
 }
 
 .block.descanso .block-title {
-  color: #86516a;
+  color: #8a717c;
 }
 
 .block.descanso .block-time {
-  color: #673b50;
+  color: var(--rest-ink);
 }
 
-/* OTROS HORARIOS: ARENA */
+/* OTROS BLOQUES: ARENA CLARO */
 
 .block.variable {
-  background: #f5edda;
-  border-left-color: #bea166;
+  background: var(--other-bg);
+  border-color: #eee7da;
+  border-left-color: var(--other-border);
 }
 
 .block.variable .block-title {
-  color: #806b43;
+  color: #88795e;
 }
 
 .block.variable .block-time {
-  color: #69542e;
+  color: var(--other-ink);
 }
 
 .free-day {
@@ -376,9 +378,9 @@ body::before {
 
 .block.note {
   margin-top: auto;
-  background: #faf5e9;
-  border-left-color: #d7c6a3;
-  box-shadow: none;
+  background: #fcf9f2;
+  border-color: #eee7da;
+  border-left-color: #d9cdb4;
 }
 
 .block.note .block-title {
@@ -421,7 +423,7 @@ body::before {
   background-image: var(--motif);
   background-size: 440px 180px;
   background-position: right bottom;
-  opacity: calc(var(--motif-opacity) * .35);
+  opacity: calc(var(--motif-opacity) * .3);
 }
 
 .week-notes h2 {
@@ -534,6 +536,7 @@ body::before {
       <span id="seasonIcon" class="season-icon" aria-hidden="true"></span>
       <span id="seasonName"></span>
     </div>
+
     <p id="eventName" class="event-label" hidden></p>
 
     <div class="calendar-card">
@@ -561,6 +564,8 @@ body::before {
 </main>
 
 <script>
+/* ESTACIONES Y EVENTOS */
+
 (() => {
   "use strict";
 
@@ -623,14 +628,17 @@ body::before {
     "#506b52", "#74856e", "#91ab85", "#c0d3b8",
     "#fcfdf6", "#edf5e7", "spring"
   );
+
   const summer = palette(
     "#4d7078", "#6e8d91", "#91bcc3", "#c0dce0",
     "#fbfdfa", "#edf6f6", "summer"
   );
+
   const autumn = palette(
     "#704b3b", "#896953", "#b18560", "#d8bda2",
     "#fcf6ef", "#f6e9da", "leaf"
   );
+
   const winter = palette(
     "#5f667d", "#7f879d", "#a6afcc", "#d0d5e6",
     "#fbfbff", "#eef0f8", "winter"
@@ -638,53 +646,112 @@ body::before {
 
   const defaults = {
     version: 1,
+
     estaciones: [
-      { ...spring, id: "primavera", nombre: "Primavera", inicio: "03-20" },
-      { ...summer, id: "verano", nombre: "Verano", inicio: "06-21" },
-      { ...autumn, id: "otono", nombre: "Otoño", inicio: "09-23" },
-      { ...winter, id: "invierno", nombre: "Invierno", inicio: "12-21" }
+      {
+        ...spring,
+        id: "primavera",
+        nombre: "Primavera",
+        inicio: "03-20"
+      },
+      {
+        ...summer,
+        id: "verano",
+        nombre: "Verano",
+        inicio: "06-21"
+      },
+      {
+        ...autumn,
+        id: "otono",
+        nombre: "Otoño",
+        inicio: "09-23"
+      },
+      {
+        ...winter,
+        id: "invierno",
+        nombre: "Invierno",
+        inicio: "12-21"
+      }
     ],
+
     eventos: [
       {
-        ...palette("#766078", "#93809a", "#bca1bd", "#dac9de",
-          "#fffbfc", "#f4eaf4", "mask"),
-        id: "entroido", nombre: "Entroido", activo: true,
-        regla: "entroido", desdeOffset: -3, hastaOffset: 0
+        ...palette(
+          "#766078", "#93809a", "#bca1bd", "#dac9de",
+          "#fffbfc", "#f4eaf4", "mask"
+        ),
+        id: "entroido",
+        nombre: "Entroido",
+        activo: true,
+        regla: "entroido",
+        desdeOffset: -3,
+        hastaOffset: 0
       },
       {
-        ...palette("#617059", "#849079", "#a3b18b", "#d1d9bd",
-          "#fffdf4", "#f1f4e6", "book"),
-        id: "libro", nombre: "Día del Libro", activo: true,
-        regla: "fecha", desde: "04-23", hasta: "04-23"
+        ...palette(
+          "#617059", "#849079", "#a3b18b", "#d1d9bd",
+          "#fffdf4", "#f1f4e6", "book"
+        ),
+        id: "libro",
+        nombre: "Día del Libro",
+        activo: true,
+        regla: "fecha",
+        desde: "04-23",
+        hasta: "04-23"
       },
       {
-        ...palette("#54706a", "#7c9185", "#a1b7a3", "#cbdacd",
-          "#fffdf7", "#edf4e9", "book"),
-        id: "letras", nombre: "Letras Galegas", activo: true,
-        regla: "fecha", desde: "05-17", hasta: "05-17"
+        ...palette(
+          "#54706a", "#7c9185", "#a1b7a3", "#cbdacd",
+          "#fffdf7", "#edf4e9", "book"
+        ),
+        id: "letras",
+        nombre: "Letras Galegas",
+        activo: true,
+        regla: "fecha",
+        desde: "05-17",
+        hasta: "05-17"
       },
       {
-        ...palette("#785743", "#95816f", "#c49a78", "#dac4b2",
-          "#fff8ee", "#f3e9e0", "pumpkin"),
-        id: "samain", nombre: "Samaín", activo: true,
-        regla: "fecha", desde: "10-31", hasta: "10-31"
+        ...palette(
+          "#785743", "#95816f", "#c49a78", "#dac4b2",
+          "#fff8ee", "#f3e9e0", "pumpkin"
+        ),
+        id: "samain",
+        nombre: "Samaín",
+        activo: true,
+        regla: "fecha",
+        desde: "10-31",
+        hasta: "10-31"
       },
       {
-        ...palette("#735342", "#927863", "#b4956d", "#d6c3a6",
-          "#fff9ee", "#f3eada", "chestnut"),
-        id: "magosto", nombre: "Magosto", activo: true,
-        regla: "fecha", desde: "11-11", hasta: "11-11"
+        ...palette(
+          "#735342", "#927863", "#b4956d", "#d6c3a6",
+          "#fff9ee", "#f3eada", "chestnut"
+        ),
+        id: "magosto",
+        nombre: "Magosto",
+        activo: true,
+        regla: "fecha",
+        desde: "11-11",
+        hasta: "11-11"
       },
       {
-        ...palette("#76664e", "#928575", "#bfa776", "#d9cdb5",
-          "#fffdf4", "#f5f0e3", "sparkle"),
-        id: "aninovo", nombre: "Fin de año / Aninovo", activo: true,
-        regla: "fecha", desde: "12-31", hasta: "01-01"
+        ...palette(
+          "#76664e", "#928575", "#bfa776", "#d9cdb5",
+          "#fffdf4", "#f5f0e3", "sparkle"
+        ),
+        id: "aninovo",
+        nombre: "Fin de año / Aninovo",
+        activo: true,
+        regla: "fecha",
+        desde: "12-31",
+        hasta: "01-01"
       }
     ]
   };
 
   const external = window.PANELES_CONFIG;
+
   const cfg = external &&
     Array.isArray(external.estaciones) &&
     external.estaciones.length &&
@@ -699,15 +766,18 @@ body::before {
         year: "numeric",
         month: "2-digit",
         day: "2-digit"
-      }).formatToParts(now)
-        .filter(p => p.type !== "literal")
-        .map(p => [p.type, Number(p.value)])
+      })
+      .formatToParts(now)
+      .filter(part => part.type !== "literal")
+      .map(part => [part.type, Number(part.value)])
     );
   }
 
   function monthDay(value) {
     const match = /^(\d{2})-(\d{2})$/.exec(value || "");
-    return match ? Number(match[1]) * 100 + Number(match[2]) : 0;
+    return match
+      ? Number(match[1]) * 100 + Number(match[2])
+      : 0;
   }
 
   function inRange(day, from, to) {
@@ -731,6 +801,7 @@ body::before {
     const m = Math.floor((a + 11 * h + 22 * l) / 451);
     const month = Math.floor((h + l - 7 * m + 114) / 31);
     const day = (h + l - 7 * m + 114) % 31 + 1;
+
     return Date.UTC(year, month - 1, day) - 47 * 86400000;
   }
 
@@ -740,8 +811,9 @@ body::before {
     const utc = Date.UTC(p.year, p.month - 1, p.day);
     const tuesday = carnival(p.year);
 
-    const seasons = [...cfg.estaciones]
-      .sort((a, b) => monthDay(a.inicio) - monthDay(b.inicio));
+    const seasons = [...cfg.estaciones].sort(
+      (a, b) => monthDay(a.inicio) - monthDay(b.inicio)
+    );
 
     let season = seasons[seasons.length - 1];
 
@@ -753,11 +825,17 @@ body::before {
       if (!item.activo) return false;
 
       if (item.regla === "entroido") {
-        return utc >= tuesday + Number(item.desdeOffset) * 86400000 &&
-               utc <= tuesday + Number(item.hastaOffset) * 86400000;
+        return (
+          utc >= tuesday + Number(item.desdeOffset) * 86400000 &&
+          utc <= tuesday + Number(item.hastaOffset) * 86400000
+        );
       }
 
-      return inRange(day, monthDay(item.desde), monthDay(item.hasta));
+      return inRange(
+        day,
+        monthDay(item.desde),
+        monthDay(item.hasta)
+      );
     });
 
     return {
@@ -770,8 +848,10 @@ body::before {
   }
 
   function svg(content, viewBox = "0 0 32 32") {
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' +
-      viewBox + '">' + content + "</svg>";
+    return (
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' +
+      viewBox + '">' + content + "</svg>"
+    );
   }
 
   function background(kind, color) {
@@ -787,29 +867,36 @@ body::before {
       [220, 140, .7, -15]
     ];
 
-    return svg(positions.map(([x, y, scale, rotate]) =>
+    const drawing = positions.map(([x, y, scale, rotate]) => (
       '<g transform="translate(' + x + " " + y + ") scale(" +
-      scale + ") rotate(" + rotate + ' 16 16)">' + motif + "</g>"
-    ).join(""), "0 0 440 180");
+      scale + ") rotate(" + rotate + ' 16 16)">' +
+      motif + "</g>"
+    )).join("");
+
+    return svg(drawing, "0 0 440 180");
   }
 
   let lastTheme = "";
 
   function apply(now = new Date()) {
     const state = choose(now);
-    const signature = JSON.stringify([state.style, state.seasonStyle]);
+    const signature = JSON.stringify([
+      state.style,
+      state.seasonStyle
+    ]);
 
     if (signature === lastTheme) return state;
     lastTheme = signature;
 
-    const t = { ...autumn, ...state.style };
+    const theme = { ...autumn, ...state.style };
+
     const variables = {
-      ink: t.texto,
-      muted: t.textoSecundario,
-      accent: t.acento,
-      border: t.borde,
-      paper: t.fondoClaro,
-      wash: t.fondoPastel
+      ink: theme.texto,
+      muted: theme.textoSecundario,
+      accent: theme.acento,
+      border: theme.borde,
+      paper: theme.fondoClaro,
+      wash: theme.fondoPastel
     };
 
     for (const [name, value] of Object.entries(variables)) {
@@ -818,14 +905,17 @@ body::before {
 
     let image = "";
 
-    if (t.imagenFondo) {
+    if (theme.imagenFondo) {
       try {
         const resolved = new URL(
-          t.imagenFondo,
+          theme.imagenFondo,
           window.PANELES_CONFIG_BASE || document.baseURI
         );
-        if (["http:", "https:", "file:", "data:", "blob:"]
-            .includes(resolved.protocol)) {
+
+        if (
+          ["http:", "https:", "file:", "data:", "blob:"]
+          .includes(resolved.protocol)
+        ) {
           image = resolved.href;
         }
       } catch (_) {}
@@ -835,21 +925,29 @@ body::before {
 
     if (image) {
       motif = "url(" + JSON.stringify(image) + ")";
-    } else if (t.motivo !== "none") {
-      const color = /^#[0-9a-f]{6}$/i.test(t.acento)
-        ? t.acento : "#b18560";
+    } else if (theme.motivo !== "none") {
+      const color = /^#[0-9a-f]{6}$/i.test(theme.acento)
+        ? theme.acento
+        : "#b18560";
 
       motif = 'url("data:image/svg+xml,' +
-        encodeURIComponent(background(t.motivo, color)) + '")';
+        encodeURIComponent(background(theme.motivo, color)) +
+        '")';
     }
 
-    const opacity = Number(t.opacidadFondo);
+    const opacity = Number(theme.opacidadFondo);
 
     ROOT.style.setProperty("--motif", motif);
-    ROOT.style.setProperty("--motif-size", image ? "cover" : "440px 180px");
+    ROOT.style.setProperty(
+      "--motif-size",
+      image ? "cover" : "440px 180px"
+    );
+
     ROOT.style.setProperty(
       "--motif-opacity",
-      Number.isFinite(opacity) ? Math.max(0, Math.min(1, opacity)) : .34
+      Number.isFinite(opacity)
+        ? Math.max(0, Math.min(1, opacity))
+        : .34
     );
 
     ROOT.dataset.season = state.season;
@@ -866,22 +964,32 @@ body::before {
     };
 
     const icon = state.seasonStyle.motivo;
+
     document.getElementById("seasonIcon").innerHTML = svg(
-      MOTIFS[icon] || MOTIFS[defaultIcon[state.season]] || MOTIFS.leaf
+      MOTIFS[icon] ||
+      MOTIFS[defaultIcon[state.season]] ||
+      MOTIFS.leaf
     );
 
     const eventLabel = document.getElementById("eventName");
     eventLabel.hidden = !state.event;
-    eventLabel.textContent = state.event ? state.style.nombre : "";
+    eventLabel.textContent = state.event
+      ? state.style.nombre
+      : "";
 
     return state;
   }
 
-  window.PanelCalendar = Object.freeze({ choose, apply, carnival });
-  window.HorarioMadridParts = madridParts;
+  window.PanelCalendar = Object.freeze({
+    choose,
+    apply,
+    carnival
+  });
 
   apply();
+
   setInterval(() => apply(), 30000);
+
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) apply();
   });
@@ -889,6 +997,8 @@ body::before {
 </script>
 
 <script>
+/* LECTURA DEL HORARIO */
+
 (() => {
   "use strict";
 
@@ -914,7 +1024,8 @@ body::before {
   };
 
   function normalizeKey(text) {
-    return text.toUpperCase()
+    return text
+      .toUpperCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
   }
@@ -927,89 +1038,117 @@ body::before {
     let week = "";
     let isNotes = false;
 
-    text.replace(/\uFEFF/g, "").split(/\r?\n/).forEach(rawLine => {
-      const line = rawLine.trim();
-      if (!line || line.startsWith("#")) return;
+    text
+      .replace(/\uFEFF/g, "")
+      .split(/\r?\n/)
+      .forEach(rawLine => {
+        const line = rawLine.trim();
 
-      if (line.toUpperCase().includes("[NOTAS]")) {
-        isNotes = true;
-        currentDay = null;
-        return;
-      }
+        if (!line || line.startsWith("#")) return;
 
-      if (isNotes) {
-        const note = line.replace(/^-\s*/, "").trim();
-        if (note) generalNotes.push(note);
-        return;
-      }
+        if (line.toUpperCase().includes("[NOTAS]")) {
+          isNotes = true;
+          currentDay = null;
+          return;
+        }
 
-      if (/^SEMANA:/i.test(line)) {
-        week = line.replace(/^SEMANA:/i, "").trim();
-        return;
-      }
+        if (isNotes) {
+          const note = line.replace(/^-\s*/, "").trim();
+          if (note) generalNotes.push(note);
+          return;
+        }
 
-      const match = line.match(
-        /\[(LUNES|MARTES|MIERCOLES|MIÉRCOLES|JUEVES|VIERNES|SABADO|SÁBADO|DOMINGO)\]/i
-      );
+        if (/^SEMANA:/i.test(line)) {
+          week = line.replace(/^SEMANA:/i, "").trim();
+          return;
+        }
 
-      if (match) {
-        currentDay = normalizeKey(match[1]);
-        schedule[currentDay] = { blocks: [], note: "" };
-        return;
-      }
+        const match = line.match(
+          /\[(LUNES|MARTES|MIERCOLES|MIÉRCOLES|JUEVES|VIERNES|SABADO|SÁBADO|DOMINGO)\]/i
+        );
 
-      if (!currentDay || !line.includes(":")) return;
+        if (match) {
+          currentDay = normalizeKey(match[1]);
+          schedule[currentDay] = {
+            blocks: [],
+            note: ""
+          };
+          return;
+        }
 
-      const colon = line.indexOf(":");
-      const key = line.slice(0, colon).trim().toLowerCase();
-      const value = line.slice(colon + 1).trim();
+        if (!currentDay || !line.includes(":")) return;
 
-      if (key === "nota") {
-        schedule[currentDay].note = value;
-        return;
-      }
+        const colon = line.indexOf(":");
+        const key = line
+          .slice(0, colon)
+          .trim()
+          .toLowerCase();
 
-      let time = value;
-      let type = "variable";
+        const value = line.slice(colon + 1).trim();
 
-      if (value.includes("|")) {
-        const parts = value.split("|");
-        time = parts[0].trim();
-        const typeText = (parts[1] || "").trim().toLowerCase();
+        if (key === "nota") {
+          schedule[currentDay].note = value;
+          return;
+        }
 
-        if (typeText.includes("estudio")) type = "estudio";
-        else if (typeText.includes("descanso")) type = "descanso";
-      } else if (value.toLowerCase().includes("descanso")) {
-        type = "descanso";
-        time = "Descanso";
-      }
+        let time = value;
+        let type = "variable";
 
-      let label;
+        if (value.includes("|")) {
+          const parts = value.split("|");
+          time = parts[0].trim();
 
-      if (key === "nocturno") {
-        label = type === "estudio"
-          ? "Estudio nocturno"
-          : type === "descanso" ? "Descanso nocturno" : "Nocturno";
-      } else if (type === "estudio") {
-        label = "Estudio de " + key;
-      } else if (type === "descanso") {
-        label = "Descanso";
-      } else {
-        label = key.charAt(0).toUpperCase() + key.slice(1);
-      }
+          const typeText = (parts[1] || "")
+            .trim()
+            .toLowerCase();
 
-      schedule[currentDay].blocks.push({
-        time, type, label, period: key
+          if (typeText.includes("estudio")) {
+            type = "estudio";
+          } else if (typeText.includes("descanso")) {
+            type = "descanso";
+          }
+        } else if (value.toLowerCase().includes("descanso")) {
+          type = "descanso";
+          time = "Descanso";
+        }
+
+        let label;
+
+        if (key === "nocturno") {
+          label = type === "estudio"
+            ? "Estudio nocturno"
+            : type === "descanso"
+              ? "Descanso nocturno"
+              : "Nocturno";
+        } else if (type === "estudio") {
+          label = "Estudio de " + key;
+        } else if (type === "descanso") {
+          label = "Descanso";
+        } else {
+          label = key.charAt(0).toUpperCase() + key.slice(1);
+        }
+
+        schedule[currentDay].blocks.push({
+          time,
+          type,
+          label,
+          period: key
+        });
       });
-    });
 
-    return { week, schedule, generalNotes };
+    return {
+      week,
+      schedule,
+      generalNotes
+    };
   }
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
+
     if (className) node.className = className;
     if (text !== undefined) node.textContent = text;
+
     return node;
   }
 
@@ -1023,44 +1162,69 @@ body::before {
 
     document.querySelectorAll(".day-card").forEach(card => {
       const current = card.dataset.day === today;
+
       card.classList.toggle("today", current);
-      if (current) card.setAttribute("aria-current", "date");
-      else card.removeAttribute("aria-current");
+
+      if (current) {
+        card.setAttribute("aria-current", "date");
+      } else {
+        card.removeAttribute("aria-current");
+      }
     });
   }
 
   function renderWeekHeader(week) {
-    document.getElementById("weekText").textContent =
-      week ? "Semana del " + week : "Semana actual";
+    document.getElementById("weekText").textContent = week
+      ? "Semana del " + week
+      : "Semana actual";
 
     const match = week.match(/(\d{2})\/(\d{2})\/(\d{4})/);
+
     if (!match) {
-      document.getElementById("weekDays").textContent = "Lun → Dom";
+      document.getElementById("weekDays").textContent =
+        "Lun → Dom";
       return;
     }
 
     const start = new Date(Date.UTC(
-      Number(match[3]), Number(match[2]) - 1, Number(match[1]), 12
+      Number(match[3]),
+      Number(match[2]) - 1,
+      Number(match[1]),
+      12
     ));
-    const end = new Date(start.getTime() + 6 * 86400000);
+
+    const end = new Date(
+      start.getTime() + 6 * 86400000
+    );
 
     const month = date => new Intl.DateTimeFormat("es-ES", {
-      timeZone: "UTC", month: "long"
+      timeZone: "UTC",
+      month: "long"
     }).format(date).toUpperCase();
 
     const startMonth = month(start);
     const endMonth = month(end);
 
+    let monthText;
+
+    if (start.getUTCFullYear() !== end.getUTCFullYear()) {
+      monthText =
+        startMonth + " " + start.getUTCFullYear() +
+        " / " + endMonth + " " + end.getUTCFullYear();
+    } else if (startMonth === endMonth) {
+      monthText = startMonth + " " + start.getUTCFullYear();
+    } else {
+      monthText =
+        startMonth + " / " + endMonth + " " +
+        end.getUTCFullYear();
+    }
+
     document.getElementById("weekMonth").textContent =
-      start.getUTCFullYear() !== end.getUTCFullYear()
-        ? startMonth + " " + start.getUTCFullYear() +
-          " / " + endMonth + " " + end.getUTCFullYear()
-        : startMonth === endMonth
-          ? startMonth + " " + start.getUTCFullYear()
-          : startMonth + " / " + endMonth + " " + end.getUTCFullYear();
+      monthText;
 
     document.getElementById("weekDays").textContent =
-      String(start.getUTCDate()).padStart(2, "0") + " → " +
+      String(start.getUTCDate()).padStart(2, "0") +
+      " → " +
       String(end.getUTCDate()).padStart(2, "0");
   }
 
@@ -1071,22 +1235,33 @@ body::before {
     grid.replaceChildren();
 
     DAYS.forEach(([key, name]) => {
-      const day = data.schedule[key] || { blocks: [], note: "" };
+      const day = data.schedule[key] || {
+        blocks: [],
+        note: ""
+      };
+
       const card = element("article", "day-card");
       card.dataset.day = key;
+
       card.append(element("h2", "day-title", name));
 
       day.blocks.forEach(block => {
-        const classes = "block " + block.type +
+        const classes =
+          "block " + block.type +
           (block.period === "nocturno" ? " nocturno" : "");
 
         const box = element("div", classes);
+
         const icon = block.period === "nocturno"
           ? ICONS.nocturno
           : ICONS[block.type] || "✨";
 
         box.append(
-          element("div", "block-title", icon + " " + block.label),
+          element(
+            "div",
+            "block-title",
+            icon + " " + block.label
+          ),
           element("div", "block-time", block.time)
         );
 
@@ -1094,15 +1269,19 @@ body::before {
       });
 
       if (!day.blocks.length) {
-        card.append(element("p", "free-day", "Día libre"));
+        card.append(
+          element("p", "free-day", "Día libre")
+        );
       }
 
       if (day.note) {
         const note = element("div", "block note");
+
         note.append(
           element("div", "block-title", "📌 Nota"),
           element("div", "block-time", day.note)
         );
+
         card.append(note);
       }
 
@@ -1116,7 +1295,9 @@ body::before {
       ? data.generalNotes
       : ["Sin notas esta semana 🌿"];
 
-    list.forEach(text => notes.append(element("li", "", text)));
+    list.forEach(text => {
+      notes.append(element("li", "", text));
+    });
 
     updateToday();
   }
@@ -1125,19 +1306,27 @@ body::before {
     const target = document.getElementById("lastUpdate");
 
     try {
-      const url = "https://api.github.com/repos/" +
+      const url =
+        "https://api.github.com/repos/" +
         GITHUB_USER + "/" + GITHUB_REPO +
         "/commits?path=config_horario.txt&per_page=1";
 
       const response = await fetch(url);
-      if (!response.ok) throw new Error("Fecha no disponible");
+
+      if (!response.ok) {
+        throw new Error("Fecha no disponible");
+      }
 
       const commits = await response.json();
       const value = commits[0]?.commit?.committer?.date;
+
       if (!value) throw new Error("Sin fecha");
 
       const date = new Date(value);
-      if (Number.isNaN(date.getTime())) throw new Error("Fecha inválida");
+
+      if (Number.isNaN(date.getTime())) {
+        throw new Error("Fecha inválida");
+      }
 
       target.textContent = "Actualizado el " +
         new Intl.DateTimeFormat("es-ES", {
@@ -1146,6 +1335,7 @@ body::before {
           month: "long",
           year: "numeric"
         }).format(date);
+
     } catch (_) {
       target.textContent = "";
     }
@@ -1153,32 +1343,48 @@ body::before {
 
   async function loadAll() {
     try {
-      const response = await fetch(CONFIG_FILE + "?v=" + Date.now());
-      if (!response.ok) throw new Error("No se pudo leer el horario");
+      const response = await fetch(
+        CONFIG_FILE + "?v=" + Date.now()
+      );
+
+      if (!response.ok) {
+        throw new Error("No se pudo leer el horario");
+      }
 
       const data = parseData(await response.text());
+
       renderUI(data);
       fetchGitHubDate();
-    } catch (error) {
+
+    } catch (_) {
       const grid = document.getElementById("weekGrid");
       grid.replaceChildren();
 
       const box = element("div", "error-box");
+
       box.append(
-        element("strong", "", "No se pudo cargar el horario."),
-        element("p", "",
-          "Comprueba que config_horario.txt esté en la misma carpeta " +
-          "que este HTML y abre la página desde GitHub Pages."
+        element(
+          "strong",
+          "",
+          "No se pudo cargar el horario."
+        ),
+        element(
+          "p",
+          "",
+          "Comprueba que config_horario.txt esté en la misma " +
+          "carpeta que este HTML y abre la página desde GitHub Pages."
         )
       );
 
       grid.append(box);
+
       document.getElementById("weekText").textContent =
         "Horario pendiente de cargar";
     }
   }
 
   loadAll();
+
   setInterval(updateToday, 60000);
 
   document.addEventListener("visibilitychange", () => {
