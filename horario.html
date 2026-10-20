@@ -228,6 +228,22 @@
       .day-card { min-height: auto; }
     }
   </style>
+<script id="paneles-config-source" src="paneles_estaciones_config.js"></script>
+<style>
+:root{--fondo:var(--wash);--papel:var(--paper);--papel-2:var(--wash);--tinta:var(--ink);--suave:var(--muted);--verde:var(--accent);--verde-oscuro:var(--ink)}
+body{background:linear-gradient(130deg,var(--paper,#fcf6ef),var(--wash,#f6e9da));color:var(--ink,#704b3b)}
+.header h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700}
+.agenda{border:1px solid var(--border);border-radius:18px;box-shadow:0 8px 30px #65493714;background:var(--paper)}
+.day-card,.calendar-card,.post-it{position:relative;isolation:isolate;overflow:hidden;border:1px solid var(--border);border-radius:14px;background:linear-gradient(125deg,var(--paper),var(--wash))}
+.day-card::before,.post-it::before,.calendar-card::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:var(--motif);background-size:var(--motif-size,318px 72px);opacity:calc(var(--motif-opacity,.34)*.55)}
+.day-card:nth-child(4n+2)::before{background-position:60px 35px}.day-card:nth-child(4n+3)::before{background-position:-90px 10px}.day-card:nth-child(4n)::before{background-position:30px -25px}
+.day-card.today{outline:2px solid #d8aebb;background:linear-gradient(120deg,var(--paper),#f5e7eb)}
+.calendar-top{background:var(--wash);color:var(--ink);border-bottom:1px solid var(--border)}
+.day-title{color:var(--ink);border-color:var(--border)}
+.sticker,.pin{display:none}.block{background:#ffffffdc}.block.note{background:var(--wash)}
+.post-it{overflow:visible}.post-it::before{border-radius:14px}.footer{color:var(--muted)}
+@media(max-width:650px){.agenda{padding:16px}.wrapper{padding:20px 12px}}
+</style>
 </head>
 
 <body>
@@ -520,5 +536,74 @@
 
     loadAll();
   </script>
+<script>
+/* Mismo calendario y paleta en los dos archivos; no necesita internet.
+   Fechas de estación de calendario: 20 marzo / 21 junio / 23 septiembre / 21 diciembre.
+   Los eventos se activan solo en sus fechas y después vuelve la estación.
+   Entroido: del sábado al martes, calculado cada año (no fecha fija).
+   No se incluyen festividades religiosas, banderas ni conmemoraciones patrióticas. */
+(function(){
+ const root=document.documentElement;
+ const motifs={
+  leaf:'<path d="M12 25l-1-6-7-1 4-5-4-5 7 1 2-7 3 6 6-3-1 7 6 3-7 4 1 6-6-1z" fill="currentColor"/><path d="M11 30l5-17m-2 9-5-6m7 3 5-4" fill="none" stroke="#fff5e5" stroke-width=".9"/>',
+  spring:'<path d="M14 29q-3-13 8-22M16 22Q2 22 7 12q11 0 9 10M19 15q-1-10 9-10 2 9-9 10" fill="currentColor"/><circle cx="7" cy="6" r="3" fill="#d9b6c5"/>',
+  summer:'<path d="M2 19q5-6 10 0t10 0t10 0M2 26q5-6 10 0t10 0t10 0" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="7" r="5" fill="#e2c88d"/>',
+  winter:'<path d="M16 2v28M4 9l24 14M4 23L28 9M11 5l5 5 5-5M11 27l5-5 5 5M4 14l7-2-2-7M28 18l-7 2 2 7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>',
+  mask:'<path d="M2 10q5-7 14-1 9-6 14 1l-3 12q-6 4-11-1-5 5-11 1z" fill="currentColor"/><path d="M6 13q5-3 8 2-5 3-8-2m12 2q3-5 8-2-3 5-8 2" fill="#fff9ef"/><circle cx="5" cy="3" r="1.5" fill="#ca9daf"/><path d="M24 2l3 3m-3 1 3-3" stroke="#d0ad71"/>',
+  book:'<path d="M3 5q7-2 13 2 6-4 13-2v22q-7-2-13 2-6-4-13-2z" fill="currentColor"/><path d="M16 7v22M7 10l5 1m-5 5 5 1m8-6 5-1m-5 7 5-1" fill="none" stroke="#fffaf0" stroke-width="1.2"/>',
+  pumpkin:'<path d="M16 9q-3-6 3-7" fill="none" stroke="#839369" stroke-width="3"/><ellipse cx="16" cy="20" rx="14" ry="11" fill="currentColor"/><path d="M16 10q-8 10 0 20m0-20q8 10 0 20" fill="none" stroke="#fff2de" stroke-width="1"/>',
+  chestnut:'<path d="M16 3Q-1 15 4 25q11 10 24-1Q32 13 16 3" fill="currentColor"/><path d="M4 24q12-5 24 0-11 11-24 0" fill="#d8bb8a"/><path d="M10 10q-4 4-4 9" fill="none" stroke="#fff4df" stroke-width="1.2"/>',
+  sparkle:'<path d="M16 2l3 10 10 4-10 3-3 11-4-11-10-3 10-4z" fill="currentColor"/><circle cx="28" cy="4" r="2" fill="#c2b4d9"/>'
+ };
+ const defaults={"version": 1, "ayuda": {"fechas": "MM-DD = mes-día. Son fechas de calendario editables, no instantes astronómicos.", "edicion": "Puedes editar este TXT, importarlo en panel_personalizar.html y guardar paneles_estaciones_config.js.", "instalacion": "Guarda el JS únicamente en OBS/paneles_estacionales y recarga las fuentes de OBS.", "fondos": "Elige un motivo o una imagen en el panel. También puedes indicar una ruta relativa, por ejemplo fondos/otono.png.", "prioridad": "Los eventos tienen prioridad sobre la estación. Si coinciden, gana el primero de la lista.", "entroido": "Se calcula cada año. Desde el sábado anterior hasta el martes de Entroido.", "imagenes": "Una imagen cargada en el panel se incorpora al JS/TXT. No tienes que copiarla por separado."}, "ancho": 318, "estaciones": [{"id": "primavera", "nombre": "Primavera", "inicio": "03-20", "texto": "#506b52", "textoSecundario": "#74856e", "acento": "#91ab85", "borde": "#c0d3b8", "fondoClaro": "#fcfdf6", "fondoPastel": "#edf5e7", "motivo": "spring", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "verano", "nombre": "Verano", "inicio": "06-21", "texto": "#4d7078", "textoSecundario": "#6e8d91", "acento": "#91bcc3", "borde": "#c0dce0", "fondoClaro": "#fbfdfa", "fondoPastel": "#edf6f6", "motivo": "summer", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "otono", "nombre": "Otoño", "inicio": "09-23", "texto": "#704b3b", "textoSecundario": "#896953", "acento": "#b18560", "borde": "#d8bda2", "fondoClaro": "#fcf6ef", "fondoPastel": "#f6e9da", "motivo": "leaf", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "invierno", "nombre": "Invierno", "inicio": "12-21", "texto": "#5f667d", "textoSecundario": "#7f879d", "acento": "#a6afcc", "borde": "#d0d5e6", "fondoClaro": "#fbfbff", "fondoPastel": "#eef0f8", "motivo": "winter", "imagenFondo": "", "opacidadFondo": 0.34}], "eventos": [{"id": "entroido", "nombre": "Entroido", "activo": true, "regla": "entroido", "desdeOffset": -3, "hastaOffset": 0, "texto": "#766078", "textoSecundario": "#93809a", "acento": "#bca1bd", "borde": "#dac9de", "fondoClaro": "#fffbfc", "fondoPastel": "#f4eaf4", "motivo": "mask", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "libro", "nombre": "Día del Libro", "activo": true, "regla": "fecha", "desde": "04-23", "hasta": "04-23", "texto": "#617059", "textoSecundario": "#849079", "acento": "#a3b18b", "borde": "#d1d9bd", "fondoClaro": "#fffdf4", "fondoPastel": "#f1f4e6", "motivo": "book", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "letras", "nombre": "Letras Galegas", "activo": true, "regla": "fecha", "desde": "05-17", "hasta": "05-17", "texto": "#54706a", "textoSecundario": "#7c9185", "acento": "#a1b7a3", "borde": "#cbdacd", "fondoClaro": "#fffdf7", "fondoPastel": "#edf4e9", "motivo": "book", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "samain", "nombre": "Samaín", "activo": true, "regla": "fecha", "desde": "10-31", "hasta": "10-31", "texto": "#785743", "textoSecundario": "#95816f", "acento": "#c49a78", "borde": "#dac4b2", "fondoClaro": "#fff8ee", "fondoPastel": "#f3e9e0", "motivo": "pumpkin", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "magosto", "nombre": "Magosto", "activo": true, "regla": "fecha", "desde": "11-11", "hasta": "11-11", "texto": "#735342", "textoSecundario": "#927863", "acento": "#b4956d", "borde": "#d6c3a6", "fondoClaro": "#fff9ee", "fondoPastel": "#f3eada", "motivo": "chestnut", "imagenFondo": "", "opacidadFondo": 0.34}, {"id": "aninovo", "nombre": "Fin de año / Aninovo", "activo": true, "regla": "fecha", "desde": "12-31", "hasta": "01-01", "texto": "#76664e", "textoSecundario": "#928575", "acento": "#bfa776", "borde": "#d9cdb5", "fondoClaro": "#fffdf4", "fondoPastel": "#f5f0e3", "motivo": "sparkle", "imagenFondo": "", "opacidadFondo": 0.34}]};
+ let cfg=window.PANELES_CONFIG||defaults;
+ function parts(now){const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now).filter(x=>x.type!=='literal').map(x=>[x.type,+x.value]));return p;}
+ function carnival(y){ // Gregorian movable-calendar calculation; used only for the cultural carnival.
+  const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451);
+  const month=Math.floor((h+l-7*m+114)/31),day=(h+l-7*m+114)%31+1;
+  return Date.UTC(y,month-1,day)-47*86400000;
+ }
+
+ function md(s){const m=/^(\d{2})-(\d{2})$/.exec(s||'');return m?+m[1]*100+(+m[2]):0;}
+ function inRange(n,start,end){return start<=end?n>=start&&n<=end:n>=start||n<=end;}
+ function choose(now){
+  const p=parts(now),day=p.month*100+p.day,utc=Date.UTC(p.year,p.month-1,p.day),tuesday=carnival(p.year);
+  const seasons=[...cfg.estaciones].sort((a,b)=>md(a.inicio)-md(b.inicio));
+  let season=seasons[seasons.length-1];for(const s of seasons){if(day>=md(s.inicio))season=s;}
+  const event=cfg.eventos.find(e=>e.activo&&(e.regla==='entroido'?utc>=tuesday+Number(e.desdeOffset)*86400000&&utc<=tuesday+Number(e.hastaOffset)*86400000:inRange(day,md(e.desde),md(e.hasta))));
+  return {season:season.id,event:event?event.id:'',theme:(event||season).id,style:event||season,seasonStyle:season};
+ }
+ function svg(content,viewBox='0 0 32 32'){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+viewBox+'">'+content+'</svg>';}
+ function background(kind,color){const motif=motifs[kind].replaceAll('currentColor',color);return svg('<g>'+[[0,7,1.05,-20],[36,-10,.72,35],[278,-2,1.1,22],[299,43,.86,-35],[10,50,.70,60],[251,49,.68,-15]].map(([x,y,s,r])=>'<g transform="translate('+x+' '+y+') scale('+s+') rotate('+r+' 16 16)">'+motif+'</g>').join('')+'</g>','0 0 318 72');}
+ let last='';
+ function apply(now=new Date()){
+  const state=choose(now);const signature=JSON.stringify([state.style,cfg.ancho,state.season]);if(last===signature)return state;last=signature;
+  const t=state.style,{texto:ink,textoSecundario:muted,acento:accent,borde:border,fondoClaro:paper,fondoPastel:wash,motivo:kind}=t;
+  Object.entries({ink,muted,accent,border,paper,wash}).forEach(([key,value])=>root.style.setProperty('--'+key,value));
+  root.style.setProperty('--panel-width',Math.max(180,Math.min(900,Number(cfg.ancho)||318))+'px');
+  let image=t.imagenFondo||'';
+  if(image){try{image=new URL(image,window.PANELES_CONFIG_BASE||document.baseURI).href;}catch(e){image='';}}
+  const safeImage=image&&!/^(javascript|vbscript):/i.test(image);
+  const imageUrl=safeImage?'url('+JSON.stringify(image)+')':'none';
+  root.style.setProperty('--motif',image?safeImage?imageUrl:'none':kind==='none'?'none':'url("data:image/svg+xml,'+encodeURIComponent(background(motifs[kind]?kind:'leaf',accent))+'")');
+  root.style.setProperty('--motif-size',image?'cover':'318px 72px');
+  root.style.setProperty('--motif-opacity',Math.max(0,Math.min(1,Number(t.opacidadFondo)||0)));
+  root.dataset.season=state.season;root.dataset.event=state.event;
+  const detail=document.querySelector('.detalle');
+  // El reloj conserva un detalle de la estación. La música no tiene icono decorativo.
+  if(detail)detail.innerHTML=svg(motifs[state.seasonStyle.motivo]||motifs.leaf);
+  return state;
+ }
+ window.PanelCalendar=Object.freeze({choose,apply,carnival});
+ window.addEventListener('message',ev=>{
+  if(window.parent===window||ev.source!==window.parent||ev.data?.tipo!=='paneles-preview')return;
+  const candidate=ev.data.config;
+  if(!candidate||!Array.isArray(candidate.estaciones)||!candidate.estaciones.length||!Array.isArray(candidate.eventos))return;
+  cfg=candidate;if(ev.data.baseConfiguracion)window.PANELES_CONFIG_BASE=ev.data.baseConfiguracion;last='';window.PANEL_PREVIEW_DATE=ev.data.fecha||'';apply(window.PANEL_PREVIEW_DATE?new Date(window.PANEL_PREVIEW_DATE+'T12:00:00+01:00'):new Date());if(typeof actualizarReloj==='function')actualizarReloj();
+ });
+ apply();setInterval(()=>apply(window.PANEL_PREVIEW_DATE?new Date(window.PANEL_PREVIEW_DATE+'T12:00:00+01:00'):new Date()),30000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)apply(window.PANEL_PREVIEW_DATE?new Date(window.PANEL_PREVIEW_DATE+'T12:00:00+01:00'):new Date());});
+})();
+</script>
 </body>
 </html>
