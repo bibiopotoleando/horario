@@ -31,10 +31,10 @@ nocturno: descanso
 nota: 
 
 [SÁBADO]
-mañana: 09:00-13:30 | estudio
-tarde: descanso
+mañana: 09:00-14:00 | estudio
+tarde: 15:00-19:15 | lectura
 nocturno: descanso
-nota: puede variar
+nota: esta tarde estaré en modo lectura
 
 
 [DOMINGO]
