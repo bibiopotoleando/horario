@@ -19,10 +19,10 @@ nocturno: descanso
 nota: dentista
 
 [JUEVES]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-19:30 | estudio
+mañana: descanso
+tarde: descanso
 nocturno: descanso
-nota: 
+nota: tengo que ordenar la casa
 
 [VIERNES]
 mañana: 09:00-13:30 | estudio
