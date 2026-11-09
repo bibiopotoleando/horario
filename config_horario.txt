@@ -1,4 +1,4 @@
-SEMANA: 02/11/2026 al 08/11/2026
+SEMANA: 09/11/2026 al 15/11/2026
 
 [LUNES]
 mañana: 09:00-13:30 | estudio
@@ -10,19 +10,19 @@ nota:
 mañana: 09:00-13:30 | estudio
 tarde: 15:00-19:30 | estudio
 nocturno: descanso
-nota: pomo largo de 2'5 horas por clases de la academia (tarde)
+nota:
 
 [MIÉRCOLES]
 mañana: 08:00-13:00 | estudio
-tarde: 16:00-19:30 | estudio
+tarde: 15:00-19:30 | estudio
 nocturno: descanso
-nota: dentista
+nota: 
 
 [JUEVES]
-mañana: descanso
-tarde: descanso
+mañana: 09:00-13:30 | estudio
+tarde: 15:00-19:30 | estudio
 nocturno: descanso
-nota: tengo que ordenar la casa
+nota: 
 
 [VIERNES]
 mañana: 09:00-13:30 | estudio
