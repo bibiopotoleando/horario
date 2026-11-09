@@ -13,10 +13,10 @@ nocturno: descanso
 nota:
 
 [MIÉRCOLES]
-mañana: 08:00-13:00 | estudio
-tarde: 15:00-19:30 | estudio
+mañana: descanso
+tarde: descanso
 nocturno: descanso
-nota: 
+nota: huelga
 
 [JUEVES]
 mañana: 09:00-13:30 | estudio
