@@ -1,14 +1,14 @@
-SEMANA: 09/11/2026 al 15/11/2026
+SEMANA: 16/11/2026 al 22/11/2026
 
 [LUNES]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-19:30 | estudio
+mañana: descanso
+tarde: descanso
 nocturno: descanso
 nota: 
 
 [MARTES]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-19:30 | estudio
+mañana: descanso
+tarde: 18:00-20:30 | lectura
 nocturno: descanso
 nota:
 
@@ -16,31 +16,31 @@ nota:
 mañana: descanso
 tarde: descanso
 nocturno: descanso
-nota: huelga
+nota: viaje
 
 [JUEVES]
-mañana: 09:00-13:30 | estudio
-tarde: 15:00-19:30 | estudio
+mañana: descanso
+tarde: descanso
 nocturno: descanso
-nota: 
+nota: viaje
 
 [VIERNES]
-mañana: 09:00-13:30 | estudio
+mañana: descanso
 tarde: descanso
 nocturno: descanso
-nota: 
+nota: viaje
 
 [SÁBADO]
-mañana: 09:00-13:30 | estudio
+mañana: descanso
 tarde: descanso
 nocturno: descanso
-nota: variable
+nota: viaje
 
 [DOMINGO]
-mañana: 09:00-13:30 | estudio
+mañana: descanso
 tarde: descanso
 nocturno: descanso
-nota: variable
+nota: viaje
 
 
 [NOTAS]
